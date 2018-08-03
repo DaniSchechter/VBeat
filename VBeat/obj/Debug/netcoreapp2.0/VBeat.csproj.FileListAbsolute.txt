@@ -1,0 +1,11 @@
+G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\VBeat.deps.json
+G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\VBeat.runtimeconfig.json
+G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\VBeat.runtimeconfig.dev.json
+G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\VBeat.dll
+G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\VBeat.pdb
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.csprojAssemblyReference.cache
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.csproj.CoreCompileInputs.cache
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.AssemblyInfoInputs.cache
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.AssemblyInfo.cs
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.dll
+G:\Projects\C#\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.pdb
