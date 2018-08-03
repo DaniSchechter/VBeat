@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace VBeat.Models
 {
-    public class ArtistModel
+    public class ArtistModel : UserModel
     {
-        public virtual UserModel User { get; set; }
         public virtual List<SongModel> SongList { get; set; }
         public string ArtistName { get; set; }
         public string ArtistImage { get; set; }
