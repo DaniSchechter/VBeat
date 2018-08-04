@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VBeat.Models.BridgeModel;
 
 namespace VBeat.Models
 {
@@ -15,7 +16,7 @@ namespace VBeat.Models
         [Display(Name = "Show Name")]
         [StringLength(20, MinimumLength = 3)]
         public string ShowName { get; set; }
-        public virtual ICollection<ArtistModel> ArtistList { get; set; }
+        public virtual ICollection<ArtistShowModel> ArtistList { get; } = new List<ArtistShowModel>();
 
         [Required]
         [StringLength(15, MinimumLength = 3)]

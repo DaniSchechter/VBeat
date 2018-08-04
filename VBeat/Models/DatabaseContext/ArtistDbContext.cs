@@ -12,8 +12,9 @@ namespace VBeat.Models
     {
         public DbSet<ArtistModel> Artists { get; set; }
         public DbSet<SongModel> Songs { get; set; }
+        public DbSet<ShowModel> Shows { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

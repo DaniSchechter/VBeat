@@ -18,6 +18,6 @@ namespace VBeat.Models
 
         public string ArtistImage { get; set; }
 
-        public virtual ICollection<ShowModel> Shows { get; set; }
+        public virtual ICollection<ArtistShowModel> Shows { get; } = new List<ArtistShowModel>();
     }
 }
