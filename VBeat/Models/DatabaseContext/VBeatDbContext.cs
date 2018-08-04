@@ -8,7 +8,7 @@ using VBeat.Models.DatabaseContext;
 
 namespace VBeat.Models
 {
-    public class ArtistDbContext : MainDbContext
+    public class VBeatDbContext : MainDbContext
     {
         public DbSet<ArtistModel> Artists { get; set; }
         public DbSet<SongModel> Songs { get; set; }

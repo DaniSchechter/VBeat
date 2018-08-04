@@ -9,7 +9,7 @@ using VBeat.Models;
 
 namespace VBeat.Migrations
 {
-    [DbContext(typeof(ArtistDbContext))]
+    [DbContext(typeof(VBeatDbContext))]
     [Migration("20180804132645_Initial")]
     partial class Initial
     {

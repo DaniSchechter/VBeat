@@ -8,7 +8,7 @@ using VBeat.Models;
 
 namespace VBeat.Migrations
 {
-    [DbContext(typeof(ArtistDbContext))]
+    [DbContext(typeof(VBeatDbContext))]
     partial class ArtistDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -11,9 +11,9 @@ namespace VBeat.Controllers
 {
     public class ArtistModelsController : Controller
     {
-        private readonly ArtistDbContext _context;
+        private readonly VBeatDbContext _context;
 
-        public ArtistModelsController(ArtistDbContext context)
+        public ArtistModelsController(VBeatDbContext context)
         {
             _context = context;
         }
