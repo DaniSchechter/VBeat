@@ -14,6 +14,7 @@ namespace VBeat.Models
         public DbSet<SongModel> Songs { get; set; }
         public DbSet<ShowModel> Shows { get; set; }
         public DbSet<PlaylistModel> Playlists { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
 
 
