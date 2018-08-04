@@ -19,5 +19,7 @@ namespace VBeat.Models
         public bool Public { get; set; }
 
         public string PlaylistImage { get; set; }
+
+        public string PlaylistName { get; set; }
     }
 }
