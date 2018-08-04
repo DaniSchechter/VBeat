@@ -10,10 +10,13 @@ namespace VBeat.Models
     {
         [Key]
         public int PlaylistId { get; set; }
+
         public virtual ICollection<SongModel> Songs { get; set; }
+
         [Required]
         [Display(Name = "Is Public")]
         public bool Public { get; set; }
+
         public string PlaylistImage { get; set; }
     }
 }

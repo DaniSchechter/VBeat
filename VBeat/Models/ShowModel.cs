@@ -32,6 +32,7 @@ namespace VBeat.Models
 
         [Required]
         [Display(Name = "Show Time")]
+        //needs also hour
         public DateTime ShowTime { get; set; }
     }
 }
