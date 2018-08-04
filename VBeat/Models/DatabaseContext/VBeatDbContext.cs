@@ -13,6 +13,7 @@ namespace VBeat.Models
         public DbSet<ArtistModel> Artists { get; set; }
         public DbSet<SongModel> Songs { get; set; }
         public DbSet<ShowModel> Shows { get; set; }
+        public DbSet<PlaylistModel> Playlists { get; set; }
 
 
 
@@ -20,6 +21,7 @@ namespace VBeat.Models
         {
             modelBuilder.Entity<ArtistSongModel>().HasKey(t => new { t.SongId, t.UserId });
             modelBuilder.Entity<ArtistShowModel>().HasKey(t => new { t.ShowId, t.UserId });
+            modelBuilder.Entity<PlaylistSongModel>().HasKey(t => new { t.PlaylistId, t.SongId });
         }
     }
 }

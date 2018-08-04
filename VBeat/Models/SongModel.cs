@@ -35,5 +35,7 @@ namespace VBeat.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime AddedDate { get; set; }
+
+        virtual public ICollection<PlaylistSongModel> Playlists { get; } = new List<PlaylistSongModel>();
     }
 }

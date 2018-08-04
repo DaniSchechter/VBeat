@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VBeat.Models.BridgeModel;
 
 namespace VBeat.Models
 {
@@ -11,7 +12,7 @@ namespace VBeat.Models
         [Key]
         public int PlaylistId { get; set; }
 
-        public virtual ICollection<SongModel> Songs { get; set; }
+        public virtual ICollection<PlaylistSongModel> Songs { get; } = new List<PlaylistSongModel>();
 
         [Required]
         [Display(Name = "Is Public")]
