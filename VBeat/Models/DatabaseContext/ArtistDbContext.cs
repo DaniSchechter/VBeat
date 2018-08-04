@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VBeat.Models.BridgeModel;
+using VBeat.Models.DatabaseContext;
 
 namespace VBeat.Models
 {
-    public class ArtistDbContext : DbContext
+    public class ArtistDbContext : MainDbContext
     {
         public DbSet<ArtistModel> Artists { get; set; }
         public DbSet<SongModel> Songs { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
