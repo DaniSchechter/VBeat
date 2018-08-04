@@ -19,6 +19,7 @@ namespace VBeat.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ArtistSongModel>().HasKey(t => new { t.SongId, t.UserId });
+            modelBuilder.Entity<ArtistShowModel>().HasKey(t => new { t.ShowId, t.UserId });
         }
     }
 }
