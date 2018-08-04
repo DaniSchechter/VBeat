@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VBeat.Models.BridgeModel;
 
 namespace VBeat.Models
 {
     public class ArtistModel : UserModel
     {
-        public virtual ICollection<SongModel> SongList { get; set; }
+        public virtual ICollection<ArtistSongModel> SongList { get; } = new List<ArtistSongModel>();
 
         [Required]
         [Display(Name ="Artist Name")]
@@ -17,6 +18,6 @@ namespace VBeat.Models
 
         public string ArtistImage { get; set; }
 
-        public virtual ICollection<ShowModel> Shows { get; set; }
+        public virtual ICollection<ArtistShowModel> Shows { get; } = new List<ArtistShowModel>();
     }
 }

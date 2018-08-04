@@ -24,13 +24,10 @@ namespace VBeat.Models
         [StringLength(16, MinimumLength = 5)]
         public string Password { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfRegistration { get; set; }
 
-        [Required]
-        //needs also the hour
         public DateTime TimeOfLastLogin { get; set; }
 
         virtual public ICollection<PlaylistModel> SavedPlaylists { get; set; } 
