@@ -1,0 +1,33 @@
+﻿@model VBeat.Models.PlaylistModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PlaylistModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Public)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Public)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaylistImage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlaylistImage)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PlaylistId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
