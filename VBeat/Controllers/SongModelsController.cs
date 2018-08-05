@@ -11,6 +11,9 @@ namespace VBeat.Controllers
 {
     public class SongModelsController : Controller
     {
+        public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
+
+        private readonly int NUM_NEW_RELEASES = 10;
         private readonly VBeatDbContext _context;
 
         public SongModelsController(VBeatDbContext context)
@@ -21,6 +24,7 @@ namespace VBeat.Controllers
         // GET: SongModels
         public async Task<IActionResult> Index()
         {
+            ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             return View(await _context.Songs.ToListAsync());
         }
 
