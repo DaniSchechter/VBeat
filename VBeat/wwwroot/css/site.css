@@ -33,3 +33,19 @@
         display: none;
     }
 }
+
+#carousel {
+    width: 960px;
+    border: 1px solid #222;
+    height: 300px;
+    position: relative;
+    clear: both;
+    overflow: hidden;
+    background: #FFF;
+}
+
+
+#carousel img {
+    visibility: hidden; /* hide images until carousel can handle them */
+    cursor: pointer; /* otherwise it's not as obvious items can be clicked */
+}

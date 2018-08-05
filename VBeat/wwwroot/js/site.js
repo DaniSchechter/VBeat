@@ -1,1 +1,6 @@
-﻿// Write your JavaScript code.
+﻿
+$(document).ready(function () {
+    var carousel = $("#carousel").waterwheelCarousel({
+        flankingItems: 4,
+    });
+});

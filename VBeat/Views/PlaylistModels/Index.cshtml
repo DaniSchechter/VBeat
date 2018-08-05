@@ -12,30 +12,37 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Public)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PlaylistImage)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Public)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaylistImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaylistName)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Public)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlaylistImage)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PlaylistId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlaylistId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlaylistId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Public)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaylistImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaylistName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PlaylistId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PlaylistId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PlaylistId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
