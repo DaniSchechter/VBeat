@@ -5,26 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VBeat.Models;
 
-namespace VBeat.Controllers
+namespace VBeat.Models
 {
-    public class PlaylistModelsController : Controller
+    public class ShowModelsController : Controller
     {
         private readonly VBeatDbContext _context;
 
-        public PlaylistModelsController(VBeatDbContext context)
+        public ShowModelsController(VBeatDbContext context)
         {
             _context = context;
         }
 
-        // GET: PlaylistModels
+        // GET: ShowModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Playlists.ToListAsync());
+            return View(await _context.Shows.ToListAsync());
         }
 
-        // GET: PlaylistModels/Details/5
+        // GET: ShowModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +31,39 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            var playlistModel = await _context.Playlists
-                .SingleOrDefaultAsync(m => m.PlaylistId == id);
-            if (playlistModel == null)
+            var showModel = await _context.Shows
+                .SingleOrDefaultAsync(m => m.ShowId == id);
+            if (showModel == null)
             {
                 return NotFound();
             }
 
-            return View(playlistModel);
+            return View(showModel);
         }
 
-        // GET: PlaylistModels/Create
+        // GET: ShowModels/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PlaylistModels/Create
+        // POST: ShowModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlaylistId,Public,PlaylistImage,PlaylistName")] PlaylistModel playlistModel)
+        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(playlistModel);
+                _context.Add(showModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(playlistModel);
+            return View(showModel);
         }
 
-        // GET: PlaylistModels/Edit/5
+        // GET: ShowModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +71,22 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            var playlistModel = await _context.Playlists.SingleOrDefaultAsync(m => m.PlaylistId == id);
-            if (playlistModel == null)
+            var showModel = await _context.Shows.SingleOrDefaultAsync(m => m.ShowId == id);
+            if (showModel == null)
             {
                 return NotFound();
             }
-            return View(playlistModel);
+            return View(showModel);
         }
 
-        // POST: PlaylistModels/Edit/5
+        // POST: ShowModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlaylistId,Public,PlaylistImage,PlaylistName")] PlaylistModel playlistModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ShowId,ShowName,Country,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
         {
-            if (id != playlistModel.PlaylistId)
+            if (id != showModel.ShowId)
             {
                 return NotFound();
             }
@@ -96,12 +95,12 @@ namespace VBeat.Controllers
             {
                 try
                 {
-                    _context.Update(playlistModel);
+                    _context.Update(showModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlaylistModelExists(playlistModel.PlaylistId))
+                    if (!ShowModelExists(showModel.ShowId))
                     {
                         return NotFound();
                     }
@@ -112,10 +111,10 @@ namespace VBeat.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(playlistModel);
+            return View(showModel);
         }
 
-        // GET: PlaylistModels/Delete/5
+        // GET: ShowModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +122,30 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            var playlistModel = await _context.Playlists
-                .SingleOrDefaultAsync(m => m.PlaylistId == id);
-            if (playlistModel == null)
+            var showModel = await _context.Shows
+                .SingleOrDefaultAsync(m => m.ShowId == id);
+            if (showModel == null)
             {
                 return NotFound();
             }
 
-            return View(playlistModel);
+            return View(showModel);
         }
 
-        // POST: PlaylistModels/Delete/5
+        // POST: ShowModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var playlistModel = await _context.Playlists.SingleOrDefaultAsync(m => m.PlaylistId == id);
-            _context.Playlists.Remove(playlistModel);
+            var showModel = await _context.Shows.SingleOrDefaultAsync(m => m.ShowId == id);
+            _context.Shows.Remove(showModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlaylistModelExists(int id)
+        private bool ShowModelExists(int id)
         {
-            return _context.Playlists.Any(e => e.PlaylistId == id);
+            return _context.Shows.Any(e => e.ShowId == id);
         }
     }
 }
