@@ -23,18 +23,20 @@
 
         <header>
             <div class="middle-container">
-                <a asp-controller="SongModels" asp-action="Index">VBeat</a>
+                <nav>
+                   <ul>
+                       <li><span><a asp-controller="SongModels" asp-action="Index" class="li-selected">Featured</a></span></li>
+                       <li><span><a asp-controller="SongModels" asp-action="Index">Genres(Filter)</a></span></li>
+                       <li><span><a asp-controller="SongModels" asp-action="Index">Discover(algorithm)</a></span></li>
+                   </ul>
+                </nav>
             </div>
         </header>
-        <nav>
-            <div class="middle-container">
-                <ul>
-                    <li><a asp-controller="SongModels" asp-action="Index">Featured</a></li>
-                    <li ><a asp-controller="SongModels" asp-action="Index">Genres(Filter)</a></li>
-                    <li ><a asp-controller="SongModels" asp-action="Index">Discover(algorithm)</a></li>
-                </ul>
-            </div>
-        </nav>
+        
+        <aside>
+            <a id="logo" asp-controller="SongModels" asp-action="Index"> VBeat</a>
+        </aside>
+
         @RenderBody()
         <hr />
         <footer>

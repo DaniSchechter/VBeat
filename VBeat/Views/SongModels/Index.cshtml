@@ -5,27 +5,16 @@
 }
 
 <section id="new-releases">
-    <div class="middle-container">
-        <h1>DISPLAY THE NEWEST !!! DANI</h1>
-        <h1>New Releases</h1>
-
-        <div id="carousel">
-            @foreach (var item in Model.Take(9))
-            {
-                <div class="song-container">
-                    <a asp-action="Edit" asp-route-id="@item.SongId">
-                        <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="80%" />
-                        <div class="song-info">
-                            <p>
-                                @foreach (var artist in item.ArtistList)
-                                {
-                                    @Html.DisplayFor(modelArtist => artist.Artist.ArtistName)
-                                }
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            }
+    <div><h1>New Releases</h1></div><div class="middle-container">
+    <div id="carousel">
+        @foreach (var item in Model.Take(9))
+         {
+            <div class="song-container">
+                <a asp-action="Edit" asp-route-id="@item.SongId">
+                    <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="80%" />
+                </a>
+            </div>
+         }
         </div>
         <a href="#">view more</a>
     </div>

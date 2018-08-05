@@ -6,9 +6,14 @@
 
 /*Global*/
 #middle-container{
+    display:block;
     height:100%;
     width:90%;
     margin: auto;
+}
+ul {
+    padding: 0;
+    margin: 0;
 }
 
 /*Header*/
@@ -17,25 +22,51 @@ header {
     color: white;
     margin-top: -25px;
     padding: 30px 0 0 30px;
+    position: sticky;
+
 }
 
-header a, header a:hover{
-    font-size: 60px;
+header #logo{
+    float:left;
+    font-size: 30px;
     color: white;
     text-decoration:none;
 }
 
+header a:hover{
+    color: white;
+    text-decoration:none;
+}
 
 /*nav*/
+header nav{
+    margin: auto;
+}
 nav a{
     color: white;
     text-decoration:none;
 }
-nav ul{
-    padding:0;
-    margin:0;
+
+nav li{
+    float:left;
 }
 
+nav li span{
+    padding: 0 20px 0 20px;
+    background-color:#000050;
+    border: white 2px;
+}
+
+li .li-selected a {
+
+}
+
+/*aside*/
+aside{
+
+}
+
+/*Carousel*/
 #carousel {
     width: 1100px;
     height: 300px;
