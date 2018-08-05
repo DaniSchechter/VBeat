@@ -13251,24 +13251,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\גיא\\.nuget\\packages\\": {},
+    "C:\\Users\\schec\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Projects\\C#\\VBeat\\VBeat\\VBeat.csproj",
+      "projectUniqueName": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
       "projectName": "VBeat",
-      "projectPath": "G:\\Projects\\C#\\VBeat\\VBeat\\VBeat.csproj",
-      "packagesPath": "C:\\Users\\גיא\\.nuget\\packages\\",
-      "outputPath": "G:\\Projects\\C#\\VBeat\\VBeat\\obj\\",
+      "projectPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
+      "packagesPath": "C:\\Users\\schec\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\גיא\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\schec\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
