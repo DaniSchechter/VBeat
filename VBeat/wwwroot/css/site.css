@@ -1,49 +1,49 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿body{
+    padding:0;
+    margin:0; 
+    background-color:#000025;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/*Global*/
+#middle-container{
+    height:100%;
+    width:90%;
+    margin: auto;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+/*Header*/
+header {
+    background-color: #000040;
+    color: white;
+    margin-top: -25px;
+    padding: 30px 0 0 30px;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+header a, header a:hover{
+    font-size: 60px;
+    color: white;
+    text-decoration:none;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+/*nav*/
+nav a{
+    color: white;
+    text-decoration:none;
+}
+nav ul{
+    padding:0;
+    margin:0;
 }
 
 #carousel {
-    width: 960px;
-    border: 1px solid #222;
+    width: 1100px;
     height: 300px;
     position: relative;
     clear: both;
     overflow: hidden;
-    background: #FFF;
+    margin: auto;
 }
-
 
 #carousel img {
     visibility: hidden; /* hide images until carousel can handle them */
