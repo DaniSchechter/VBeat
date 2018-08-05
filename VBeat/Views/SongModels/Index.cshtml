@@ -4,24 +4,45 @@
     ViewData["Title"] = "Index";
 }
 
+<section id="new-releases">
+    <div class="middle-container">
+        <h1>DISPLAY THE NEWEST !!! DANI</h1>
+        <h1>New Releases</h1>
 
-
-<div id="carousel">
-    <!--Only 10-->
-    @foreach (var item in Model)
-    { 
-    <div>
-        <a asp-action="Delete" asp-route-id="@item.SongId">
-            <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="320px" height="180px" />
-        </a>
+        <div id="carousel">
+            @foreach (var item in Model.Take(9))
+            {
+                <div class="song-container">
+                    <a asp-action="Edit" asp-route-id="@item.SongId">
+                        <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="80%" />
+                        <div class="song-info">
+                            <p>
+                                @foreach (var artist in item.ArtistList)
+                                {
+                                    @Html.DisplayFor(modelArtist => artist.Artist.ArtistName)
+                                }
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <a href="#">view more</a>
     </div>
-    }
-</div>
-<h2>Index</h2>
+</section>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New (ONLY FOR ARTIST (NOT EVEN ADMIN) !!!!!!!!!!!!!!)</a>
 </p>
+
+<section id="recently-played">
+    <div class="middle-container">
+        <h1>BY JS evry click on song add new div like that:: </h1>
+        <h1>Recently Played</h1>
+
+        <p>save in db because even after refresh it is still shown</p>
+    </div>
+</section>
 
 <!--
 <table class="table">
