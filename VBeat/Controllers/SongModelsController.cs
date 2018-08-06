@@ -11,6 +11,9 @@ namespace VBeat.Controllers
 {
     public class SongModelsController : Controller
     {
+        public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
+
+        private readonly int NUM_NEW_RELEASES = 7;
         private readonly VBeatDbContext _context;
 
         public SongModelsController(VBeatDbContext context)
@@ -21,6 +24,7 @@ namespace VBeat.Controllers
         // GET: SongModels
         public async Task<IActionResult> Index()
         {
+            ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             return View(await _context.Songs.ToListAsync());
         }
 
@@ -53,10 +57,11 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,SongPath,SongImagePath,ReleaseDate,AddedDate")] SongModel songModel)
+        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,SongPath,SongImagePath,ReleaseDate")] SongModel songModel)
         {
             if (ModelState.IsValid)
             {
+                songModel.AddedDate = DateTime.UtcNow;
                 songModel.SongImagePath = "/images/" + songModel.SongImagePath;
                 _context.Add(songModel);
                 await _context.SaveChangesAsync();
@@ -86,7 +91,7 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SongId,SongName,Genre,SongPath,SongImagePath,ReleaseDate,AddedDate")] SongModel songModel)
+        public async Task<IActionResult> Edit(int id, [Bind("SongId,SongName,Genre,SongPath,SongImagePath,ReleaseDate")] SongModel songModel)
         {
             if (id != songModel.SongId)
             {

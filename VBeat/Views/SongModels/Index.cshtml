@@ -7,7 +7,7 @@
 <section id="new-releases">
     <div><h1>New Releases</h1></div><div class="middle-container">
     <div id="carousel">
-        @foreach (var item in Model.Take(9))
+        @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
          {
             <div class="song-container">
                 <a asp-action="Edit" asp-route-id="@item.SongId">
