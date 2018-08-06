@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using VBeat.Models.BridgeModel;
+using VBeat.Models.Validations;
 
 namespace VBeat.Models
 {
@@ -19,20 +20,26 @@ namespace VBeat.Models
         public virtual ICollection<ArtistShowModel> ArtistList { get; } = new List<ArtistShowModel>();
 
         [Required]
-        [StringLength(15, MinimumLength = 3)]
+        [StringLength(15)]
         public string Country { get; set; }
 
         [Required]
+        [StringLength(15)]
+        public string City { get; set; }
+
+        [Required]
         [Display(Name = "Street Name")]
-        [StringLength(20, MinimumLength = 3)]
+        [StringLength(20)]
         public string StreetName { get; set; }
 
         [Required]
         [Display(Name = "House Name")]
+        [PositiveNumber]
         public int HouseNumber { get; set; }
 
         [Required]
         [Display(Name = "Show Time")]
+        [FutureDate]
         //needs also hour
         public DateTime ShowTime { get; set; }
     }

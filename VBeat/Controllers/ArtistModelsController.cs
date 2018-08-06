@@ -53,10 +53,12 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtistName,ArtistImage,UserId,Username,Email,Password,DateOfRegistration,TimeOfLastLogin")] ArtistModel artistModel)
+        public async Task<IActionResult> Create([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
         {
             if (ModelState.IsValid)
             {
+                artistModel.TimeOfLastLogin = DateTime.UtcNow;
+                artistModel.DateOfRegistration = DateTime.UtcNow;
                 _context.Add(artistModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +87,7 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtistName,ArtistImage,UserId,Username,Email,Password,DateOfRegistration,TimeOfLastLogin")] ArtistModel artistModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
         {
             if (id != artistModel.UserId)
             {
