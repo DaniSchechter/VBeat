@@ -18,6 +18,18 @@
             @Html.DisplayFor(model => model.ArtistName)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.ArtistImage)
         </dt>
         <dd>
@@ -34,7 +46,7 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>   
+        </dd>
     </dl>
     
     <form asp-action="Delete">
