@@ -34,6 +34,7 @@ namespace VBeat.Models
 
         [Required]
         [Display(Name = "House Name")]
+        [PositiveNumber]
         public int HouseNumber { get; set; }
 
         [Required]
