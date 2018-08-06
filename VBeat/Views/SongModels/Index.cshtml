@@ -13,6 +13,7 @@
                 <a asp-action="Edit" asp-route-id="@item.SongId">
                     <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="80%" />
                 </a>
+                <p display ="none"> @Html.DisplayFor(modelItem => item.SongName)</p>
             </div>
          }
         </div>
