@@ -23,6 +23,10 @@ namespace VBeat.Models
         public string Country { get; set; }
 
         [Required]
+        [StringLength(15, MinimumLength = 3)]
+        public string City { get; set; }
+
+        [Required]
         [Display(Name = "Street Name")]
         [StringLength(20, MinimumLength = 3)]
         public string StreetName { get; set; }
