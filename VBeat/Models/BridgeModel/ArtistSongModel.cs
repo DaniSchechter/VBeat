@@ -12,6 +12,5 @@ namespace VBeat.Models.BridgeModel
 
         public int SongId { get; set; }
         virtual public SongModel Song { get; set; }
-        
     }
 }

@@ -21,15 +21,16 @@ namespace VBeat.Models
         public string Genre { get; set; }
 
         [Required]
+        [Display(Name  ="URL To MP3")]
         public string SongPath { get; set; }
 
-        [Required, Display(Name = "Song")]
+        [Required, Display(Name = "Song Image URL")]
         public string SongImagePath { get; set; }
 
-        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true), PastDate]
+        [Required, Display(Name ="Release Date"),DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true), PastDate]
         public DateTime ReleaseDate { get; set; }
 
-        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true), PastDate]
+        [Required,Display(Name = "Added To Site Date"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true), PastDate]
         public DateTime AddedDate { get; set; }
 
         virtual public ICollection<PlaylistSongModel> Playlists { get; } = new List<PlaylistSongModel>();

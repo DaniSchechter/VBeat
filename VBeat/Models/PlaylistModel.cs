@@ -18,8 +18,10 @@ namespace VBeat.Models
         [Display(Name = "Is Public")]
         public bool Public { get; set; }
 
+        [Display(Name = "Playlist Image")]
         public string PlaylistImage { get; set; }
 
+        [Display(Name = "Playlist Name")]
         public string PlaylistName { get; set; }
 
         virtual public UserModel UserModel { get; set; }

@@ -16,6 +16,7 @@ namespace VBeat.Models
         [StringLength(20 ,MinimumLength=3)]
         public string ArtistName { get; set; }
 
+        [Display(Name = "Artist Image")]
         public string ArtistImage { get; set; }
 
         public virtual ICollection<ArtistShowModel> Shows { get; } = new List<ArtistShowModel>();
