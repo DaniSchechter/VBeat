@@ -45,6 +45,9 @@ namespace VBeat
             {
                 routes.MapRoute(
                     name: "default",
+		    `
+                    template: "{controller=Home}/{action=HomePage}/{id?}");
+
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

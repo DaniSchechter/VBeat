@@ -150,5 +150,25 @@ namespace VBeat.Controllers
         {
             return _context.Users.Any(e => e.UserId == id);
         }
+
+
+        public async Task<IActionResult> SignIn()
+        {
+            return View();
+        }
+
+
+        [HttpPost, ActionName("SignIn")]
+        public async Task<IActionResult> SignInAction([Bind("Username,Password")] UserModel inputUser)
+        {
+            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==inputUser.Username && u.Password == inputUser.Password));
+            if (userModel==null)
+            {
+                ViewData["Error"] = "username or password are incorrect";
+                return View();
+            }
+            return View(userModel);//for daniel schechter implementation. return the main page for signed in user
+        }
+
     }
 }
