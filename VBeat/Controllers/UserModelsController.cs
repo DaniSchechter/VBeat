@@ -150,5 +150,12 @@ namespace VBeat.Controllers
         {
             return _context.Users.Any(e => e.UserId == id);
         }
+
+        
+       /* public async Task<IActionResult> SignIn()
+        {
+
+        }*/
+
     }
 }
