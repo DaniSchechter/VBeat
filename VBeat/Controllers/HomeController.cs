@@ -11,10 +11,15 @@ namespace VBeat.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly VBeatDbContext dbContext;
+        public HomeController()
+        {
+            dbContext = new VBeatDbContext();
+        }
         public IActionResult Index()
         {
-            
-            ViewData["PlaylistCollection"] = SessionFactory.GetSessionManager().GetUserModel().SavedPlaylists;
+            UserModel userModel = SessionFactory.GetSessionManager().GetUserModel();
+            ViewData["PlaylistCollection"] = userModel.SavedPlaylists;
             return View();
         }
 

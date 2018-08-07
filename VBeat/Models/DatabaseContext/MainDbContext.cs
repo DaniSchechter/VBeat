@@ -9,7 +9,13 @@ namespace VBeat.Models.DatabaseContext
     public abstract class MainDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-       => optionsBuilder.UseSqlServer(
-           @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0");
+        {
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer(
+                       @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0");
+
+        }
+       
     }
 }

@@ -22,6 +22,6 @@ namespace VBeat.Models
 
         public string PlaylistName { get; set; }
 
-        public UserModel UserModel { get; set; }
+        virtual public UserModel UserModel { get; set; }
     }
 }

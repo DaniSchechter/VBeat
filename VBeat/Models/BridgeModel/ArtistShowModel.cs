@@ -9,9 +9,9 @@ namespace VBeat.Models.BridgeModel
     public class ArtistShowModel
     {
         public int UserId { get; set; }
-        public ArtistModel Artist { get; set; }
+        virtual public ArtistModel Artist { get; set; }
 
         public int ShowId { get; set; }
-        public ShowModel Show {get;set;}
+        virtual public ShowModel Show {get;set;}
     }
 }

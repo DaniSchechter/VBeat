@@ -36,6 +36,6 @@ namespace VBeat.Models
 
         public DateTime TimeOfLastLogin { get; set; }
 
-        virtual public ICollection<PlaylistModel> SavedPlaylists { get; set; } 
+        virtual public ICollection<PlaylistModel> SavedPlaylists { get; } = new List<PlaylistModel>();
     }
 }
