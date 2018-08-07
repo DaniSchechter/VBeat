@@ -151,11 +151,24 @@ namespace VBeat.Controllers
             return _context.Users.Any(e => e.UserId == id);
         }
 
-        
-       /* public async Task<IActionResult> SignIn()
-        {
 
-        }*/
+        public async Task<IActionResult> SignIn(string userName, string password)
+        {
+            return View();
+        }
+
+
+        [HttpPost, ActionName("Sign In")]
+        public async Task<IActionResult> SignInAction(string userName, string password)
+        {
+            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==userName && u.Password == password));        
+            if (userModel==null)
+            {
+                ViewData["Error"] = "username or password are incorrect";
+                return View();
+            }
+            return View(userModel);//for daniel schechter implementation. return the main page for signed in user
+        }
 
     }
 }
