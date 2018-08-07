@@ -5,13 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VBeat.Models;
+using VBeat.Models.Session;
 
 namespace VBeat.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly VBeatDbContext dbContext;
+        public HomeController()
+        {
+            dbContext = new VBeatDbContext();
+        }
         public IActionResult Index()
         {
+            UserModel userModel = SessionFactory.GetSessionManager().GetUserModel();
+            ViewData["DisplayName"] = userModel.Username;
+            ViewData["PlaylistCollection"] = userModel.SavedPlaylists;
             return View();
         }
 
