@@ -33,7 +33,7 @@ namespace VBeat.Models
         public string StreetName { get; set; }
 
         [Required]
-        [Display(Name = "House Name")]
+        [Display(Name = "House #")]
         [PositiveNumber]
         public int HouseNumber { get; set; }
 
