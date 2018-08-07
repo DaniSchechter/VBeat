@@ -21,5 +21,7 @@ namespace VBeat.Models
         public string PlaylistImage { get; set; }
 
         public string PlaylistName { get; set; }
+
+        public UserModel UserModel { get; set; }
     }
 }

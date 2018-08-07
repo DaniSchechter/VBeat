@@ -24,7 +24,7 @@ namespace VBeat.Models
             modelBuilder.Entity<ArtistShowModel>().HasKey(t => new { t.ShowId, t.UserId });
             modelBuilder.Entity<PlaylistSongModel>().HasKey(t => new { t.PlaylistId, t.SongId });
 
-            modelBuilder.Entity<UserModel>().HasMany(u => u.SavedPlaylists);
+            modelBuilder.Entity<UserModel>().HasMany(u => u.SavedPlaylists).WithOne(p => p.UserModel);
         }
     }
 }

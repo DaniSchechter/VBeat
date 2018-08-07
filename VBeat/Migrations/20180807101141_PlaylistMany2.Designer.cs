@@ -12,9 +12,10 @@ using VBeat.Models;
 namespace VBeat.Migrations
 {
     [DbContext(typeof(VBeatDbContext))]
-    partial class ArtistDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180807101141_PlaylistMany2")]
+    partial class PlaylistMany2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

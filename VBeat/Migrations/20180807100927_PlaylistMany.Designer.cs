@@ -12,9 +12,10 @@ using VBeat.Models;
 namespace VBeat.Migrations
 {
     [DbContext(typeof(VBeatDbContext))]
-    partial class ArtistDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180807100927_PlaylistMany")]
+    partial class PlaylistMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,7 +229,7 @@ namespace VBeat.Migrations
 
             modelBuilder.Entity("VBeat.Models.PlaylistModel", b =>
                 {
-                    b.HasOne("VBeat.Models.UserModel", "UserModel")
+                    b.HasOne("VBeat.Models.UserModel")
                         .WithMany("SavedPlaylists")
                         .HasForeignKey("UserModelUserId");
                 });
