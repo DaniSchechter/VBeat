@@ -19,6 +19,7 @@ namespace VBeat.Controllers
         public IActionResult Index()
         {
             UserModel userModel = SessionFactory.GetSessionManager().GetUserModel();
+            ViewData["DisplayName"] = userModel.Username;
             ViewData["PlaylistCollection"] = userModel.SavedPlaylists;
             return View();
         }

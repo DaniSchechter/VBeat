@@ -17,7 +17,7 @@ namespace VBeat.Models
         public string Username { get; set; }
 
         [Required]
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
@@ -33,11 +33,11 @@ namespace VBeat.Models
         public string Password { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name ="Registration Date")]
+        [Display(Name = "Registration Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfRegistration { get; set; }
 
-        [Display(Name ="Last Login")]
+        [Display(Name = "Last Login")]
         public DateTime TimeOfLastLogin { get; set; }
 
         virtual public ICollection<PlaylistModel> SavedPlaylists { get; } = new List<PlaylistModel>();
