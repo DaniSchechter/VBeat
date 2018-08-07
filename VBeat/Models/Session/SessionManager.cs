@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VBeat.Models.Session
 {
-    interface SessionManager
+    public interface SessionManager
     {
         UserModel GetUserModel();
         ArtistModel GetArtistModel();

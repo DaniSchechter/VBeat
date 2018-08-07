@@ -9,7 +9,21 @@ namespace VBeat.Models.Session
     {
         public static SessionManager GetSessionManager()
         {
+            return new EmptySessionFactory();
+        }
+    }
+
+     class EmptySessionFactory : SessionManager
+    {
+        public ArtistModel GetArtistModel()
+        {
             return null;
+        }
+
+        public UserModel GetUserModel()
+        {
+            VBeatDbContext vBeat = new VBeatDbContext();
+            return vBeat.Users.First();
         }
     }
 }

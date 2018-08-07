@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VBeat.Models;
+using VBeat.Models.Session;
 
 namespace VBeat.Controllers
 {
@@ -12,6 +13,8 @@ namespace VBeat.Controllers
     {
         public IActionResult Index()
         {
+            
+            ViewData["PlaylistCollection"] = SessionFactory.GetSessionManager().GetUserModel().SavedPlaylists;
             return View();
         }
 
