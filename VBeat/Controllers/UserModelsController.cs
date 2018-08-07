@@ -152,16 +152,16 @@ namespace VBeat.Controllers
         }
 
 
-        public async Task<IActionResult> SignIn(string userName, string password)
+        public async Task<IActionResult> SignIn()
         {
             return View();
         }
 
 
-        [HttpPost, ActionName("Sign In")]
-        public async Task<IActionResult> SignInAction(string userName, string password)
+        [HttpPost, ActionName("SignIn")]
+        public async Task<IActionResult> SignInAction([Bind("Username,Password")] UserModel inputUser)
         {
-            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==userName && u.Password == password));        
+            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==inputUser.Username && u.Password == inputUser.Password));
             if (userModel==null)
             {
                 ViewData["Error"] = "username or password are incorrect";
