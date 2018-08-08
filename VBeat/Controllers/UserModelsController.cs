@@ -55,6 +55,13 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
+            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u =>u.Username == userModel.Username);
+            if (checkIfExists!=null)
+            {
+                ViewData["Error"] = "UserName already exists, please try again";
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
                 userModel.TimeOfLastLogin = DateTime.UtcNow;
@@ -63,7 +70,7 @@ namespace VBeat.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userModel);
+            return View(userModel);//for daniel schechter return here the home view for logged in user
         }
 
         // GET: UserModels/Edit/5

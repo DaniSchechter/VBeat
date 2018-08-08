@@ -55,6 +55,13 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
         {
+            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u => u.Username == artistModel.Username);
+            if (checkIfExists != null)
+            {
+                ViewData["Error"] = "UserName already exists, please try again";
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
                 artistModel.TimeOfLastLogin = DateTime.UtcNow;
