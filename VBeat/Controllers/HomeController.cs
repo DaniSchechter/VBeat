@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VBeat.Models;
+using Microsoft.AspNetCore.Http;
+using VBeat.Models.Consts;
 
 namespace VBeat.Controllers
 {
@@ -17,7 +19,7 @@ namespace VBeat.Controllers
         }
         public IActionResult Index()
         {
-            UserModel userModel = SessionFactory.GetSessionManager().GetUserModel();
+            UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
             ViewData["DisplayName"] = userModel.Username;
             ViewData["PlaylistCollection"] = userModel.SavedPlaylists;
             return View();
