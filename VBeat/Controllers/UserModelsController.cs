@@ -68,9 +68,9 @@ namespace VBeat.Controllers
                 userModel.DateOfRegistration = DateTime.UtcNow;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "SongModels");
             }
-            return View(userModel);//for daniel schechter return here the home view for logged in user
+            return View(userModel);
         }
 
         // GET: UserModels/Edit/5
