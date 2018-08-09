@@ -13,7 +13,7 @@ namespace VBeat.Controllers
     {
         public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
 
-        private readonly int NUM_NEW_RELEASES = 10;
+        private readonly int NUM_NEW_RELEASES = 7;
 
         private readonly VBeatDbContext _context;
 

@@ -5,89 +5,38 @@
 }
 
 <section id="new-releases">
-    <div><h1>New Releases</h1></div><div class="middle-container">
+    <div><h1>New Releases</h1></div>
     <div id="carousel">
         @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
-         {
+        {
             <div class="song-container">
                 <a asp-action="Edit" asp-route-id="@item.SongId">
-                    <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="80%" />
-                </a>
-                <p display ="none"> @Html.DisplayFor(modelItem => item.SongName)</p>
+                    <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="60%" />
+                </a>             
             </div>
-         }
-        </div>
-        <a href="#">view more</a>
+        }
+    </div>
+    <div class="song-details-container"></div>
+        @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
+        {
+            <div id ="@Html.DisplayFor(modelItem => item.SongId)" class="song-wrraper">
+                <p> @Html.DisplayFor(modelItem => item.SongName)</p><br />
+                <p>
+                 @foreach (var artist in item.ArtistList)
+                 {
+                     @Html.DisplayFor(modelArtist => artist.Artist.ArtistName) <br/>
+                 }
+                </p>
+            </div>
+        }
     </div>
 </section>
 
-<p>
-    <a asp-action="Create">Create New (ONLY FOR ARTIST (NOT EVEN ADMIN) !!!!!!!!!!!!!!)</a>
-</p>
-
 <section id="recently-played">
     <div class="middle-container">
-        <h1>BY JS evry click on song add new div like that:: </h1>
         <h1>Recently Played</h1>
 
         <p>save in db because even after refresh it is still shown</p>
     </div>
 </section>
 
-<!--
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SongName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SongPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SongImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongPath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongImagePath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AddedDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.SongId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.SongId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.SongId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-    -->
