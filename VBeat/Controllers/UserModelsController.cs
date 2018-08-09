@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using Microsoft.AspNetCore.Http;
+using VBeat.Models.Consts;
 
 namespace VBeat.Controllers
 {
@@ -55,10 +57,20 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
-            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u =>u.Username == userModel.Username);
+            UserModel checkIfExists = _context.Users.Where(u =>u.Username == userModel.Username || u.Email == userModel.Email).FirstOrDefault();
             if (checkIfExists!=null)
             {
-                ViewData["Error"] = "UserName already exists, please try again";
+                string error = "";
+
+                if(checkIfExists.Username == userModel.Username)
+                {
+                    error = "Username is already taken.";
+                } else if(checkIfExists.Email == userModel.Email)
+                {
+                    error = "Email is already taken.";
+                }
+
+                ViewData["Error"] = error;
                 return View();
             }
 
@@ -68,9 +80,9 @@ namespace VBeat.Controllers
                 userModel.DateOfRegistration = DateTime.UtcNow;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("SignIn", "UserModels");
             }
-            return View(userModel);//for daniel schechter return here the home view for logged in user
+            return View(userModel);
         }
 
         // GET: UserModels/Edit/5
@@ -174,7 +186,11 @@ namespace VBeat.Controllers
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
             }
-            return View(userModel);//for daniel schechter implementation. return the main page for signed in user
+            userModel.TimeOfLastLogin = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            HttpContext.Session.SetInt32(SessionConsts.UserId, userModel.UserId);
+            return RedirectToAction("Index","Home");// TODO check this
         }
 
     }
