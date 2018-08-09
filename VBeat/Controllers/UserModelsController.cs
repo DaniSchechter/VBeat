@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using Microsoft.AspNetCore.Http;
+using VBeat.Models.Consts;
 
 namespace VBeat.Controllers
 {
@@ -55,8 +57,8 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
-            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u =>u.Username == userModel.Username);
-            if (checkIfExists!=null)
+            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u => u.Username == userModel.Username);
+            if (checkIfExists != null)
             {
                 ViewData["Error"] = "UserName already exists, please try again";
                 return View();
@@ -168,15 +170,17 @@ namespace VBeat.Controllers
         [HttpPost, ActionName("SignIn")]
         public async Task<IActionResult> SignInAction([Bind("Username,Password")] UserModel inputUser)
         {
-            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==inputUser.Username && u.Password == inputUser.Password));
-            if (userModel==null)
+            var userModel = await _context.Users.SingleOrDefaultAsync(u => (u.Username == inputUser.Username && u.Password == inputUser.Password));
+            if (userModel == null)
             {
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
             }
             userModel.TimeOfLastLogin = DateTime.UtcNow;
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","SongModels");
+
+            HttpContext.Session.SetInt32(SessionConsts.UserId, userModel.UserId);
+            return RedirectToAction("Index", "SongModels");// TODO check this
         }
 
     }

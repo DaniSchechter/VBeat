@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VBeat.Models;
-using VBeat.Models.Session;
 
 namespace VBeat.Controllers
 {
