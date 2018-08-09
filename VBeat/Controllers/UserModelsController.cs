@@ -57,17 +57,17 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
-            UserModel checkIfExists = await _context.Users.SingleOrDefaultAsync(u =>u.Username == userModel.Username || u.Email == userModel.Email);
+            UserModel checkIfExists = _context.Users.Where(u =>u.Username == userModel.Username || u.Email == userModel.Email).FirstOrDefault();
             if (checkIfExists!=null)
             {
                 string error = "";
 
                 if(checkIfExists.Username == userModel.Username)
                 {
-                    error += "Username is already taken.";
+                    error = "Username is already taken.";
                 } else if(checkIfExists.Email == userModel.Email)
                 {
-                    error += "<br>Email is already taken.";
+                    error = "Email is already taken.";
                 }
 
                 ViewData["Error"] = error;
@@ -190,7 +190,7 @@ namespace VBeat.Controllers
             await _context.SaveChangesAsync();
 
             HttpContext.Session.SetInt32(SessionConsts.UserId, userModel.UserId);
-            return RedirectToAction("Index","SongModels");// TODO check this
+            return RedirectToAction("Index","Home");// TODO check this
         }
 
     }
