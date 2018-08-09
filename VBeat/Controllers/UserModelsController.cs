@@ -57,8 +57,8 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
-            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u => u.Username == userModel.Username);
-            if (checkIfExists != null)
+            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u =>u.Username == userModel.Username);
+            if (checkIfExists!=null)
             {
                 ViewData["Error"] = "UserName already exists, please try again";
                 return View();
@@ -70,7 +70,7 @@ namespace VBeat.Controllers
                 userModel.DateOfRegistration = DateTime.UtcNow;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "SongModels");
+                return RedirectToAction("SignIn", "UserModels");
             }
             return View(userModel);
         }
@@ -170,8 +170,8 @@ namespace VBeat.Controllers
         [HttpPost, ActionName("SignIn")]
         public async Task<IActionResult> SignInAction([Bind("Username,Password")] UserModel inputUser)
         {
-            var userModel = await _context.Users.SingleOrDefaultAsync(u => (u.Username == inputUser.Username && u.Password == inputUser.Password));
-            if (userModel == null)
+            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==inputUser.Username && u.Password == inputUser.Password));
+            if (userModel==null)
             {
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
@@ -180,7 +180,7 @@ namespace VBeat.Controllers
             await _context.SaveChangesAsync();
 
             HttpContext.Session.SetInt32(SessionConsts.UserId, userModel.UserId);
-            return RedirectToAction("Index", "SongModels");// TODO check this
+            return RedirectToAction("Index","SongModels");// TODO check this
         }
 
     }
