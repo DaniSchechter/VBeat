@@ -174,6 +174,8 @@ namespace VBeat.Controllers
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
             }
+            userModel.TimeOfLastLogin = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index","SongModels");
         }
 
