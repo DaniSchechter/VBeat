@@ -22,6 +22,12 @@ namespace VBeat
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(30);
+                options.Cookie.HttpOnly = true;
+            });
             services.AddDbContext<VBeatDbContext>();
             services.AddMvc();
         }
@@ -40,7 +46,8 @@ namespace VBeat
             }
 
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
