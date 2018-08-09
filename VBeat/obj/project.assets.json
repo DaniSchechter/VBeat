@@ -12291,7 +12291,7 @@
       ]
     },
     "System.Security.Cryptography.Xml/4.4.2": {
-      "sha512": "q9Dren/YP5jhRCkDvLfuaPpMTQzP97ANvzq/OoGgwK8YdLRSTABS9oW5/23OKoM2DRCuBrh4qaecD2YNhPtuzQ==",
+      "sha512": "1m+fKVrApgKYMRuE0MF0vGjqy4XqAp1rCtyAzMXhJajMDDytMh/rHk9hp4M7KKk3QQZoWJUvyUY7xcw74w+JiQ==",
       "type": "package",
       "path": "system.security.cryptography.xml/4.4.2",
       "files": [
@@ -13479,24 +13479,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yuval\\.nuget\\packages\\": {},
+    "C:\\Users\\schec\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yuval\\Desktop\\projectWebApplications\\VBeat\\VBeat\\VBeat.csproj",
+      "projectUniqueName": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
       "projectName": "VBeat",
-      "projectPath": "C:\\Users\\Yuval\\Desktop\\projectWebApplications\\VBeat\\VBeat\\VBeat.csproj",
-      "packagesPath": "C:\\Users\\Yuval\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yuval\\Desktop\\projectWebApplications\\VBeat\\VBeat\\obj\\",
+      "projectPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
+      "packagesPath": "C:\\Users\\schec\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Yuval\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\schec\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

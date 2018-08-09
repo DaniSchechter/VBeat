@@ -174,7 +174,7 @@ namespace VBeat.Controllers
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
             }
-            return View(userModel);//for daniel schechter implementation. return the main page for signed in user
+            return RedirectToAction("Index","SongModels");
         }
 
     }
