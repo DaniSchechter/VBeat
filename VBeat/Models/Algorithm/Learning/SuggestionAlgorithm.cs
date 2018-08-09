@@ -7,6 +7,6 @@ namespace VBeat.Models.Algorithm.Learning
 {
     interface SuggestionAlgorithm
     {
-        List<SongModel> Suggset(PlaylistModel playlist);
+        List<int> Suggset(PlaylistModel playlist);
     }
 }
