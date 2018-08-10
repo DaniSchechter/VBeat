@@ -6,16 +6,18 @@
 
 <section id="new-releases">
     <div><h1>New Releases</h1></div>
-    <div id="carousel">
-        @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
-        {
-            <div class="song-container">
-                <a asp-action="Edit" asp-route-id="@item.SongId">
-                    <img class ="@Html.DisplayFor(modelItem => item.SongId)" src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="60%" />
-                </a>             
-            </div>
-        }
-    </div>
+    <div id="carousel-container">
+        <div id="carousel">
+            @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
+            {
+                <div class="song-container">
+                    <a asp-action="Edit" asp-route-id="@item.SongId">
+                        <img class ="@Html.DisplayFor(modelItem => item.SongId)" src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="60%" />
+                    </a>             
+                </div>
+            }
+        </div>
+    <div>
     <div id="song-details-container">
         @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
         {
@@ -36,7 +38,20 @@
     <div class="middle-container">
         <h1>Recently Played</h1>
 
-        <p>save in db because even after refresh it is still shown</p>
+        @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
+        {
+            <div class="square">
+                <div class="content">
+                    <div class="table">
+                        <div class="table-cell">
+                           <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+         }
+
+ 
     </div>
 </section>
 

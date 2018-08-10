@@ -32,3 +32,4 @@ C:\Users\Yuval\Desktop\פרויקט 68\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat
 C:\Users\Yuval\Desktop\פרויקט 68\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.dll
 C:\Users\Yuval\Desktop\פרויקט 68\VBeat\VBeat\obj\Debug\netcoreapp2.0\VBeat.pdb
 G:\Projects\C#\VBeat\VBeat\bin\Debug\netcoreapp2.0\Accord.dll.config
+C:\Users\schec\Documents\Dani Schechter\מכללה\git\VBeat\VBeat\bin\Debug\netcoreapp2.0\Accord.dll.config

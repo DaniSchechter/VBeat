@@ -5,60 +5,74 @@
     background: linear-gradient(rgb(0, 0, 160), black 85%) fixed;
     background-repeat: no-repeat;
     color: white;
-    font-size:medium;
+    font-size: medium;
 }
 
 /*Global*/
 div {
     text-align: center;
 }
+
 ul {
     padding: 0;
     margin: 0;
 }
+
 .text-danger {
     color: white;
+}
+section{
+    margin-bottom:50px;
+}
+.middle-container{
+    width: 90%;
+    margin:0 auto;
 }
 /*Header*/
 header {
     background-color: black;
     width: 100%;
-    height:60px;
-    position:absolute;
+    height: 60px;
+    position: absolute;
     border-bottom: white 1px solid;
 }
 
 header a {
-    text-decoration: none;
-    font-size:26px;
-    color:white;
+text-decoration: none;
+font-size: 26px;
+color: white;
 }
 
-header nav div.ul-container{
+header nav div.ul-container {
+    float:left;
     margin: 0 auto;
     width: 100%;
 }
-header ul{
-    margin:0;
-    padding:0;
-    height:100%;
+
+header ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-header ul li{
-    float:left;
-    list-style:none;
+header ul li {
+    float: right;
+    list-style: none;
     padding: 10px 30px 10px 30px;
 }
-header ul li#logo{
-    margin-right:480px;
+
+header li#logo {
+    float:left;
 }
+
 header li:hover {
-    background-color:white;
-    cursor:pointer;
+    background-color: white;
+    cursor: pointer;
 }
-header li:hover a{
-    background-color:white;
-    color:black;
+
+header li:hover a {
+    background-color: white;
+    color: black;
     text-decoration: none;
 }
 
@@ -66,36 +80,34 @@ header li:hover a{
 aside {
     background-color: black;
     width: 10%;
-    height:80%;
-    position:absolute;
-    border-right: white 1.5px solid;
-    margin-top:60px;
-    min-width:100px;
+    height: 80%;
+    position: absolute;
+    border-right: white 2px solid;
+    margin-top: 60px;
 }
-
 /*Footer*/
-footer{
-    position:static;
+footer {
+    position: static;
 }
 
 /*General Body Content*/
 div.body-content {
-    height:790px;
+    height: 790px;
     width: 90%;
     float: right;
-    margin-top:60px;
-    overflow-y:scroll;
+    margin-top: 60px;
+    overflow-y: scroll;
 }
 
 /*SongView*/
+/*Sectio new releases*/
 /*Carousel*/
 #carousel {
     width: 90%;
-    height: 350px;
+    height: 400px;
     position: absolute;
     clear: both;
     overflow: hidden;
-    margin-top: -20px;
 }
 
 #carousel img {
@@ -103,19 +115,52 @@ div.body-content {
     cursor: pointer; /* otherwise it's not as obvious items can be clicked */
 }
 
-div#song-details-container {
+div.song-details-container {
     margin-top: -60px;
 }
 
-div.song-wrapper {
-   display:none;
+div.song-wrapper{
+    display:none;
+    margin-top:-50px;
 }
 
-p.song-name{
-    font-size:20px;
-    font-weight:bold;
+/*Section recently played*/
+.square {
+    float: left;
+    position: relative;
+    width: 21.25%;
+    padding-bottom: 21.25%; /* = width for a 1:1 aspect ratio */
+    margin: 1.85%;
+    overflow: hidden;
 }
 
-p.song-artists {
-    font-size: 16px;
+.content {
+    position: absolute;
+    height: 99%; /* = 100% - 2*10% padding */
+    width: 99%; /* = 100% - 2*5% padding */
+}
+
+.table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.table-cell {
+    position:absolute;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+}
+.table-cell > img {
+    position:absolute;
+    display:block;
+    height:100%;
+    width:100%;
+    top:50%;
+    left:50%;
+    transform:translate3d(-50%,-50%,0);
+
+
 }
