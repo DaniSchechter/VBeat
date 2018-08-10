@@ -3,8 +3,61 @@
     ViewData["Title"] = "SearchView";
 }
 
-<h2>Search for songs</h2>
 <div class="container">
+    <h2>Search for songs</h2>
+    <div class="row">
+        <form class="form-inline" asp-controller="SongModels" asp-action="Search">
+            <label class="sr-only" for="inlineFormInput">Artist Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="artistName" placeholder="Artist Name">
 
+            <label class="sr-only" for="inlineFormInputGroup">Song Name</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <input type="text" class="form-control" id="songName" name="songName" placeholder="Song Name">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="row">
+        @if (ViewData["Songs"] != null)
+        {
+
+            List<SongModel> Songs = ((IQueryable<SongModel>)ViewData["Songs"]).ToList();
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Song Name</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Song Path</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Release Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Songs.Count(); i++)
+                    {
+
+
+                        SongModel curSong = Songs[i];
+
+                        <tr>
+                            <th scope="row">@curSong.SongId</th>
+                            <th>@curSong.SongName</th>
+                            <th>@curSong.Genre</th>
+                            <th>@curSong.SongPath</th>
+                            <th><img src="@curSong.SongImagePath" /></th>
+                            <th>@curSong.ReleaseDate.ToShortDateString()</th>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        }
+
+    </div>
 </div>
+
 

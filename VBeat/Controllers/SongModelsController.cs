@@ -151,13 +151,26 @@ namespace VBeat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Search(string ArtistName)
+
+        public IActionResult Search()
+        {
+            return View("~/Views/SongModels/SearchView.cshtml");
+        }
+
+        [HttpPost]
+        public IActionResult Search(string artistName, string songName)
         {
             IQueryable<SongModel> songs = from s in _context.Songs select s;
-            if(!string.IsNullOrWhiteSpace(ArtistName))
+
+            if(!string.IsNullOrWhiteSpace(songName))
+            {
+                songs = songs.Where(s => s.SongName.ToLower().Contains(songName.ToLower()));
+            }
+
+            if(!string.IsNullOrWhiteSpace(artistName))
             {
                 songs = songs.Where(s => s.ArtistList.Where(
-                    a =>a.Artist.ArtistName.ToLower().Contains(ArtistName)).Count() > 0
+                    a =>a.Artist.ArtistName.ToLower().Contains(artistName.ToLower())).Count() > 0
                 );
             }
 
