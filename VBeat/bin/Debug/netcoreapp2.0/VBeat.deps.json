@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "8fec476827cf7d172314a5cb6caf2b357cb8e9a6"
+    "signature": "fefb700bfe154c3a904d6d2a2f92a84328fc19ed"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
       "VBeat/1.0.0": {
         "dependencies": {
           "Accord": "3.8.0",
+          "Accord.MachineLearning": "3.8.0",
           "Microsoft.AspNetCore.All": "2.0.9",
           "Microsoft.EntityFrameworkCore.Proxies": "2.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "2.1.1",
@@ -43,6 +44,44 @@
         },
         "compile": {
           "lib/netstandard2.0/Accord.dll": {}
+        }
+      },
+      "Accord.MachineLearning/3.8.0": {
+        "dependencies": {
+          "Accord": "3.8.0",
+          "Accord.Math": "3.8.0",
+          "Accord.Statistics": "3.8.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Accord.MachineLearning.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/Accord.MachineLearning.dll": {}
+        }
+      },
+      "Accord.Math/3.8.0": {
+        "dependencies": {
+          "Accord": "3.8.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Accord.Math.Core.dll": {},
+          "lib/netstandard2.0/Accord.Math.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/Accord.Math.Core.dll": {},
+          "lib/netstandard2.0/Accord.Math.dll": {}
+        }
+      },
+      "Accord.Statistics/3.8.0": {
+        "dependencies": {
+          "Accord": "3.8.0",
+          "Accord.Math": "3.8.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Accord.Statistics.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/Accord.Statistics.dll": {}
         }
       },
       "Castle.Core/4.2.1": {
@@ -4345,6 +4384,27 @@
       "path": "accord/3.8.0",
       "hashPath": "accord.3.8.0.nupkg.sha512"
     },
+    "Accord.MachineLearning/3.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6d8HY6/S4t5LBgD4YWrHISDX4q9s/caBu4fbHhq5RH2U4ETbtnDcvwgtsqGHKH1FyPylWFOniYjLO4B4xkEEuw==",
+      "path": "accord.machinelearning/3.8.0",
+      "hashPath": "accord.machinelearning.3.8.0.nupkg.sha512"
+    },
+    "Accord.Math/3.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K3dzeQjDIrwRnoTRoMOoIbul2Uc0B8cnEtdrSlirmIo37C+jVkmYpJzme/z4Kg99XR2Vj5W5TTNlhjn+AKR+8A==",
+      "path": "accord.math/3.8.0",
+      "hashPath": "accord.math.3.8.0.nupkg.sha512"
+    },
+    "Accord.Statistics/3.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8WsmCE31Qdy3FmRvwtAY3F9/fJEi/6uyLQrhOvSI6pP6gpoaacmCrJRIphkGf2EB8gKHRWLAc4UXr1OOPHxkmQ==",
+      "path": "accord.statistics/3.8.0",
+      "hashPath": "accord.statistics.3.8.0.nupkg.sha512"
+    },
     "Castle.Core/4.2.1": {
       "type": "package",
       "serviceable": true,
@@ -6350,7 +6410,7 @@
     "System.Security.Cryptography.Xml/4.4.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-q9Dren/YP5jhRCkDvLfuaPpMTQzP97ANvzq/OoGgwK8YdLRSTABS9oW5/23OKoM2DRCuBrh4qaecD2YNhPtuzQ==",
+      "sha512": "sha512-1m+fKVrApgKYMRuE0MF0vGjqy4XqAp1rCtyAzMXhJajMDDytMh/rHk9hp4M7KKk3QQZoWJUvyUY7xcw74w+JiQ==",
       "path": "system.security.cryptography.xml/4.4.2",
       "hashPath": "system.security.cryptography.xml.4.4.2.nupkg.sha512"
     },

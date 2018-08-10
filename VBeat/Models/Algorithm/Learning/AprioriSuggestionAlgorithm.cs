@@ -72,7 +72,7 @@ namespace VBeat.Models.Algorithm.Learning
 
         class NotTrainedException: Exception
         {
-
+        
         }
     }
 }
