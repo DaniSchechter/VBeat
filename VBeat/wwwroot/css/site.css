@@ -68,9 +68,10 @@ aside {
     width: 10%;
     height:80%;
     position:absolute;
-    border-right: white 2px solid;
+    border-right: white 1.5px solid;
     margin-top:60px;
 }
+
 /*Footer*/
 footer{
     position:static;
@@ -85,16 +86,15 @@ div.body-content {
     overflow-y:scroll;
 }
 
-
-
 /*SongView*/
 /*Carousel*/
 #carousel {
     width: 90%;
-    height: 400px;
+    height: 350px;
     position: absolute;
     clear: both;
     overflow: hidden;
+    margin-top: -20px;
 }
 
 #carousel img {
@@ -102,7 +102,11 @@ div.body-content {
     cursor: pointer; /* otherwise it's not as obvious items can be clicked */
 }
 
-div.song-details-container {
+div#song-details-container {
     margin-top: -60px;
 }
 
+div.song-wrapper {
+   display:none;
+   background-color
+}

@@ -16,10 +16,10 @@
             </div>
         }
     </div>
-    <div class="song-details-container"></div>
+    <div id="song-details-container">
         @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
         {
-            <div id ="@Html.DisplayFor(modelItem => item.SongId)" class="song-wrraper">
+            <div id="@Html.DisplayFor(modelItem => item.SongId)" class="song-wrapper">
                 <p> @Html.DisplayFor(modelItem => item.SongName)</p><br />
                 <p>
                  @foreach (var artist in item.ArtistList)
@@ -29,7 +29,7 @@
                 </p>
             </div>
         }
-    </div>
+   </div>
 </section>
 
 <section id="recently-played">

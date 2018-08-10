@@ -87,7 +87,6 @@
       }
 
       var $imageElements = data.itemsContainer.find('img'), loadedImages = 0, totalImages = $imageElements.length;
-
       $imageElements.each(function () {
         $(this).bind('load', function () {
           // Add to number of images loaded and see if they are all done yet
