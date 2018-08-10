@@ -11,7 +11,7 @@
         {
             <div class="song-container">
                 <a asp-action="Edit" asp-route-id="@item.SongId">
-                    <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="60%" />
+                    <img class ="@Html.DisplayFor(modelItem => item.SongId)" src="@Html.DisplayFor(modelItem => item.SongImagePath)" width="30%" height="60%" />
                 </a>             
             </div>
         }
@@ -19,9 +19,9 @@
     <div id="song-details-container">
         @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
         {
-            <div id="@Html.DisplayFor(modelItem => item.SongId)" class="song-wrapper">
-                <p> @Html.DisplayFor(modelItem => item.SongName)</p><br />
-                <p>
+            <div  class="@Html.DisplayFor(modelItem => item.SongId) song-wrapper">
+                <p class="song-name"> @Html.DisplayFor(modelItem => item.SongName)</p>
+                <p class="song-artists">
                  @foreach (var artist in item.ArtistList)
                  {
                      @Html.DisplayFor(modelArtist => artist.Artist.ArtistName) <br/>

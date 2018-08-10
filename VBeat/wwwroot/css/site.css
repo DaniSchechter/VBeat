@@ -70,6 +70,7 @@ aside {
     position:absolute;
     border-right: white 1.5px solid;
     margin-top:60px;
+    min-width:100px;
 }
 
 /*Footer*/
@@ -108,5 +109,13 @@ div#song-details-container {
 
 div.song-wrapper {
    display:none;
-   background-color
+}
+
+p.song-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+p.song-artists {
+    font-size: 16px;
 }

@@ -481,6 +481,11 @@
      * the user passed in if the center item is clicked
      */
     $(this).find('img').bind("click", function () {
+      //Display the image's details
+      var ClickedImageClass = $(this).attr('class');
+      $('div#song-details-container div').hide();
+      $('div#song-details-container div.' + ClickedImageClass).show();
+
       var itemPosition = $(this).data().currentPosition;
 
       if (options.imageNav == false) {
