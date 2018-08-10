@@ -151,6 +151,20 @@ namespace VBeat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Search(string ArtistName)
+        {
+            IQueryable<SongModel> songs = from s in _context.Songs select s;
+            if(!string.IsNullOrWhiteSpace(ArtistName))
+            {
+                songs = songs.Where(s => s.ArtistList.Where(
+                    a =>a.Artist.ArtistName.ToLower().Contains(ArtistName)).Count() > 0
+                );
+            }
+
+            ViewData["Songs"] = songs;
+            return View("~/Views/SongModels/SearchView.cshtml");
+        }
+
         private bool SongModelExists(int id)
         {
             return _context.Songs.Any(e => e.SongId == id);
