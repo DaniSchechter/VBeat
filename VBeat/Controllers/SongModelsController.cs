@@ -217,10 +217,10 @@ namespace VBeat.Controllers
             for (int i = 0; i < months.Length; i++)
             {
                 int numSongs = _context.Songs.Where(s => s.ReleaseDate.Month.Equals(i + 1)).Count();
-                dataLabelModel.Add(new DataLabelModel() { ""})
+                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i] });
             }
 
-            return Json();
+            return Json(dataLabelModel);
         }
     }
 }
