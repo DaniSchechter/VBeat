@@ -26,11 +26,12 @@
             { "label": "two", "value": 50 },
             { "label": "three", "value": 30 }];
          */
-        function getDataFromServer() {
+        function getDataFromServer(func) {
             $.get({
                 url: "/SongModels/GetSongsByMonth",
             }).done(function (response, textStatus, jqXHR) {
                 console.log(response);
+                func(response);
             }).fail(function () {
                 alert('unable to get data from server');
                 console.error('get request was unable to get data from server');
@@ -77,12 +78,19 @@
                     return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
                 })
                 .attr("text-anchor", "middle")                          //center the text on it's origin
-                .text(function (d, i) { return data[i].label; });        //get the label from our original data array
+                .text(function (d, i) {
+                    if (data[i].value == 0) {
+                        return '';
+                    }
+                    return data[i].label;
+                });        //get the label from our original data array
         }
 
         $(document).ready(function () {
             console.log("page ready for action!");
-            drawPie(getDataFromServer());
+            getDataFromServer(function (data) {
+                drawPie(data);
+            });
         });
 
     </script>
