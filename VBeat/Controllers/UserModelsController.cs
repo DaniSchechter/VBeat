@@ -68,9 +68,9 @@ namespace VBeat.Controllers
                 userModel.DateOfRegistration = DateTime.UtcNow;
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "SongModels");
             }
-            return View(userModel);//for daniel schechter return here the home view for logged in user
+            return View(userModel);
         }
 
         // GET: UserModels/Edit/5
@@ -174,7 +174,9 @@ namespace VBeat.Controllers
                 ViewData["Error"] = "username or password are incorrect";
                 return View();
             }
-            return View(userModel);//for daniel schechter implementation. return the main page for signed in user
+            userModel.TimeOfLastLogin = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index","SongModels");
         }
 
     }

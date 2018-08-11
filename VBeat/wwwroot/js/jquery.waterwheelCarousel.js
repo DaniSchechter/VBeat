@@ -87,7 +87,6 @@
       }
 
       var $imageElements = data.itemsContainer.find('img'), loadedImages = 0, totalImages = $imageElements.length;
-
       $imageElements.each(function () {
         $(this).bind('load', function () {
           // Add to number of images loaded and see if they are all done yet
@@ -165,7 +164,7 @@
           separation *= options.separationMultiplier;
         }
         data.calculations[i] = {
-          distance: data.calculations[i-1].distance + separation,
+          distance: data.calculations[i-1].distance + separation+35,
           offset:   data.calculations[i-1].offset + horizonOffset,
           opacity:  data.calculations[i-1].opacity * options.opacityMultiplier
         }
@@ -482,6 +481,11 @@
      * the user passed in if the center item is clicked
      */
     $(this).find('img').bind("click", function () {
+      //Display the image's details
+      var ClickedImageClass = $(this).attr('class');
+      $('div#song-details-container div').hide();
+      $('div#song-details-container div.' + ClickedImageClass).show();
+
       var itemPosition = $(this).data().currentPosition;
 
       if (options.imageNav == false) {
@@ -647,7 +651,7 @@
     separationMultiplier:       0.6, // multipled by separation distance to increase/decrease distance for each additional item
     horizonOffset:              0,   // offset each item from the "horizon" by this amount (causes arching)
     horizonOffsetMultiplier:    1,   // multipled by horizon offset to increase/decrease offset for each additional item
-    sizeMultiplier:             0.7, // determines how drastically the size of each item changes
+    sizeMultiplier:             0.8, // determines how drastically the size of each item changes
     opacityMultiplier:          0.8, // determines how drastically the opacity of each item changes
     horizon:                    0,   // how "far in" the horizontal/vertical horizon should be set from the container wall. 0 for auto
     flankingItems:              3,   // the number of items visible on either side of the center
