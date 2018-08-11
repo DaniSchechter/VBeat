@@ -25,7 +25,8 @@ namespace VBeat.Controllers.Test
 
             suggestionAlgorithm.Train(_context.Playlists
                 .Where(p => p.PlaylistId != playlistId).ToList());
-            List<int> intList = suggestionAlgorithm.Suggset(_context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault());
+            PlaylistModel targetPlaylist = _context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault();
+            List<int> intList = suggestionAlgorithm.Suggset(targetPlaylist);
             return intList;
         }
 
