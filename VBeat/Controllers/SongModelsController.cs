@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using VBeat.Models.Json;
 
 namespace VBeat.Controllers
 {
@@ -156,7 +157,7 @@ namespace VBeat.Controllers
 
         public IActionResult Statistics()
         {
-            return null;
+            return View();
         }
 
 
@@ -201,12 +202,26 @@ namespace VBeat.Controllers
                 ViewData["Offset"] = 0;
             }
             ViewData["Songs"] = songs;
-            return View("~/Views/SongModels/SearchView.cshtml");
+            return View("~/Views/SongModels/Search.cshtml");
         }
 
         private bool SongModelExists(int id)
         {
             return _context.Songs.Any(e => e.SongId == id);
+        }
+
+        public JsonResult GetSongsByMonth()
+        {
+            string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December" };
+            List<DataLabelModel> dataLabelModel = new List<DataLabelModel>();
+
+            for (int i = 0; i < months.Length; i++)
+            {
+                int numSongs = _context.Songs.Where(s => s.ReleaseDate.Month.Equals(i + 1)).Count();
+                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i] });
+            }
+
+            return Json(dataLabelModel);
         }
     }
 }

@@ -331,3 +331,8 @@ ASALocalRun/
 
 # Ignore VS Settings
 .vs/
+
+# Ignore binary files
+VBeat/bin/
+VBeat/obj/
+
