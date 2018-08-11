@@ -157,6 +157,11 @@ namespace VBeat.Controllers
             return View("~/Views/SongModels/SearchView.cshtml");
         }
 
+        public IActionResult Statistics()
+        {
+
+        }
+
         [HttpPost]
         public IActionResult Search(string artistName, string songName)
         {
