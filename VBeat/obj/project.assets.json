@@ -13682,27 +13682,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\schec\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
+    "C:\\Users\\גיא\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
+      "projectUniqueName": "G:\\Projects\\C#\\VBeat\\VBeat\\VBeat.csproj",
       "projectName": "VBeat",
-      "projectPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\VBeat.csproj",
-      "packagesPath": "C:\\Users\\schec\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\obj\\",
+      "projectPath": "G:\\Projects\\C#\\VBeat\\VBeat\\VBeat.csproj",
+      "packagesPath": "C:\\Users\\גיא\\.nuget\\packages\\",
+      "outputPath": "G:\\Projects\\C#\\VBeat\\VBeat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\schec\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Users\\גיא\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -13762,13 +13759,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\schec\\Documents\\Dani Schechter\\מכללה\\git\\VBeat\\VBeat\\obj\\VBeat.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
