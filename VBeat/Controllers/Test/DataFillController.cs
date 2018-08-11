@@ -221,12 +221,12 @@ namespace VBeat.Controllers
                     int indexToAdd = random.Next(0, playlists.Count);
                     PlaylistModel curPlaylist = playlists.ElementAt(indexToAdd);
                     Models.BridgeModel.PlaylistSongModel temp = new Models.BridgeModel.PlaylistSongModel();
-                    temp.PlaylistId = playlists.ElementAt(indexToAdd).PlaylistId;
+                    temp.PlaylistId = curPlaylist.PlaylistId;
                     temp.SongId = songs.ElementAt(i).SongId;
                     if (!checkIfSongAlreadyInPlaylist(temp.SongId, temp.PlaylistId))
                     {
-                        curPlaylist.Songs.Add(temp);
-                        dbContext.Update(curPlaylist);
+                        ret.Add(temp);
+                        dbContext.Add(temp);
                     }
                 }
             }
