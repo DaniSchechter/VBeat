@@ -158,11 +158,6 @@ namespace VBeat.Controllers
             return null;
         }
 
-        public IActionResult Search()
-        {
-            return View("~/Views/SongModels/SearchView.cshtml");
-        }
-
 
         [HttpGet]
         public IActionResult Search(string artistName, string songName, string genre, int? offset)

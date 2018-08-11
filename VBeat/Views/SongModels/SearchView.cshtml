@@ -19,8 +19,11 @@
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
             <input type="hidden" name="offset" value="0" />
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-dark" id="nextPage">Next Page</button>
+            <button class="btn btn-dark" id="prevPage">Previous Page</button>
         </form>
     </div>
+    
     <div class="row">
         @if (ViewData["Songs"] != null)
         {
@@ -57,7 +60,6 @@
                     }
                 </tbody>
             </table>
-
         }
 
     </div>
