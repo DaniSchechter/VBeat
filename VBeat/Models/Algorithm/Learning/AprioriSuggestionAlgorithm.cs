@@ -59,9 +59,9 @@ namespace VBeat.Models.Algorithm.Learning
 
             int[][] matches = classifier.Decide(songIdList.ToArray());
             List<int> resultSongIdList = new List<int>();
-            for(int i = 0; i < matches.GetLength(0); i++)
+            for(int i = 0; i < matches.Length; i++)
             {
-                for(int j = 0; j < matches.GetLength(1); j++)
+                for(int j = 0; j < matches[0].Length; j++)
                 {
                     resultSongIdList.Add(matches[i][j]);
                 }
