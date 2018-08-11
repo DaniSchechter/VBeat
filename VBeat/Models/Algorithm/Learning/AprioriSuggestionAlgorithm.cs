@@ -19,7 +19,7 @@ namespace VBeat.Models.Algorithm.Learning
             return instance;
         }
 
-        private Apriori apriori = new Apriori(threshold: 2, confidence: 0.3);
+        private Apriori apriori = new Apriori(threshold: 2, confidence: 0);
         private AssociationRuleMatcher<int> classifier = null;
 
         private AprioriSuggestionAlgorithm()
