@@ -39,7 +39,7 @@ namespace VBeat.Controllers
             return start.AddDays(random.Next(range));
         }
 
-        public ICollection<SongModel> randomSongs(int num)
+        public ICollection<SongModel> RandomSongs(int num)
         {
             ICollection<SongModel> ret = new List<SongModel>();
             for (int i = 0; i < num; i++)
@@ -59,7 +59,7 @@ namespace VBeat.Controllers
         }
 
 
-        public ICollection<UserModel> randomUsers(int num)
+        public ICollection<UserModel> RandomUsers(int num)
         {
             ICollection<UserModel> ret = new List<UserModel>();
             for (int i = 0; i < num; i++)
@@ -79,7 +79,7 @@ namespace VBeat.Controllers
             return ret;
         }
 
-        public ICollection<ArtistModel> randomArtists(int num)
+        public ICollection<ArtistModel> RandomArtists(int num)
         {
             ICollection<ArtistModel> ret = new List<ArtistModel>();
             for (int i = 0; i < num; i++)
@@ -102,7 +102,7 @@ namespace VBeat.Controllers
             return ret;
         }
 
-        public ICollection<PlaylistModel> randomPlaylists(int num)
+        public ICollection<PlaylistModel> RandomPlaylists(int num)
         {
             ICollection<PlaylistModel> ret = new List<PlaylistModel>();
             for (int i = 0; i < num; i++)
@@ -179,7 +179,7 @@ namespace VBeat.Controllers
             return true;
         }
 
-        public ICollection<Models.BridgeModel.ArtistSongModel> randomArtistToSong(ICollection<SongModel> songs, ICollection<ArtistModel> artists)
+        public ICollection<Models.BridgeModel.ArtistSongModel> RandomArtistToSong(ICollection<SongModel> songs, ICollection<ArtistModel> artists)
         {
             ICollection<Models.BridgeModel.ArtistSongModel> ret = new List<Models.BridgeModel.ArtistSongModel>();
             for (int i = 0; i < songs.Count; i++)
@@ -210,7 +210,7 @@ namespace VBeat.Controllers
             return true;
         }
 
-        public ICollection<Models.BridgeModel.PlaylistSongModel> randomSongsToPlaylist(ICollection<PlaylistModel> playlists, ICollection<SongModel> songs)
+        public ICollection<Models.BridgeModel.PlaylistSongModel> RandomSongsToPlaylist(ICollection<PlaylistModel> playlists, ICollection<SongModel> songs)
         {
             ICollection<Models.BridgeModel.PlaylistSongModel> ret = new List<Models.BridgeModel.PlaylistSongModel>();
             for (int i = 0; i < songs.Count; i++)
@@ -219,8 +219,9 @@ namespace VBeat.Controllers
                 for (int j = 0; j < randNumPlaylistToAdd; j++)
                 {
                     int indexToAdd = random.Next(0, playlists.Count);
+                    PlaylistModel curPlaylist = playlists.ElementAt(indexToAdd);
                     Models.BridgeModel.PlaylistSongModel temp = new Models.BridgeModel.PlaylistSongModel();
-                    temp.PlaylistId = playlists.ElementAt(indexToAdd).PlaylistId;
+                    temp.PlaylistId = curPlaylist.PlaylistId;
                     temp.SongId = songs.ElementAt(i).SongId;
                     if (!checkIfSongAlreadyInPlaylist(temp.SongId, temp.PlaylistId))
                     {
@@ -237,124 +238,13 @@ namespace VBeat.Controllers
 
         public bool Index()
         {
-            /*ArtistModel artistModel = new ArtistModel() { ArtistImage = "https://i.imgur.com/GkyKh.jpg", ArtistName = "Fake Artist #1", Email = "fakeartist@fake.com", DateOfRegistration = DateTime.UtcNow, FirstName = "Idodo", LastName = "Aloni", Password = "12312fdasd", TimeOfLastLogin = DateTime.Now, Username = "deadmau5" };
-            ArtistModel artistModel2 = new ArtistModel() { ArtistImage = "https://i.imgur.com/GkyKh.jpg", ArtistName = "Fake Artist #2", Email = "fakeartist2@fake.com", DateOfRegistration = DateTime.UtcNow, FirstName = "Idodo2", LastName = "Aloni", Password = "12312fdasd", TimeOfLastLogin = DateTime.Now, Username = "deadmau53" };
-            ArtistModel artistModel3 = new ArtistModel() { ArtistImage = "https://i.imgur.com/GkyKh.jpg", ArtistName = "Fake Artist #3", Email = "fakeartis3t@fake.com", DateOfRegistration = DateTime.UtcNow, FirstName = "Idodo3", LastName = "Aloni", Password = "12312fdasd", TimeOfLastLogin = DateTime.Now, Username = "deadmau52" };
-            SongModel songModel = new SongModel()
-            {
-                AddedDate = DateTime.Now,
-                Genre = "EDM",
-                ReleaseDate = DateTime.Now,
-                SongImagePath = "https://i.imgur.com/rbXZcVH.jpg",
-                SongName = "Blah Blah Blah",
-                SongPath = "ftp://cdn.musiccdn.com/blablabla.mp3",
-            };
 
-            SongModel songModel2 = new SongModel()
-            {
-                AddedDate = DateTime.Now,
-                Genre = "Country Music",
-                ReleaseDate = DateTime.Now,
-                SongImagePath = "https://imgix.ranker.com/user_node_img/50065/1001280631/original/dr-no-chill-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces",
-                SongName = "HaTikva",
-                SongPath = "ftp://cdn.musiccdn.com/HaTikva.mp3",
-            };
-
-            SongModel songModel3 = new SongModel()
-            {
-                AddedDate = DateTime.Now,
-                Genre = "Pop",
-                ReleaseDate = DateTime.Now,
-                SongImagePath = "https://static.highsnobiety.com/wp-content/uploads/2018/05/07132600/this-is-america-what-you-missed-01-480x320.jpg",
-                SongName = "This Is America",
-                SongPath = "ftp://cdn.musiccdn.com/this_is_america.mp3",
-            };
-
-            PlaylistModel playlist1 = new PlaylistModel
-            {
-                PlaylistId = 1,
-                PlaylistImage = "dfmn",
-                PlaylistName = "workout",
-                Public = true,
-                UserModel = artistModel
-            };
-
-            PlaylistModel playlist2 = new PlaylistModel
-            {
-                PlaylistId = 2,
-                PlaylistImage = "bvgn",
-                PlaylistName = "workout",
-                Public = true,
-                UserModel = artistModel
-            };
-
-            Models.BridgeModel.PlaylistSongModel fir = new Models.BridgeModel.PlaylistSongModel() {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel,
-                SongId = songModel.SongId
-            };
-
-            Models.BridgeModel.PlaylistSongModel sec = new Models.BridgeModel.PlaylistSongModel()
-            {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel2,
-                SongId = songModel2.SongId
-            };
-
-            Models.BridgeModel.PlaylistSongModel thir = new Models.BridgeModel.PlaylistSongModel()
-            {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel3,
-                SongId = songModel3.SongId
-            };
-
-
-
-
-
-
-            Models.BridgeModel.PlaylistSongModel fir = new Models.BridgeModel.PlaylistSongModel()
-            {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel,
-                SongId = songModel.SongId
-            };
-
-            Models.BridgeModel.PlaylistSongModel sec = new Models.BridgeModel.PlaylistSongModel()
-            {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel2,
-                SongId = songModel2.SongId
-            };
-
-            Models.BridgeModel.PlaylistSongModel thir = new Models.BridgeModel.PlaylistSongModel()
-            {
-                Playlist = playlist1,
-                PlaylistId = playlist1.PlaylistId,
-                Song = songModel3,
-                SongId = songModel3.SongId
-            };
-
-            dbContext.Add(songModel);
-            dbContext.Add(songModel2);
-            dbContext.Add(songModel3);
-            dbContext.Add(artistModel);
-            dbContext.Add(artistModel2);
-            dbContext.Add(artistModel3);
-            dbContext.SaveChanges();
-            */
-
-            ICollection<SongModel> songs = randomSongs(5);
-            ICollection<ArtistModel> artists = randomArtists(3);
-            ICollection<UserModel> users = randomUsers(3);
-            ICollection<PlaylistModel> playlists = randomPlaylists(2);
-            ICollection<Models.BridgeModel.ArtistSongModel> artistsong = randomArtistToSong(songs, artists);
-            ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = randomSongsToPlaylist(playlists, songs);
+            ICollection<SongModel> songs = RandomSongs(20);
+            ICollection<ArtistModel> artists = RandomArtists(3);
+            ICollection<UserModel> users = RandomUsers(3);
+            ICollection<PlaylistModel> playlists = RandomPlaylists(2);
+            ICollection<Models.BridgeModel.ArtistSongModel> artistsong = RandomArtistToSong(songs, artists);
+            ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = RandomSongsToPlaylist(playlists, songs);
             return true;
         }
     }
