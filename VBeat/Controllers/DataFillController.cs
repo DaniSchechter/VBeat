@@ -11,12 +11,18 @@ namespace VBeat.Controllers
     {
         private VBeatDbContext dbContext;
 
-        
+
 
         public DataFillController()
         {
             dbContext = new VBeatDbContext();
         }
+
+        public void ClearDataBase()
+        {
+
+        }
+
 
         private static Random random = new Random();
         public string RandomString(int length)
@@ -39,7 +45,6 @@ namespace VBeat.Controllers
             for (int i = 0; i < num; i++)
             {
                 SongModel temp = new SongModel();
-                temp.SongId = i;
                 temp.SongImagePath = RandomString(10);
                 temp.SongName = RandomString(6);
                 temp.SongPath = RandomString(12);
@@ -49,6 +54,7 @@ namespace VBeat.Controllers
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
+            dbContext.SaveChanges();
             return ret;
         }
 
@@ -59,7 +65,6 @@ namespace VBeat.Controllers
             for (int i = 0; i < num; i++)
             {
                 UserModel temp = new UserModel();
-                temp.UserId = i;
                 temp.Username = RandomString(6);
                 temp.FirstName = RandomString(5);
                 temp.LastName = RandomString(5);
@@ -70,6 +75,7 @@ namespace VBeat.Controllers
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
+            dbContext.SaveChanges();
             return ret;
         }
 
@@ -79,7 +85,6 @@ namespace VBeat.Controllers
             for (int i = 0; i < num; i++)
             {
                 ArtistModel temp = new ArtistModel();
-                temp.UserId = i;
                 temp.Username = RandomString(6);
                 temp.FirstName = RandomString(5);
                 temp.LastName = RandomString(5);
@@ -91,47 +96,102 @@ namespace VBeat.Controllers
                 temp.ArtistImage = RandomString(10);
                 ret.Add(temp);
                 dbContext.Add(temp);
-                
+
             }
+            dbContext.SaveChanges();
             return ret;
         }
 
         public ICollection<PlaylistModel> randomPlaylists(int num)
         {
             ICollection<PlaylistModel> ret = new List<PlaylistModel>();
-            for (int i =0;i<num;i++)
+            for (int i = 0; i < num; i++)
             {
                 PlaylistModel temp = new PlaylistModel();
-                temp.PlaylistId = i;
                 temp.Public = true;
                 temp.PlaylistImage = RandomString(10);
                 temp.PlaylistName = RandomString(5);
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
+            dbContext.SaveChanges();
             return ret;
+        }
+
+
+        public ICollection<ShowModel> randomShows(int num)
+        {
+            ICollection<ShowModel> ret = new List<ShowModel>();
+            for (int i = 0; i < num; i++)
+            {
+                ShowModel temp = new ShowModel();
+                temp.ShowName = RandomString(6);
+                temp.Country = RandomString(6);
+                temp.City = RandomString(6);
+                temp.StreetName = RandomString(6);
+                temp.HouseNumber = random.Next(100);
+                temp.ShowTime = RandomDay();
+                ret.Add(temp);
+                dbContext.Add(temp);
+            }
+            dbContext.SaveChanges();
+            return ret;
+        }
+
+        public ICollection<Models.BridgeModel.ArtistShowModel> randomArtistsToShows(ICollection<ShowModel> shows, ICollection<ArtistModel> artists)
+        {
+            ICollection<Models.BridgeModel.ArtistShowModel> ret = new List<Models.BridgeModel.ArtistShowModel>();
+            for (int i = 0; i < shows.Count; i++)
+            {
+                int randomNumArtists = random.Next(1, artists.Count);
+                for (int j = 0;i<randomNumArtists;i++)
+                {
+                    int randomArtistIndex = random.Next(artists.Count);
+                    if (!checkIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId,shows.ElementAt(i).ShowId))
+                    {
+                        Models.BridgeModel.ArtistShowModel temp = new Models.BridgeModel.ArtistShowModel();
+                        temp.UserId = artists.ElementAt(randomArtistIndex).UserId;
+                        temp.ShowId = shows.ElementAt(i).ShowId;
+                        ret.Add(temp);
+                        dbContext.Add(temp);
+                    }
+                }
+            }
+            dbContext.SaveChanges();
+            return ret;
+        }
+
+
+
+        private bool checkIfArtistAlreadyInShow(int artistId, int showId)
+        {
+            ShowModel show = dbContext.Shows.SingleOrDefault(s => s.ShowId == showId);
+            var check = show.ArtistList.SingleOrDefault(a => a.UserId == artistId);
+            if (check == null) return false;
+            return true;
         }
 
         public ICollection<Models.BridgeModel.ArtistSongModel> randomArtistToSong(ICollection<SongModel> songs, ICollection<ArtistModel> artists)
         {
             ICollection<Models.BridgeModel.ArtistSongModel> ret = new List<Models.BridgeModel.ArtistSongModel>();
-            for (int i = 0;i<songs.Count;i++)
+            for (int i = 0; i < songs.Count; i++)
             {
                 Models.BridgeModel.ArtistSongModel temp = new Models.BridgeModel.ArtistSongModel();
                 temp.SongId = songs.ElementAt(i).SongId;
-                int rand = random.Next(0,artists.Count-1);
+                int rand = random.Next(0, artists.Count);
                 temp.UserId = artists.ElementAt(rand).UserId;
                 ret.Add(temp);
                 dbContext.Add(temp);
 
             }
+            dbContext.SaveChanges();
             return ret;
         }
 
         private bool checkIfSongAlreadyInPlaylist(int songId, int playlistId)
         {
             PlaylistModel playlist = dbContext.Playlists.SingleOrDefault(p => p.PlaylistId == playlistId);
-            var check = playlist.Songs.SingleOrDefault(s =>s.SongId==songId);
+            var check = playlist.Songs.SingleOrDefault(s => s.SongId == songId);
             if (check == null) return false;
             return true;
         }
@@ -139,12 +199,12 @@ namespace VBeat.Controllers
         public ICollection<Models.BridgeModel.PlaylistSongModel> randomSongsToPlaylist(ICollection<PlaylistModel> playlists, ICollection<SongModel> songs)
         {
             ICollection<Models.BridgeModel.PlaylistSongModel> ret = new List<Models.BridgeModel.PlaylistSongModel>();
-            for (int i = 0; i<songs.Count ;i++)
+            for (int i = 0; i < songs.Count; i++)
             {
                 int randNumPlaylistToAdd = random.Next(0, playlists.Count);
-                for (int j = 0;j<randNumPlaylistToAdd;j++)
+                for (int j = 0; j < randNumPlaylistToAdd; j++)
                 {
-                    int indexToAdd = random.Next(0,playlists.Count-1);
+                    int indexToAdd = random.Next(0, playlists.Count);
                     Models.BridgeModel.PlaylistSongModel temp = new Models.BridgeModel.PlaylistSongModel();
                     temp.PlaylistId = playlists.ElementAt(indexToAdd).PlaylistId;
                     temp.SongId = songs.ElementAt(i).SongId;
@@ -155,6 +215,7 @@ namespace VBeat.Controllers
                     }
                 }
             }
+            dbContext.SaveChanges();
             return ret;
         }
 
@@ -274,10 +335,10 @@ namespace VBeat.Controllers
             dbContext.SaveChanges();
             */
 
-            ICollection<SongModel> songs = randomSongs(10);
-            ICollection<ArtistModel> artists = randomArtists(5);
-            ICollection<UserModel> users = randomUsers(5);
-            ICollection<PlaylistModel> playlists = randomPlaylists(5);
+            ICollection<SongModel> songs = randomSongs(5);
+            ICollection<ArtistModel> artists = randomArtists(3);
+            ICollection<UserModel> users = randomUsers(3);
+            ICollection<PlaylistModel> playlists = randomPlaylists(2);
             ICollection<Models.BridgeModel.ArtistSongModel> artistsong = randomArtistToSong(songs, artists);
             ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = randomSongsToPlaylist(playlists, songs);
             return true;
