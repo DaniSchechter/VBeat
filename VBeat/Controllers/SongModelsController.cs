@@ -159,7 +159,7 @@ namespace VBeat.Controllers
 
         public IActionResult Statistics()
         {
-
+            return null;
         }
 
         [HttpPost]
