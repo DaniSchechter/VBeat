@@ -47,8 +47,8 @@ namespace VBeat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=HomePage}/{id?}");
-            });
+                    template: "{controller=UserModels}/{action=SignIn}/{id?}");
+            }); 
         }
     }
 }
