@@ -1,6 +1,23 @@
 ﻿
 @{
     ViewData["Title"] = "SearchView";
+    int offset = (int)ViewData["Offset"];
+    string artistName = (string)ViewData["ArtistName"];
+    string songName = (string)ViewData["SongName"];
+    string genreName = (string)ViewData["Genre"];
+    string baseUrl = "?artistName=" + System.Net.WebUtility.UrlEncode(artistName) 
+        + "&songName=" + System.Net.WebUtility.UrlEncode(songName)
+        + "&genre=" + System.Net.WebUtility.UrlEncode(genreName);
+    string nextUrl = baseUrl + "&offset=" + (offset + 1);
+    string prevUrl = null;
+    if (offset == 0)
+    {
+        prevUrl = "#";
+    }
+    else
+    {
+        prevUrl = baseUrl + "&offset=" + (offset - 1);
+    }
 }
 
 <div class="container">
@@ -19,11 +36,11 @@
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
             <input type="hidden" name="offset" value="0" />
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button class="btn btn-dark" id="nextPage">Next Page</button>
-            <button class="btn btn-dark" id="prevPage">Previous Page</button>
+            <button href="@nextUrl" class="btn btn-warning" id="nextPage">Next Page</button>
+            <button href="@prevUrl" class="btn btn-warning" id="prevPage">Previous Page</button>
         </form>
     </div>
-    
+
     <div class="row">
         @if (ViewData["Songs"] != null)
         {
