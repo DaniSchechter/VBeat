@@ -1,5 +1,21 @@
+<<<<<<< HEAD
 ﻿
 body {
+=======
+﻿/* Carousel */
+
+.middle-Class {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.carousel-inner > .item {
+
+    
+}
+    /********************************************************************/
+    body {
+>>>>>>> ee46de129739c5662af2a812727756e8efb6d2ac
     padding: 0;
     margin: 0;
     background-color: black; /* For browsers that do not support gradients */
@@ -151,14 +167,18 @@ div.body-content {
     top:50%;
     left:50%;
     transform:translate3d(-50%,-50%,0);
-
-
 }
 
+<<<<<<< HEAD
 /*PlayList------------------------------------------------------------------------*/
-.card{
-    background-color:black;
+.card {
+    background-color: black;
     border: white 1px solid;
+
+}
+carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
 }
 .card-image-container {
     position: relative;
