@@ -144,10 +144,10 @@ namespace VBeat.Controllers
             for (int i = 0; i < shows.Count; i++)
             {
                 int randomNumArtists = random.Next(1, artists.Count);
-                for (int j = 0;i<randomNumArtists;i++)
+                for (int j = 0; i < randomNumArtists; i++)
                 {
                     int randomArtistIndex = random.Next(artists.Count);
-                    if (!checkIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId,shows.ElementAt(i).ShowId))
+                    if (!checkIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId, shows.ElementAt(i).ShowId))
                     {
                         Models.BridgeModel.ArtistShowModel temp = new Models.BridgeModel.ArtistShowModel();
                         temp.UserId = artists.ElementAt(randomArtistIndex).UserId;
@@ -171,18 +171,32 @@ namespace VBeat.Controllers
             return true;
         }
 
+        private bool checkIfArtistAlreadyHaveSong(int artistId, int songId)
+        {
+            ArtistModel artist = dbContext.Artists.SingleOrDefault(a => a.UserId == artistId);
+            var check = artist.SongList.SingleOrDefault(s => s.SongId == songId);
+            if (check == null) return false;
+            return true;
+        }
+
         public ICollection<Models.BridgeModel.ArtistSongModel> randomArtistToSong(ICollection<SongModel> songs, ICollection<ArtistModel> artists)
         {
             ICollection<Models.BridgeModel.ArtistSongModel> ret = new List<Models.BridgeModel.ArtistSongModel>();
             for (int i = 0; i < songs.Count; i++)
             {
-                Models.BridgeModel.ArtistSongModel temp = new Models.BridgeModel.ArtistSongModel();
-                temp.SongId = songs.ElementAt(i).SongId;
-                int rand = random.Next(0, artists.Count);
-                temp.UserId = artists.ElementAt(rand).UserId;
-                ret.Add(temp);
-                dbContext.Add(temp);
-
+                int randomNumArtists = random.Next(1, 3);
+                for (int j = 0; j < randomNumArtists; j++)
+                {
+                    Models.BridgeModel.ArtistSongModel temp = new Models.BridgeModel.ArtistSongModel();
+                    temp.SongId = songs.ElementAt(i).SongId;
+                    int rand = random.Next(0, artists.Count);
+                    temp.UserId = artists.ElementAt(rand).UserId;
+                    if (!checkIfArtistAlreadyHaveSong(temp.UserId,temp.SongId))
+                    {
+                        ret.Add(temp);
+                        dbContext.Add(temp);
+                    }
+                }
             }
             dbContext.SaveChanges();
             return ret;
