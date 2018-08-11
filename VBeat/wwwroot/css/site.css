@@ -9,7 +9,7 @@
     
 }
 
-    body {
+body {
     padding: 0;
     margin: 0;
     background-color: black; /* For browsers that do not support gradients */
@@ -163,11 +163,12 @@ div.body-content {
     transform:translate3d(-50%,-50%,0);
 }
 
-
 /*PlayList------------------------------------------------------------------------*/
 .card {
     background-color: black;
     border: white 1px solid;
+
+}
 
 }
 carousel-caption p {
