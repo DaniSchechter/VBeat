@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>PlayList</h2>
+
 <div class="middle-container">
     <div class="row">
         <div class="col-sm-4">
@@ -16,11 +16,27 @@
             </div>
         </div>
         <div class="col-sm-8 ">
-            @foreach(var song in Model.Songs)
-            {
+             <ul id="playlist-song-list">
+                @foreach(var song in Model.Songs)
+                {
+                    <li>
+                            <div class="playlist-song-container">
+                                <img class="add-song-to-audio-player" src="~/images/speaker.png"/>
+                                <a asp-controller="SongModels" asp-action="Details" asp-route-id="@song.Song.SongId">
+                                    <img class="song-information" src="~/images/information.png" />
+                                </a>
+                                <div class="song-name"><p>@song.Song.SongName</p></div>
+                                <div class="song-artist">
+                                         @foreach(var artist in song.Song.ArtistList)
+                                         {
+                                             <p>@artist.Artist.ArtistName,</p>
+                                         }
+                                </div>
+                            </div>
+                    </li>
 
-
-            }
+                }
+             </ul>
         </div>
     </div>
-</div>
+</div> 
