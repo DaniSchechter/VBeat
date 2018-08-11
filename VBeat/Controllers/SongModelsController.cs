@@ -15,7 +15,7 @@ namespace VBeat.Controllers
 
         public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
 
-        private readonly int NUM_NEW_RELEASES = 7;
+        private readonly int NUM_NEW_RELEASES = 8;
 
         private readonly VBeatDbContext _context;
 
@@ -28,6 +28,7 @@ namespace VBeat.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
+            ViewData["NUM_NEW_RELEASES"] = NUM_NEW_RELEASES;
             return View(await _context.Songs.ToListAsync());
         }
 

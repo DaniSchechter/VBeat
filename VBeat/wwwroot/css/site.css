@@ -101,27 +101,16 @@ div.body-content {
 
 /*SongView*/
 /*Sectio new releases*/
-/*Carousel*/
-#carousel {
-    width: 90%;
-    height: 400px;
-    position: absolute;
-    clear: both;
-    overflow: hidden;
+@media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+        float: left;
+        width: 25%;
+        max-width: 100%;
+    }
 }
 
-#carousel img {
-    visibility: hidden; /* hide images until carousel can handle them */
-    cursor: pointer; /* otherwise it's not as obvious items can be clicked */
-}
-
-div.song-details-container {
-    margin-top: -60px;
-}
-
-div.song-wrapper{
-    display:none;
-    margin-top:-50px;
+.carousel-multi-item-2 .card img {
+    border-radius: 2px;
 }
 
 /*Section recently played*/
@@ -163,4 +152,14 @@ div.song-wrapper{
     transform:translate3d(-50%,-50%,0);
 
 
+}
+
+carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
 }
