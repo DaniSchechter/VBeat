@@ -61,6 +61,13 @@ header nav div.ul-container {
     width: 100%;
 }
 
+@media screen and (min-width: 610px) {
+
+    .custom-collapse .collapse{
+        display:block;
+    }  
+}
+
 header ul {
     margin: 0;
     padding: 0;
@@ -96,6 +103,14 @@ aside {
     position: absolute;
     border-right: white 2px solid;
     margin-top: 60px;
+}
+.menu-container {
+    margin-bottom: 100px;
+}
+
+.link-button >a{
+    margin-bottom: 50px;
+    color: white;
 }
 /*Footer*/
 footer {
