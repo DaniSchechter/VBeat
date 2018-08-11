@@ -11,6 +11,8 @@ namespace VBeat.Controllers
 {
     public class SongModelsController : Controller
     {
+        private const int PAGE_SIZE = 10;
+
         public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
 
         private readonly int NUM_NEW_RELEASES = 10;
@@ -151,35 +153,57 @@ namespace VBeat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Statistics()
+        {
+            return null;
+        }
 
         public IActionResult Search()
         {
             return View("~/Views/SongModels/SearchView.cshtml");
         }
 
-        public IActionResult Statistics()
-        {
-            return null;
-        }
 
-        [HttpPost]
-        public IActionResult Search(string artistName, string songName)
+        [HttpGet]
+        public IActionResult Search(string artistName, string songName, string genre, int? offset)
         {
             IQueryable<SongModel> songs = from s in _context.Songs select s;
 
-            if(!string.IsNullOrWhiteSpace(songName))
+            if (!string.IsNullOrWhiteSpace(songName))
             {
                 songs = songs.Where(s => s.SongName.ToLower().Contains(songName.ToLower()));
             }
 
-            if(!string.IsNullOrWhiteSpace(artistName))
+            if (!string.IsNullOrWhiteSpace(artistName))
             {
-                songs = songs.Where(s => 
+                songs = songs.Where(s =>
                 s.ArtistList.Where(
-                    a =>a.Artist.ArtistName.ToLower().Contains(artistName.ToLower())).Count() > 0
+                    a => a.Artist.ArtistName.ToLower().Contains(artistName.ToLower())).Count() > 0
                 );
             }
 
+            if (!string.IsNullOrWhiteSpace(genre))
+            {
+                songs = songs.Where(s => s.Genre.ToLower().Contains(genre.ToLower()));
+            }
+
+            int realOffset = !offset.HasValue ? 0 : offset.Value;
+
+            songs = songs
+                .Skip(realOffset * PAGE_SIZE)
+                .Take(PAGE_SIZE);
+
+            ViewData["Genre"] = genre;
+            ViewData["ArtistName"] = artistName;
+            ViewData["SongName"] = songName;
+            if (offset.HasValue)
+            {
+                ViewData["Offset"] = offset.Value;
+            }
+            else
+            {
+                ViewData["Offset"] = 0;
+            }
             ViewData["Songs"] = songs;
             return View("~/Views/SongModels/SearchView.cshtml");
         }

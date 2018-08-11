@@ -6,7 +6,7 @@
 <div class="container">
     <h2>Search for songs</h2>
     <div class="row">
-        <form class="form-inline" asp-controller="SongModels" asp-action="Search">
+        <form class="form-inline" method="get" asp-controller="SongModels" asp-action="Search">
             <label class="sr-only" for="inlineFormInput">Artist Name</label>
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="artistName" name="artistName" placeholder="Artist Name">
 
@@ -15,6 +15,9 @@
                 <input type="text" class="form-control" id="songName" name="songName" placeholder="Song Name">
             </div>
 
+            <label class="sr-only" for="inlineFormInput">Genre</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
+            <input type="hidden" name="offset" value="0" />
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
