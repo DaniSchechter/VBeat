@@ -155,7 +155,7 @@ namespace VBeat.Controllers
 
         public IActionResult Statistics()
         {
-            return null;
+            return View();
         }
 
 
