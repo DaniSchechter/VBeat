@@ -7,7 +7,7 @@ namespace VBeat.Models.Json
 {
     public class DataLabelModel
     {
-        public int value { get; set; } // lowercase for json
-        public string label { get; set; } // lowercase for json
+        public int Value { get; set; } 
+        public string Label { get; set; } 
     } 
 }
