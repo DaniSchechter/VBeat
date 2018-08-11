@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "SearchView";
+    int offset = (int)ViewData["Offset"];
+    string artistName = (string)ViewData["ArtistName"];
+    string songName = (string)ViewData["SongName"];
+    string genreName = (string)ViewData["Genre"];
+    string baseUrl = "?artistName=" + System.Net.WebUtility.UrlEncode(artistName)
+        + "&songName=" + System.Net.WebUtility.UrlEncode(songName)
+        + "&genre=" + System.Net.WebUtility.UrlEncode(genreName);
+    string nextUrl = baseUrl + "&offset=" + (offset + 1);
+    string prevUrl = null;
+    if (offset == 0)
+    {
+        prevUrl = "#";
+    }
+    else
+    {
+        prevUrl = baseUrl + "&offset=" + (offset - 1);
+    }
+}
+
+<div class="container">
+    <h2>Search for songs</h2>
+    <div class="row">
+        <form class="form-inline" method="get" asp-controller="SongModels" asp-action="Search">
+            <label class="sr-only" for="inlineFormInput">Artist Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="artistName" name="artistName" placeholder="Artist Name">
+
+            <label class="sr-only" for="inlineFormInputGroup">Song Name</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <input type="text" class="form-control" id="songName" name="songName" placeholder="Song Name">
+            </div>
+
+            <label class="sr-only" for="inlineFormInput">Genre</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
+            <input type="hidden" name="offset" value="0" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="@Html.Raw(nextUrl)" class="btn btn-warning" id="nextPage">Next Page</a>
+
+            <a href="@Html.Raw(prevUrl)" class="btn btn-warning" id="prevPage">Previous Page</a>
+        </form>
+    </div>
+
+    <div class="row">
+        @if (ViewData["Songs"] != null)
+        {
+
+            List<SongModel> Songs = ((IQueryable<SongModel>)ViewData["Songs"]).ToList();
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Song Name</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Song Path</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Release Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Songs.Count(); i++)
+                    {
+
+
+                        SongModel curSong = Songs[i];
+
+                        <tr>
+                            <th scope="row">@curSong.SongId</th>
+                            <th>@curSong.SongName</th>
+                            <th>@curSong.Genre</th>
+                            <th>@curSong.SongPath</th>
+                            <th><img src="@curSong.SongImagePath" /></th>
+                            <th>@curSong.ReleaseDate.ToShortDateString()</th>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+
