@@ -4,33 +4,23 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>PlayList</h2>
+<div class="middle-container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <h1>@Model.PlaylistName</h1>
+                <div class="card-image-container"> <img src="@Model.PlaylistImage" alt="Image Not Found" /> </div>
+                <p>@Model.Songs.Count() Songs</p>
+                <a href="#"><img src="~/images/upload.png"/></a>
+            </div>
+        </div>
+        <div class="col-sm-8 ">
+            @foreach(var song in Model.Songs)
+            {
 
-<div>
-    <h4>PlaylistModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Public)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Public)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PlaylistImage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PlaylistImage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PlaylistName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PlaylistName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PlaylistId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+            }
+        </div>
+    </div>
 </div>

@@ -1,29 +1,4 @@
-﻿/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
-
-
-/********************************************************************/
+﻿
 body {
     padding: 0;
     margin: 0;
@@ -125,7 +100,7 @@ div.body-content {
     overflow-y: scroll;
 }
 
-/*SongView*/
+/*SongView------------------------------------------------------------------------*/
 /*Sectio new releases*/
 @media (min-width: 768px) {
     .carousel-multi-item-2 .col-md-3 {
@@ -180,12 +155,40 @@ div.body-content {
 
 }
 
-carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+/*PlayList------------------------------------------------------------------------*/
+.card{
+    background-color:black;
+    border: white 1px solid;
+}
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
+    margin-bottom: 20px;
+}
+.card img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.card p{
+    padding-bottom: 20px ;
+}
+.card h1 {
+    padding: 20px 0;
+}
+.card a {
+    padding-top: 400px;
+}
+.card a img {
+    max-height: 5%;
+    min-height: 5%;
+    max-width: 5%;
+    min-width: 5%;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
