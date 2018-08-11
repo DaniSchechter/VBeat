@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "StatisticsView";
+}
+
+<!-- D3JS Script -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<div class="container">
+    <h2>Song Month Release Date %</h2>
+    <div id="song_month_pie_chart"></div>
+
+    <script>
+        function getDataFromServer() {
+
+
+        }
+
+        var data = getDataFromServer();
+        var pieChart = d3.select("#song_month_pie_chart")
+            .append("svg:svg")
+            .data([data])
+    </script>
+</div>

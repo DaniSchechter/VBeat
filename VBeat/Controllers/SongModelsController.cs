@@ -200,7 +200,7 @@ namespace VBeat.Controllers
                 ViewData["Offset"] = 0;
             }
             ViewData["Songs"] = songs;
-            return View("~/Views/SongModels/SearchView.cshtml");
+            return View("~/Views/SongModels/Search.cshtml");
         }
 
         private bool SongModelExists(int id)
