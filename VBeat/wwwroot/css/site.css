@@ -1,30 +1,16 @@
 ﻿/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+
+.middle-Class {
+    margin: 0 auto;
+    width: 90%;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.carousel-inner > .item {
+
+    
 }
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
-
-
-/********************************************************************/
-body {
+    /********************************************************************/
+    body {
     padding: 0;
     margin: 0;
     background-color: black; /* For browsers that do not support gradients */
@@ -176,9 +162,8 @@ div.body-content {
     top:50%;
     left:50%;
     transform:translate3d(-50%,-50%,0);
-
-
 }
+
 
 carousel-caption p {
     font-size: 20px;
