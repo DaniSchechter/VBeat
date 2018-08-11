@@ -20,14 +20,35 @@ namespace VBeat.Controllers.Test
         }
 
 
-        public List<int> Test(int playlistId)
+        public List<int> Test()
         {
+            SongModel sharedSong = new SongModel();
+            SongModel privateSong = new SongModel();
+            sharedSong.SongId = 1000;
+            privateSong.SongId = 500;
 
-            suggestionAlgorithm.Train(_context.Playlists
-                .Where(p => p.PlaylistId != playlistId).ToList());
-            PlaylistModel targetPlaylist = _context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault();
-            List<int> intList = suggestionAlgorithm.Suggset(targetPlaylist);
-            return intList;
+            PlaylistModel playlistModel = new PlaylistModel();
+            playlistModel.PlaylistId = 1;
+            playlistModel.Songs.Add(new Models.BridgeModel.PlaylistSongModel() { PlaylistId = playlistModel.PlaylistId, SongId = sharedSong.SongId });
+            playlistModel.Songs.Add(new Models.BridgeModel.PlaylistSongModel() { PlaylistId = playlistModel.PlaylistId, SongId = privateSong.SongId });
+
+            PlaylistModel secondPlaylistModel = new PlaylistModel();
+            secondPlaylistModel.PlaylistId = 2;
+            secondPlaylistModel.Songs.Add(new Models.BridgeModel.PlaylistSongModel() { PlaylistId = secondPlaylistModel.PlaylistId, SongId = sharedSong.SongId });
+            secondPlaylistModel.Songs.Add(new Models.BridgeModel.PlaylistSongModel() { PlaylistId = secondPlaylistModel.PlaylistId, SongId = privateSong.SongId });
+
+            PlaylistModel targetPlaylistModel = new PlaylistModel();
+            targetPlaylistModel.PlaylistId = 3;
+            targetPlaylistModel.Songs.Add(new Models.BridgeModel.PlaylistSongModel() {  PlaylistId = targetPlaylistModel.PlaylistId, SongId = sharedSong.SongId});
+
+            suggestionAlgorithm.Train(new List<PlaylistModel>()
+            {
+                playlistModel,
+                secondPlaylistModel
+            });
+
+            List<int> songs = suggestionAlgorithm.Suggset(targetPlaylistModel);
+            return songs;
         }
 
         public IActionResult Index()
