@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using VBeat.Models;
 
 namespace VBeat
@@ -22,8 +23,15 @@ namespace VBeat
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(30);
+                options.Cookie.HttpOnly = true;
+            });
             services.AddDbContext<VBeatDbContext>();
             services.AddMvc();
+                //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,12 +49,15 @@ namespace VBeat
 
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=HomePage}/{id?}");
-            });
+                    template: "{controller=UserModels}/{action=SignIn}/{id?}");
+            }); 
         }
     }
 }
