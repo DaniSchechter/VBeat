@@ -23,13 +23,6 @@ namespace VBeat.Controllers
         // GET: PlaylistModels
         public async Task<IActionResult> Index()
         {
-            VBeatDbContext dbContext = new VBeatDbContext();
-            UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
-            if (userModel == null)
-            {
-                return RedirectToAction("Create", "UserModels");
-            }
-            ViewData["DisplayId"] = userModel.UserId;
             return View(await _context.Playlists.ToListAsync());
         }
 

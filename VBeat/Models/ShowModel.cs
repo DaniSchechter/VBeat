@@ -42,5 +42,9 @@ namespace VBeat.Models
         [FutureDate]
         //needs also hour
         public DateTime ShowTime { get; set; }
+
+        [Required]
+        [Display(Name = "Show Image Path")]
+        public string ShowImagePath { get; set; }
     }
 }

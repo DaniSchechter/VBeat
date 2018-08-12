@@ -22,13 +22,6 @@ namespace VBeat.Models
         // GET: ShowModels
         public async Task<IActionResult> Index()
         {
-            VBeatDbContext dbContext = new VBeatDbContext();
-            UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
-            if (userModel == null)
-            {
-                return RedirectToAction("Create", "UserModels");
-            }
-            ViewData["DisplayId"] = userModel.UserId;
             return View(await _context.Shows.ToListAsync());
         }
 
@@ -61,7 +54,7 @@ namespace VBeat.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
+        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime,ShowImagePath")] ShowModel showModel)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +86,7 @@ namespace VBeat.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime,ShowImagePath")] ShowModel showModel)
         {
             if (id != showModel.ShowId)
             {
