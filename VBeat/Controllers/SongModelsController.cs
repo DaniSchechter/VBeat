@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using VBeat.Models.Consts;
 using VBeat.Models.Json;
 
 namespace VBeat.Controllers
@@ -30,6 +32,13 @@ namespace VBeat.Controllers
         {
             ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             ViewData["NUM_NEW_RELEASES"] = NUM_NEW_RELEASES;
+            VBeatDbContext dbContext = new VBeatDbContext();
+            UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
+            if (userModel == null)
+            {
+                return RedirectToAction("Create", "UserModels");
+            }
+            ViewData["DisplayId"] = userModel.UserId;
             return View(await _context.Songs.ToListAsync());
         }
 
