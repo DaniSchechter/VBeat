@@ -11,11 +11,13 @@
             <div class="card">
                 <h1>@Model.PlaylistName</h1>
                 <div class="card-image-container"> <img src="@Model.PlaylistImage" alt="Image Not Found" /> </div>
+
                 <p>@Model.Songs.Count() Songs</p>
                 <a href="#"><img class="add-playlist-to-library" src="~/images/upload.png"/></a>
             </div>
         </div>
         <div class="col-sm-8 ">
+
              <ul id="playlist-song-list">
                 @{int index = 0;
                     foreach (var song in Model.Songs)
@@ -47,3 +49,4 @@
         </div>
     </div>
 </div> 
+       
