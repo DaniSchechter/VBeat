@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using VBeat.Models.Consts;
 
 namespace VBeat.Models
 {
@@ -52,7 +54,7 @@ namespace VBeat.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
+        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime,ShowImagePath")] ShowModel showModel)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +86,7 @@ namespace VBeat.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime,ShowImagePath")] ShowModel showModel)
         {
             if (id != showModel.ShowId)
             {

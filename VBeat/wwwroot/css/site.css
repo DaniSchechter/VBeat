@@ -5,19 +5,15 @@
     width: 90%;
 }
 
-.carousel-inner > .item {
-
-    
-}
     /********************************************************************/
-    body {
-    padding: 0;
-    margin: 0;
-    background-color: black; /* For browsers that do not support gradients */
-    background: linear-gradient(rgb(0, 0, 160), black 85%) fixed;
-    background-repeat: no-repeat;
-    color: white;
-    font-size: medium;
+body {
+padding: 0;
+margin: 0;
+background-color: black; /* For browsers that do not support gradients */
+background: linear-gradient(rgb(0, 0, 160), black 85%) fixed;
+background-repeat: no-repeat;
+color: white;
+font-size: medium;
 }
 
 /*Global*/
@@ -61,6 +57,13 @@ header nav div.ul-container {
     width: 100%;
 }
 
+@media screen and (min-width: 625px) {
+
+    .custom-collapse .collapse{
+        display:block;
+    }  
+}
+
 header ul {
     margin: 0;
     padding: 0;
@@ -75,16 +78,17 @@ header ul li {
 
 header li#logo {
     float:left;
+    padding-left: 50px;
 }
 
 header li:hover {
-    background-color: white;
+    background-color: #2F4F4F;
     cursor: pointer;
 }
 
 header li:hover a {
-    background-color: white;
-    color: black;
+    background-color: #2F4F4F;
+    color: white;
     text-decoration: none;
 }
 
@@ -96,7 +100,40 @@ aside {
     position: absolute;
     border-right: white 2px solid;
     margin-top: 60px;
+    min-width: 50px;
 }
+
+.menu-container {
+    margin-bottom: 100px;
+}
+
+.link-button >a{
+    margin-bottom: 50px;
+    color: white;
+}
+aside a {
+    text-decoration: none;
+    font-size: 1.6vw;
+    color: white;
+}
+
+aside li {
+    list-style: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+aside li:hover {
+    background-color: #2F4F4F;
+    cursor: pointer;
+}
+
+aside li:hover a {
+    background-color: #2F4F4F;
+    color: white;
+    text-decoration: none;
+}
+
 /*Footer*/
 footer {
     position: static;
@@ -173,4 +210,16 @@ carousel-caption p {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+}
+
+.first-info{
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.second-info {
+    float: left;
+    padding: 10px;
 }
