@@ -26,6 +26,7 @@ namespace VBeat.Controllers
                 return RedirectToAction("Create", "UserModels");
             }
             ViewData["DisplayName"] = userModel.Username;
+            ViewData["DisplayId"] = userModel.UserId;
             ViewData["PlaylistCollection"] = userModel.SavedPlaylists;
             return View();
         }

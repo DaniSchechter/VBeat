@@ -4,51 +4,37 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>ShowModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ShowName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ShowName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.StreetName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StreetName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HouseNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HouseNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ShowTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ShowTime)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ShowId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="middle-container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <h1>@Model.ShowName</h1>
+                <div class="card-image-container">
+                    <!--Chnage the img src to show image-->
+                    <img src="@Model.ShowImagePath" alt="Image Not Found"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 ">
+            <ul id="playlist-song-list">
+                <li>
+                    <div class="playlist-song-container">
+                        <div class="song-genre"><p class="first-info">Country: </p><p class="second-info">@Model.Country</p></div>
+                    </div>
+                    <div class="playlist-song-container">
+                        <div class="Url2Mp3"><p class="first-info">City: </p><p class="second-info">@Model.City</p></div>
+                    </div>
+                    <div class="playlist-song-container">
+                        <div class="addedDate"><p class="first-info">Street Name: </p><p class="second-info">@Model.StreetName</p></div>
+                    </div>
+                    <div class="playlist-song-container">
+                        <div class="releaseDate"><p class="first-info">House Number: </p><p class="second-info">@Model.HouseNumber</p></div>
+                    </div>
+                    <div class="playlist-song-container">
+                        <div class="releaseDate"><p class="first-info">Show Time: </p><p class="second-info">@Model.ShowTime</p></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

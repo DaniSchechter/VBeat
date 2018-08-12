@@ -4,33 +4,42 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>PlaylistModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Public)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Public)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PlaylistImage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PlaylistImage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PlaylistName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PlaylistName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PlaylistId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="middle-container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <h1>@Model.PlaylistName</h1>
+                <div class="card-image-container"> <img src="/images/brunomars.jpg" alt="Image Not Found" /> </div>
+                <p>@Model.Songs.Count() Songs</p>
+                <a href="#"><img class="add-playlist-to-library" src="~/images/upload.png"/></a>
+            </div>
+        </div>
+        <div class="col-sm-8 ">
+            <ul id="playlist-song-list">
+                @foreach(var song in Model.Songs)
+                {
+                    <li>
+                        <div class="playlist-song-container">
+                            <img class="add-song-to-audio-player" src="~/images/speaker.png"/>
+                            <a asp-controller="SongModels" asp-action="Details" asp-route-id="@song.Song.SongId">
+                                <img class="song-information" src="~/images/information.png" />
+                            </a>
+                            <div class="song-name"><p>@song.Song.SongName</p></div>
+                            <div class="song-artist">
+                                @foreach(var artist in song.Song.ArtistList)
+                                {
+                                    <p>@artist.Artist.ArtistName,</p>
+                                }
+                            </div>
+                            <div class="song-path-container">
+                                <p>/images/brunomars.jpg</p>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
 </div>

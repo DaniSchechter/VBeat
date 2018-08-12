@@ -5,10 +5,6 @@
     width: 90%;
 }
 
-.carousel-inner > .item {
-
-    
-}
     /********************************************************************/
 body {
 padding: 0;
@@ -117,7 +113,7 @@ aside {
 }
 aside a {
     text-decoration: none;
-    font-size: 1.75vw;
+    font-size: 1.6vw;
     color: white;
 }
 
@@ -214,4 +210,16 @@ carousel-caption p {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+}
+
+.first-info{
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.second-info {
+    float: left;
+    padding: 10px;
 }
