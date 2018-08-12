@@ -149,7 +149,7 @@ div.body-content {
 }
 
 /*SongView*/
-/*Sectio new releases*/
+/*Section new releases*/
 @media (min-width: 768px) {
     .carousel-multi-item-2 .col-md-3 {
         float: left;
@@ -162,6 +162,15 @@ div.body-content {
     border-radius: 2px;
 }
 
+
+.carousel-caption h3 {
+    font-size: 20px;
+    line-height: 1.4;
+    background-color: black;
+    padding: 2%;
+    border-radius: 25px;
+    border: white 1px solid;
+}
 /*Section recently played*/
 .square {
     float: left;
@@ -188,6 +197,7 @@ div.body-content {
     position:absolute;
     display: table-cell;
     vertical-align: middle;
+    z-index: 1;
     height: 100%;
     width: 100%;
 }
@@ -202,11 +212,15 @@ div.body-content {
 }
 
 
-carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
 
+.add-song-to-playlist {
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    width: 30%;
+    z-index: 3;
+    display: none;
+}
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
