@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@using VBeat.Models.Consts
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +37,10 @@
 </header>
         
 <aside>
-    <div class="menu-container" style="width:100%">
-        <div><a asp-controller="UserModels" asp-action="Details" class="link-button">Account overview</a></div>
-        <div><a asp-controller="SongModels" asp-action="Index" class="link-button">Edit profile</a></div>
-        <div><a asp-controller="SongModels" asp-action="Index" class="link-button">Notification settings</a></div>
+    <div class="menu-container" style="width: 100%">
+        <li><div><a asp-controller="UserModels" asp-action="Details" asp-route-id="@ViewData["DisplayId"]" class="link-button">Account overview</a></div></li>
+        <li><div><a asp-controller="UserModels" asp-action="Edit" asp-route-id="@ViewData["DisplayId"]" class="link-button">Edit profile</a></div></li>
+        <li><div><a asp-controller="SongModels" asp-action="Index" asp-route-id="@ViewData["DisplayId"]" class="link-button">Change password</a></div></li>
     </div>
 </aside>
 
