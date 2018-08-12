@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using VBeat.Models.Consts;
 
 namespace VBeat.Controllers
 {
@@ -21,6 +23,13 @@ namespace VBeat.Controllers
         // GET: PlaylistModels
         public async Task<IActionResult> Index()
         {
+            VBeatDbContext dbContext = new VBeatDbContext();
+            UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
+            if (userModel == null)
+            {
+                return RedirectToAction("Create", "UserModels");
+            }
+            ViewData["DisplayId"] = userModel.UserId;
             return View(await _context.Playlists.ToListAsync());
         }
 
