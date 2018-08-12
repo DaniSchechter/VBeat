@@ -175,7 +175,7 @@ namespace VBeat.Controllers
                 temp.StreetName = RandomString(6);
                 temp.HouseNumber = random.Next(100);
                 temp.ShowTime = RandomDay();
-                //temp.ShowImagePath = ShowImages.ElementAt(random.Next(0, ShowImages.Count)); //to add after adding image property to show model
+                temp.ShowImagePath = ShowImages.ElementAt(random.Next(0, ShowImages.Count)); //to add after adding image property to show model
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
