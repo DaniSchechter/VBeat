@@ -1,8 +1,23 @@
 ﻿
 $(document).ready(function () {
     $('.carousel').carousel();
+    loadAudioPlayer();
 });
-
+function loadAudioPlayer() {
+    var i;
+    var path;
+    var extensoin;
+    var length = $('div.song-index').last().attr('id');
+    if (length) {
+        for (i = 0; i <= length; i++) {
+            path = $("#" + i + ".song-index").siblings('.song-path-container').children('p').html();
+            extension = path.split('.').pop();
+            $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        }
+        $("#myAudio").trigger('load');
+        $("#myAudio").trigger('play');
+    }
+}
 
 $('div.playlist-song-container').hover(function () {
     $(this).css("background-color", "black");
@@ -27,14 +42,20 @@ $('.add-song-to-audio-player').click(function () {
     if (answer == "") {
         alert("audio player do not support this type of files");
     }
-    else {
-        $('#myAudio').append("<source class='runningSong' src=" + path + " type='audio/" + extension + "'>");
+    else {      
+        var waitingSongs = $('#myAudio').html();
+        $('#myAudio').html("");
+        $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append(waitingSongs);
         $("#myAudio").trigger('load');
         play_audio('play');
     }
 });
 
 $('audio').on('ended', function () {
+    var waitingSongs = $('#myAudio').children(':not(:first)');
+    $('#myAudio').html("");
+    $('#myAudio').append(waitingSongs);
     $("#myAudio").trigger('load');
     $("#myAudio").trigger('play');
 });

@@ -146,8 +146,9 @@ aside li:hover a {
 /*Footer*/
 
 audio{
-    width:100%;
+    width:80%;
     margin-top:20px;
+    float:right;
 }
 #audio-container{
     bottom:0;

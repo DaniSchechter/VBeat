@@ -17,27 +17,31 @@
         </div>
         <div class="col-sm-8 ">
              <ul id="playlist-song-list">
-                @foreach(var song in Model.Songs)
-                {
-                    <li>
-                            <div class="playlist-song-container">
-                                <img class="add-song-to-audio-player" src="~/images/speaker.png"/>
-                                <a asp-controller="SongModels" asp-action="Details" asp-route-id="@song.Song.SongId">
-                                    <img class="song-information" src="~/images/information.png" />
-                                </a>
-                                <div class="song-name"><p>@song.Song.SongName</p></div>
-                                <div class="song-artist">
-                                         @foreach(var artist in song.Song.ArtistList)
-                                         {
-                                             <p>@artist.Artist.ArtistName,</p>
-                                         }
-                                </div>
-                                <div class="song-path-container">
-                                    <p>@song.Song.SongPath</p>
-                                </div>
-                            </div>
-                    </li>
+                @{int index = 0;
+                    foreach (var song in Model.Songs)
+                    {
+                        <li>
+                                <div class="playlist-song-container">
+                                    <img class="add-song-to-audio-player" src="~/images/speaker.png"/>
+                                    <a asp-controller="SongModels" asp-action="Details" asp-route-id="@song.Song.SongId">
+                                        <img class="song-information" src="~/images/information.png" />
+                                    </a>
+                                    <div class="song-name"><p>@song.Song.SongName</p></div>
+                                    <div class="song-artist">
+                                             @foreach (var artist in song.Song.ArtistList)
+                                             {
+                                                 <p>@artist.Artist.ArtistName,</p>
+                                             }
+                                    </div>
+                                    <div class="song-path-container">
+                                        <p>@song.Song.SongPath</p>
+                                    </div>
 
+                                    <div id="@index" class="song-index">    </div>
+                                </div>
+                        </li>
+                        index++;
+                        }
                 }
              </ul>
         </div>
