@@ -7,15 +7,19 @@ function loadAudioPlayer() {
     var i;
     var path;
     var extensoin;
-    var length = $('div.song-index').last().attr('id');
+    var length = $('#playlist-song-list').children("li").last().attr('id');
     if (length) {
+        //load data to the audio player
         for (i = 0; i <= length; i++) {
-            path = $("#" + i + ".song-index").siblings('.song-path-container').children('p').html();
+            path = $("li#" + i).find('.song-path-container').children('p').html();
             extension = path.split('.').pop();
-            $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+            $('#myAudio').append("<source id=" + i +" class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
         }
         $("#myAudio").trigger('load');
         $("#myAudio").trigger('play');
+        //load the first song name
+        var firstSongName = $('.song-name').children('p').first().html();
+        $('#song-in-audio-name').children('p').html(firstSongName);
     }
 }
 
@@ -43,9 +47,17 @@ $('.add-song-to-audio-player').click(function () {
         alert("audio player do not support this type of files");
     }
     else {      
+        //get the waiting songs in the audio player
         var waitingSongs = $('#myAudio').html();
+
+        //get the song name and update the p
+        var songId = $(this).closest('li').attr('id');
+        var songName = $('li#' + songId).find('.song-name').children('p').html();
+        $('#song-in-audio-name').children('p').html(songName);
+
+        //delete the finished song from the waiting list
         $('#myAudio').html("");
-        $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append("<source id=" + songId +"class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
         $('#myAudio').append(waitingSongs);
         $("#myAudio").trigger('load');
         play_audio('play');
@@ -58,6 +70,9 @@ $('audio').on('ended', function () {
     $('#myAudio').append(waitingSongs);
     $("#myAudio").trigger('load');
     $("#myAudio").trigger('play');
+    var songid = waitingSongs.first().attr('id');
+    var songName = $('li#' + songid).find('.song-name').children('p').html();
+    $('#song-in-audio-name').children('p').html(songName);
 });
 
 
