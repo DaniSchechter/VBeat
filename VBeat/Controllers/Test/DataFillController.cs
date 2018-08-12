@@ -11,10 +11,10 @@ namespace VBeat.Controllers
     {
         private VBeatDbContext dbContext;
 
-        private List<string> ArtistImages;
-        private List<string> SongImages;
-        private List<string> PlaylistImages;
-        private List<string> ShowImages;
+        private List<string> ArtistImages = new List<string>();
+        private List<string> SongImages = new List<string>();
+        private List<string> PlaylistImages = new List<string>();
+        private List<string> ShowImages = new List<string>();
 
         public DataFillController()
         {
