@@ -11,10 +11,10 @@ namespace VBeat.Controllers
     {
         private VBeatDbContext dbContext;
 
-        private List<string> ArtistImages;
-        private List<string> SongImages;
-        private List<string> PlaylistImages;
-        private List<string> ShowImages;
+        private List<string> ArtistImages = new List<string>();
+        private List<string> SongImages = new List<string>();
+        private List<string> PlaylistImages = new List<string>();
+        private List<string> ShowImages = new List<string>();
 
         public DataFillController()
         {
@@ -175,7 +175,7 @@ namespace VBeat.Controllers
                 temp.StreetName = RandomString(6);
                 temp.HouseNumber = random.Next(100);
                 temp.ShowTime = RandomDay();
-                //temp.ShowImagePath = ShowImages.ElementAt(random.Next(0, ShowImages.Count)); //to add after adding image property to show model
+                temp.ShowImagePath = ShowImages.ElementAt(random.Next(0, ShowImages.Count)); //to add after adding image property to show model
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
