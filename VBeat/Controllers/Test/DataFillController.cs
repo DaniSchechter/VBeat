@@ -20,41 +20,41 @@ namespace VBeat.Controllers
         {
             dbContext = new VBeatDbContext();
 
-            ArtistImages.Add("~/images/brunomars.jpg");
-            ArtistImages.Add("~/images/default.png");
-            ArtistImages.Add("~/images/drake.jpg");
-            ArtistImages.Add("~/images/edsheeran.jpg");
-            ArtistImages.Add("~/images/johnlegend.jpg");
-            ArtistImages.Add("~/images/passenger.jpg");
-            ArtistImages.Add("~/images/samsmith.jpg");
-            ArtistImages.Add("~/images/stromae.jpg");
-            ArtistImages.Add("~/images/thechainsmokers.jpg");
+            ArtistImages.Add("/images/brunomars.jpg");
+            ArtistImages.Add("/images/default.png");
+            ArtistImages.Add("/images/drake.jpg");
+            ArtistImages.Add("/images/edsheeran.jpg");
+            ArtistImages.Add("/images/johnlegend.jpg");
+            ArtistImages.Add("/images/passenger.jpg");
+            ArtistImages.Add("/images/samsmith.jpg");
+            ArtistImages.Add("/images/stromae.jpg");
+            ArtistImages.Add("/images/thechainsmokers.jpg");
 
-            PlaylistImages.Add("~/images/playlistDeadSea.jpg");
-            PlaylistImages.Add("~/images/playlistHawai.jpg");
-            PlaylistImages.Add("~/images/playlistRelax.jpg");
-            PlaylistImages.Add("~/images/playlistStarfish.jpg");
-            PlaylistImages.Add("~/images/playlistSunset.jpg");
-            PlaylistImages.Add("~/images/playlistWater.jpg");
-            PlaylistImages.Add("~/images/playlistWorkout.jpg");
+            PlaylistImages.Add("/images/playlistDeadSea.jpg");
+            PlaylistImages.Add("/images/playlistHawai.jpg");
+            PlaylistImages.Add("/images/playlistRelax.jpg");
+            PlaylistImages.Add("/images/playlistStarfish.jpg");
+            PlaylistImages.Add("/images/playlistSunset.jpg");
+            PlaylistImages.Add("/images/playlistWater.jpg");
+            PlaylistImages.Add("/images/playlistWorkout.jpg");
 
-            SongImages.Add("~/images/songDoubleBass.jpg");
-            SongImages.Add("~/images/songDrums.png");
-            SongImages.Add("~/images/songElecGuitar.jpg");
-            SongImages.Add("~/images/songGuitar.jpg");
-            SongImages.Add("~/images/songGuitarPaint.png");
-            SongImages.Add("~/images/songHARP.jpg");
-            SongImages.Add("~/images/songJazz.jpg");
-            SongImages.Add("~/images/songKordion.jpg");
-            SongImages.Add("~/images/songRock.png");
-            SongImages.Add("~/images/songSax.jpeg");
+            SongImages.Add("/images/songDoubleBass.jpg");
+            SongImages.Add("/images/songDrums.png");
+            SongImages.Add("/images/songElecGuitar.jpg");
+            SongImages.Add("/images/songGuitar.jpg");
+            SongImages.Add("/images/songGuitarPaint.png");
+            SongImages.Add("/images/songHARP.jpg");
+            SongImages.Add("/images/songJazz.jpg");
+            SongImages.Add("/images/songKordion.jpg");
+            SongImages.Add("/images/songRock.png");
+            SongImages.Add("/images/songSax.jpeg");
 
 
-            ShowImages.Add("~/images/show1.jpg");
-            ShowImages.Add("~/images/show2.jpg");
-            ShowImages.Add("~/images/show3.jpg");
-            ShowImages.Add("~/images/show4.jpg");
-            ShowImages.Add("~/images/show5.jpg");
+            ShowImages.Add("/images/show1.jpg");
+            ShowImages.Add("/images/show2.jpg");
+            ShowImages.Add("/images/show3.jpg");
+            ShowImages.Add("/images/show4.jpg");
+            ShowImages.Add("/images/show5.jpg");
         }
 
 

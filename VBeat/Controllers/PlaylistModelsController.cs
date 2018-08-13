@@ -23,7 +23,22 @@ namespace VBeat.Controllers
         // GET: PlaylistModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Playlists.ToListAsync());
+
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+
+            var userModel = await _context.Users
+                .SingleOrDefaultAsync(m => m.UserId == id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(userModel.SavedPlaylists);
         }
 
         // GET: PlaylistModels/Details/5
