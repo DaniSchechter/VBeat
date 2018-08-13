@@ -20,10 +20,33 @@ namespace VBeat.Controllers
             _context = context;
         }
 
+
+        private bool IsUserOwnPlaylist(int userId, int playlistId)
+        {
+            var user =  _context.Users.SingleOrDefault(u => u.UserId == userId);
+            var check = user.SavedPlaylists.SingleOrDefault(p => p.PlaylistId==playlistId);
+            if (check != null) return true;
+            return false;
+        }
         // GET: PlaylistModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Playlists.ToListAsync());
+
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+
+            var userModel = await _context.Users
+                .SingleOrDefaultAsync(m => m.UserId == id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(await _context.Playlists.Where(p => IsUserOwnPlaylist(userModel.UserId,p.PlaylistId)).ToListAsync());
         }
 
         // GET: PlaylistModels/Details/5
