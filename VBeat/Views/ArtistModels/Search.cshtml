@@ -1,0 +1,55 @@
+﻿@using System.Net;
+
+@{
+
+    ViewData["Title"] = "Search";
+    int offset = (int)ViewData["Offset"];
+    string artistName = (string)ViewData["ArtistName"];
+    if(artistName == null)
+    {
+        artistName = "";
+    }
+    IQueryable<ArtistModel> searchResults = (IQueryable<ArtistModel>)ViewData["ArtistList"];
+    string baseUrl = "/ArtistModels/Search?artistName=" + WebUtility.UrlEncode(artistName);
+    string nextUrl = baseUrl + "&offset=" + (offset + 1).ToString();
+    string prevUrl = "#";
+    if(offset != 0)
+    {
+        prevUrl = baseUrl + "&offset=" + (offset - 1).ToString();
+    }
+}
+
+
+<div class="container">
+    <h2>Artist Search</h2>
+    <form class="form-inline" asp-controller="ArtistModels" asp-action="Search" method="get">
+        <label class="sr-only" for="inlineFormInput">Artist Name</label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="artistName" name="artistName" placeholder="Artist Name" value="@artistName">
+        <input type="hidden" name="offset" id="offset" value="@offset" />
+
+        <a class="btn btn-warning" href="@nextUrl">Next Page</a>
+        <a class="btn btn-warning" href="@prevUrl">Previous Page</a>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Artist Name</th>
+                <th scope="col">Artist Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ArtistModel am in searchResults)
+            {
+                <tr>
+                    <th scope="row"><a href="/ArtistModels/Details/@am.UserId">@am.UserId</a></th>
+                    <td>@am.ArtistName</td>
+                    <td><img src="@am.ArtistImage" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
