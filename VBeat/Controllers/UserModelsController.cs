@@ -27,12 +27,14 @@ namespace VBeat.Controllers
         }
 
         // GET: UserModels/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
-                return NotFound();
+                return Unauthorized();
             }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
             var userModel = await _context.Users
                 .SingleOrDefaultAsync(m => m.UserId == id);

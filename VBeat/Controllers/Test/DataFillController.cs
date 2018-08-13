@@ -11,16 +11,50 @@ namespace VBeat.Controllers
     {
         private VBeatDbContext dbContext;
 
-
+        private List<string> ArtistImages = new List<string>();
+        private List<string> SongImages = new List<string>();
+        private List<string> PlaylistImages = new List<string>();
+        private List<string> ShowImages = new List<string>();
 
         public DataFillController()
         {
             dbContext = new VBeatDbContext();
-        }
 
-        public void ClearDataBase()
-        {
+            ArtistImages.Add("~/images/brunomars.jpg");
+            ArtistImages.Add("~/images/default.png");
+            ArtistImages.Add("~/images/drake.jpg");
+            ArtistImages.Add("~/images/edsheeran.jpg");
+            ArtistImages.Add("~/images/johnlegend.jpg");
+            ArtistImages.Add("~/images/passenger.jpg");
+            ArtistImages.Add("~/images/samsmith.jpg");
+            ArtistImages.Add("~/images/stromae.jpg");
+            ArtistImages.Add("~/images/thechainsmokers.jpg");
 
+            PlaylistImages.Add("~/images/playlistDeadSea.jpg");
+            PlaylistImages.Add("~/images/playlistHawai.jpg");
+            PlaylistImages.Add("~/images/playlistRelax.jpg");
+            PlaylistImages.Add("~/images/playlistStarfish.jpg");
+            PlaylistImages.Add("~/images/playlistSunset.jpg");
+            PlaylistImages.Add("~/images/playlistWater.jpg");
+            PlaylistImages.Add("~/images/playlistWorkout.jpg");
+
+            SongImages.Add("~/images/songDoubleBass.jpg");
+            SongImages.Add("~/images/songDrums.png");
+            SongImages.Add("~/images/songElecGuitar.jpg");
+            SongImages.Add("~/images/songGuitar.jpg");
+            SongImages.Add("~/images/songGuitarPaint.png");
+            SongImages.Add("~/images/songHARP.jpg");
+            SongImages.Add("~/images/songJazz.jpg");
+            SongImages.Add("~/images/songKordion.jpg");
+            SongImages.Add("~/images/songRock.png");
+            SongImages.Add("~/images/songSax.jpeg");
+
+
+            ShowImages.Add("~/images/show1.jpg");
+            ShowImages.Add("~/images/show2.jpg");
+            ShowImages.Add("~/images/show3.jpg");
+            ShowImages.Add("~/images/show4.jpg");
+            ShowImages.Add("~/images/show5.jpg");
         }
 
 
@@ -42,11 +76,13 @@ namespace VBeat.Controllers
         public ICollection<SongModel> RandomSongs(int num)
         {
             ICollection<SongModel> ret = new List<SongModel>();
+            int randomToName = random.Next(2000);
             for (int i = 0; i < num; i++)
             {
                 SongModel temp = new SongModel();
-                temp.SongImagePath = RandomString(10);
-                temp.SongName = RandomString(6);
+                temp.SongImagePath = SongImages.ElementAt(random.Next(0, SongImages.Count));
+                int addToName = randomToName + i;
+                temp.SongName = "song" + addToName.ToString();
                 temp.SongPath = RandomString(12);
                 temp.ReleaseDate = new DateTime(2018, 3, 11);
                 temp.Genre = RandomString(5);
@@ -62,10 +98,12 @@ namespace VBeat.Controllers
         public ICollection<UserModel> RandomUsers(int num)
         {
             ICollection<UserModel> ret = new List<UserModel>();
+            int randomToName = random.Next(2000);
             for (int i = 0; i < num; i++)
             {
                 UserModel temp = new UserModel();
-                temp.Username = RandomString(6);
+                int addToName = randomToName + i;
+                temp.Username = "user" + addToName.ToString();
                 temp.FirstName = RandomString(5);
                 temp.LastName = RandomString(5);
                 temp.Email = RandomString(5);
@@ -82,6 +120,7 @@ namespace VBeat.Controllers
         public ICollection<ArtistModel> RandomArtists(int num)
         {
             ICollection<ArtistModel> ret = new List<ArtistModel>();
+            int randomToName = random.Next(2000);
             for (int i = 0; i < num; i++)
             {
                 ArtistModel temp = new ArtistModel();
@@ -92,8 +131,9 @@ namespace VBeat.Controllers
                 temp.Password = RandomString(5);
                 temp.DateOfRegistration = RandomDay();
                 temp.TimeOfLastLogin = RandomDay();
-                temp.ArtistName = RandomString(5);
-                temp.ArtistImage = RandomString(10);
+                int addToName = randomToName + i;
+                temp.ArtistName = "artist" + addToName.ToString();
+                temp.ArtistImage = ArtistImages.ElementAt(random.Next(0, ArtistImages.Count));
                 ret.Add(temp);
                 dbContext.Add(temp);
 
@@ -105,12 +145,14 @@ namespace VBeat.Controllers
         public ICollection<PlaylistModel> RandomPlaylists(int num)
         {
             ICollection<PlaylistModel> ret = new List<PlaylistModel>();
+            int randomToName = random.Next(2000);
             for (int i = 0; i < num; i++)
             {
                 PlaylistModel temp = new PlaylistModel();
                 temp.Public = true;
-                temp.PlaylistImage = RandomString(10);
-                temp.PlaylistName = RandomString(5);
+                temp.PlaylistImage = PlaylistImages.ElementAt(random.Next(0, PlaylistImages.Count));
+                int addToName = randomToName + i;
+                temp.PlaylistName = "playlist" + addToName.ToString();
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
@@ -122,15 +164,18 @@ namespace VBeat.Controllers
         public ICollection<ShowModel> randomShows(int num)
         {
             ICollection<ShowModel> ret = new List<ShowModel>();
+            int randomToName = random.Next(2000);
             for (int i = 0; i < num; i++)
             {
                 ShowModel temp = new ShowModel();
-                temp.ShowName = RandomString(6);
+                int addToName = randomToName + i;
+                temp.ShowName = "show" + addToName.ToString();
                 temp.Country = RandomString(6);
                 temp.City = RandomString(6);
                 temp.StreetName = RandomString(6);
                 temp.HouseNumber = random.Next(100);
                 temp.ShowTime = RandomDay();
+                temp.ShowImagePath = ShowImages.ElementAt(random.Next(0, ShowImages.Count)); //to add after adding image property to show model
                 ret.Add(temp);
                 dbContext.Add(temp);
             }
@@ -191,7 +236,7 @@ namespace VBeat.Controllers
                     temp.SongId = songs.ElementAt(i).SongId;
                     int rand = random.Next(0, artists.Count);
                     temp.UserId = artists.ElementAt(rand).UserId;
-                    if (!checkIfArtistAlreadyHaveSong(temp.UserId,temp.SongId))
+                    if (!checkIfArtistAlreadyHaveSong(temp.UserId, temp.SongId))
                     {
                         ret.Add(temp);
                         dbContext.Add(temp);
@@ -215,7 +260,7 @@ namespace VBeat.Controllers
             ICollection<Models.BridgeModel.PlaylistSongModel> ret = new List<Models.BridgeModel.PlaylistSongModel>();
             for (int i = 0; i < songs.Count; i++)
             {
-                int randNumPlaylistToAdd = random.Next(0, playlists.Count);
+                int randNumPlaylistToAdd = random.Next(0, playlists.Count + 1);
                 for (int j = 0; j < randNumPlaylistToAdd; j++)
                 {
                     int indexToAdd = random.Next(0, playlists.Count);
@@ -238,7 +283,6 @@ namespace VBeat.Controllers
 
         public bool Index()
         {
-
             ICollection<SongModel> songs = RandomSongs(20);
             ICollection<ArtistModel> artists = RandomArtists(3);
             ICollection<UserModel> users = RandomUsers(3);

@@ -18,7 +18,7 @@ namespace VBeat.Controllers
 
         public readonly string NEW_RELEASES_LIST_KEY = "NEW_RELEASES";
 
-        private readonly int NUM_NEW_RELEASES = 8;
+        private readonly int NUM_NEW_RELEASES = 3;
 
         private readonly VBeatDbContext _context;
 
@@ -220,10 +220,21 @@ namespace VBeat.Controllers
             for (int i = 0; i < months.Length; i++)
             {
                 int numSongs = _context.Songs.Where(s => s.ReleaseDate.Month.Equals(i + 1)).Count();
-                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i] });
+                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i]  + " (" + numSongs.ToString()  + ")"});
             }
 
             return Json(dataLabelModel);
+        }
+
+        public JsonResult GetSongsByGenreCount()
+        {
+            List<DataLabelModel> dataLabelMdoel = new List<DataLabelModel>();
+            IQueryable<DataLabelModel> genreResult = from s in _context.Songs
+                              group s by s.Genre into sGenre
+                              let genreCount = sGenre.Count()
+                              select new DataLabelModel() { Label = sGenre.Key, Value = genreCount };
+
+            return Json(genreResult.ToList());
         }
     }
 }
