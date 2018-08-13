@@ -16,6 +16,10 @@
     <div id="pie">
 
     </div>
+    <h2># Of Songs By Genre</h2>
+    <div id="genre_pie">
+
+    </div>
 </div>
 
 
@@ -26,7 +30,7 @@
             { "label": "two", "value": 50 },
             { "label": "three", "value": 30 }];
          */
-        function getDataFromServer(func) {
+        function getSongsMonthDataFromServer(func) {
             $.get({
                 url: "/SongModels/GetSongsByMonth",
             }).done(function (response, textStatus, jqXHR) {
@@ -38,15 +42,25 @@
             });
         }
 
-        function drawPie(data) {
-            var w = 300,                        //width
-                h = 300,                            //height
-                r = 100,                            //radius
+        function getGenreSongDataFromServer(func) {
+            $.get({
+                url: "/SongModels/GetSongsByGenreCount",
+            }).done(function (response, textStatus, jqXHR) {
+                console.log(response);
+                func(response);
+            });
+
+        }
+
+        function drawPie(el,data) {
+            var w = 500,                        //width
+                h = 500,                            //height
+                r = 200,                            //radius
                 color = d3.scale.category10();     //builtin range of colors
 
 
 
-            var vis = d3.select("#pie")
+            var vis = d3.select("#" + el)
                 .append("svg:svg")              //create the SVG element inside the <body>
                 .data([data])                   //associate our data with the document
                 .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
@@ -88,8 +102,12 @@
 
         $(document).ready(function () {
             console.log("page ready for action!");
-            getDataFromServer(function (data) {
-                drawPie(data);
+            getSongsMonthDataFromServer(function (data) {
+                drawPie("pie",data);
+            });
+
+            getGenreSongDataFromServer(function (data) {
+                drawPie("genre_pie", data);
             });
         });
 
