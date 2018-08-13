@@ -225,5 +225,16 @@ namespace VBeat.Controllers
 
             return Json(dataLabelModel);
         }
+
+        public JsonResult GetSongsByGenreCount()
+        {
+            List<DataLabelModel> dataLabelMdoel = new List<DataLabelModel>();
+            IQueryable<DataLabelModel> genreResult = from s in _context.Songs
+                              group s by s.Genre into sGenre
+                              let genreCount = sGenre.Count()
+                              select new DataLabelModel() { Label = sGenre.Key, Value = genreCount };
+
+            return Json(genreResult.ToList());
+        }
     }
 }
