@@ -13,6 +13,7 @@ namespace VBeat.Controllers
 {
     public class ArtistModelsController : Controller
     {
+        private static int PAGE_SIZE = 10;
         private readonly VBeatDbContext _context;
 
         public ArtistModelsController(VBeatDbContext context)
@@ -153,6 +154,27 @@ namespace VBeat.Controllers
             _context.Artists.Remove(artistModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Search(string artistName, int? offset)
+        {
+            int realOffset = offset.HasValue ? offset.Value : 0;
+            IQueryable<ArtistModel> artistModels = _context.Artists;
+
+            if(!string.IsNullOrEmpty(artistName))
+            {
+                artistModels = artistModels.Where(a => a.ArtistName.ToLower().Contains(artistName));
+            }
+
+            artistModels = artistModels
+                .Skip(realOffset * PAGE_SIZE)
+                .Take(PAGE_SIZE);
+
+            ViewData["ArtistList"] = artistModels;
+            ViewData["ArtistName"] = artistName;
+            ViewData["Offset"] = realOffset;
+            return View("~/Views/ArtistModels/Search.cshtml");
         }
 
         private bool ArtistModelExists(int id)
