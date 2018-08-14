@@ -50,7 +50,7 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["USER_PLAYLISTS"]= await _context.Playlists.ToListAsync();
             return View(songModel);
         }
 

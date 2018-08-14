@@ -265,9 +265,6 @@ div.body-content {
     display: none;
 }
 
-.col-sm-4 {
-width: 80%;
-}
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
 }
@@ -328,7 +325,8 @@ div.playlist-song-container div{
     margin:2px;
 }
 
-button#add-song-to-playlist {
+button#add-song-to-playlist,
+button.add-song-to-specific-playlist {
     position: absolute;
     background-color: green;
     height: 50px;
@@ -338,13 +336,20 @@ button#add-song-to-playlist {
     left: 2px;
     border: white 2px solid;
 }
-button#add-song-to-playlist:hover{
+button#add-song-to-playlist:hover,
+button.add-song-to-specific-playlist:hover{
     background-color: black;
 }
-button#add-song-to-playlist img{
+button#add-song-to-playlist img,
+button.add-song-to-specific-playlist{
     position:relative;
     height:100%;
     margin-left:10%;
+}
+
+button.add-song-to-specific-playlist{
+    margin-bottom:10px;
+    display:none;
 }
 
 ul#playlist-song-list{
