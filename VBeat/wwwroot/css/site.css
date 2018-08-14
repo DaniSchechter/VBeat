@@ -255,8 +255,17 @@ div.body-content {
     border-radius: 30px;
 }
 
+.add-song-to-playlist {
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    width: 30%;
+    z-index: 3;
+    display: none;
+}
+
 .col-sm-4 {
-    width: 80%;
+width: 80%;
 }
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
