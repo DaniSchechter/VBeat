@@ -13,14 +13,6 @@ $('.table-cell').mouseleave(function () {
     $(this).children("a").children("img").hide();
 });
 
-$('.item').mouseover(function () {
-    $(this).find("img.add-song-to-audio").show();
-});
-
-$('.item').mouseleave(function () {
-    $(this).find("img.add-song-to-audio").hide();
-});
-
 $(".add-song-to-audio").click(function() {
     alert("to do - add song to playlist");
     loadAudioPlayer();

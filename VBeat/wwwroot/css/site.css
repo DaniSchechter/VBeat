@@ -234,7 +234,6 @@ div.body-content {
     position:absolute;
     display: table-cell;
     vertical-align: middle;
-    z-index: 1;
     height: 100%;
     width: 100%;
 }
@@ -264,17 +263,17 @@ div.body-content {
     z-index: 3;
     display: none;
 }
-
-<<<<<<< HEAD
-=======
 .col-sm-5 {
-width: 80%;
+    width: 80%;
 }
->>>>>>> 8f396e2631871664c05e1a5063e85a6ed801ef61
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
 }
-
+carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
 .card-image-container {
     position: relative;
     overflow: hidden;
