@@ -265,6 +265,12 @@ div.body-content {
     display: none;
 }
 
+<<<<<<< HEAD
+=======
+.col-sm-5 {
+width: 80%;
+}
+>>>>>>> 8f396e2631871664c05e1a5063e85a6ed801ef61
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
 }

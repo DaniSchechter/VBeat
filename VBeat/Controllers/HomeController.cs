@@ -23,7 +23,7 @@ namespace VBeat.Controllers
             UserModel userModel = dbContext.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32(SessionConsts.UserId));
             if (userModel == null)
             {
-                return RedirectToAction("Create", "UserModels");
+                return RedirectToAction("SignIn", "UserModels");
             }
             ViewData["DisplayName"] = userModel.Username;
             ViewData["DisplayId"] = userModel.UserId;
