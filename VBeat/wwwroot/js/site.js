@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 //--------------Show plus icon on the Home Page images------------------------- 
-$('.table-cell').hover(function () {
+$('.table-cell').mouseover(function () {
     $(this).find("img").show();
 });
 
@@ -13,7 +13,7 @@ $('.table-cell').mouseleave(function () {
     $(this).children("a").children("img").hide();
 });
 
-$(".add-song-to-playlist").click(function() {
+$(".add-song-to-audio").click(function() {
     alert("to do - add song to playlist");
     loadAudioPlayer();
 });
@@ -111,6 +111,10 @@ $('audio').on('ended', function () {
     $('#song-in-audio-name').children('p').html(songName);
 });
 
+//---------------------------Display  playlist when adding song to playlist------------------- 
+$('#add-song-to-playlist').click(function () {
+    $('.add-song-to-specific-playlist').show();
+});
 
 //_________________________________________________________ Just to not forget something
 $('.add-playlist-to-library').click(function () {

@@ -31,6 +31,14 @@
                     </div>
                 </li>
             </ul>
-        </div>
+            <div class="col-sm-6 ">
+                <button id="add-song-to-playlist">Add to playlist<img src="~/images/plus-btn.png"></button>
+            </div>
+            <div class="col-sm-6 ">
+               @foreach(var playlist in (IEnumerable<PlaylistModel>)ViewData["USER_PLAYLISTS"])
+               {
+                    <button class="add-song-to-specific-playlist">Add to @Html.DisplayFor(playlistModel => playlist.PlaylistName) playlist</button>    
+               }
+            </div>
     </div>
 </div>
