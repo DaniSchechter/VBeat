@@ -59,14 +59,9 @@
                         var currentAddress = "@Model.HouseNumber + ',' + @Model.StreetName + ',' + @Model.City + ',' +@Model.Country"
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
-                                center: { lat: 24.844340,lng: 29.343437},
-                                zoom: 8
+                                zoom: 16
                             });
-                            var marker = new google.maps.Marker({
-                                position: { lat: 24.844340, lng: 29.343437 },
-                                map: map,
-                                title: 'Hello World!'
-                            });
+
 
 
                         var geocoder = new google.maps.Geocoder();
@@ -75,7 +70,7 @@
                             if (status == google.maps.GeocoderStatus.OK) {
 
                                 var myResult = results[0].geometry.location; // reference LatLng value
-
+                                map.setCenter(myResult);
                                 var marker = new google.maps.Marker({
                                     position: myResult,
                                     map: map,
@@ -84,10 +79,6 @@
                             }
                         });
                         }
-
-
-
-
 
 
                     </script>
