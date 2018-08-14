@@ -38,16 +38,15 @@ namespace VBeat.Controllers
             PlaylistImages.Add("/images/playlistWater.jpg");
             PlaylistImages.Add("/images/playlistWorkout.jpg");
 
-            SongImages.Add("/images/songDoubleBass.jpg");
-            SongImages.Add("/images/songDrums.png");
-            SongImages.Add("/images/songElecGuitar.jpg");
-            SongImages.Add("/images/songGuitar.jpg");
-            SongImages.Add("/images/songGuitarPaint.png");
-            SongImages.Add("/images/songHARP.jpg");
-            SongImages.Add("/images/songJazz.jpg");
-            SongImages.Add("/images/songKordion.jpg");
-            SongImages.Add("/images/songRock.png");
-            SongImages.Add("/images/songSax.jpeg");
+            SongImages.Add("/images/brunomars.jpg");
+            SongImages.Add("/images/default.png");
+            SongImages.Add("/images/drake.jpg");
+            SongImages.Add("/images/edsheeran.jpg");
+            SongImages.Add("/images/johnlegend.jpg");
+            SongImages.Add("/images/passenger.jpg");
+            SongImages.Add("/images/samsmith.jpg");
+            SongImages.Add("/images/stromae.jpg");
+            SongImages.Add("/images/thechainsmokers.jpg");
 
 
             ShowImages.Add("/images/show1.jpg");
