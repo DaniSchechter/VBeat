@@ -77,7 +77,7 @@ function checkSongValidation(path) {
 //------------------Add song manually to audio player on click-----------------------
 $('.add-song-to-audio-player').click(function () {
     var path = $(this).siblings('.song-path-container').children('p').html();
-    valid = checkSongValidation(path);
+    var valid = checkSongValidation(path);
     if (valid == "") {
         alert("audio player do not support this type of files");
     }
