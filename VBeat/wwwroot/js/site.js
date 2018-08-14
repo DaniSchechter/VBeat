@@ -5,12 +5,20 @@ $(document).ready(function () {
 });
 
 //--------------Show plus icon on the Home Page images------------------------- 
-$('.table-cell').hover(function () {
+$('.table-cell').mouseover(function () {
     $(this).find("img").show();
 });
 
 $('.table-cell').mouseleave(function () {
     $(this).children("a").children("img").hide();
+});
+
+$('.item').mouseover(function () {
+    $(this).find("img.add-song-to-audio").show();
+});
+
+$('.item').mouseleave(function () {
+    $(this).find("img.add-song-to-audio").hide();
 });
 
 $(".add-song-to-audio").click(function() {

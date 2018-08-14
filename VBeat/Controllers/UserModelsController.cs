@@ -190,7 +190,7 @@ namespace VBeat.Controllers
             userModel.TimeOfLastLogin = DateTime.UtcNow;
             await _context.SaveChangesAsync();
             HttpContext.Session.SetInt32(SessionConsts.UserId, userModel.UserId);
-            return RedirectToAction("Index", "Home");// TODO check this
+            return RedirectToAction("Display", "SongModels");// TODO check this
         }
 
     }

@@ -268,10 +268,7 @@ div.body-content {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
 }
-carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
+
 .card-image-container {
     position: relative;
     overflow: hidden;
