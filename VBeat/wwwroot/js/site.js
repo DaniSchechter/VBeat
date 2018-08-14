@@ -52,7 +52,7 @@ function loadAudioPlayer() {
                 $("li#" + i).children('.playlist-song-container').css("background-color", "red");
                 $("li#" + i).children('.playlist-song-container').off('mouseover');
                 $("li#" + i).children('.playlist-song-container').off('mouseleave');
-                $("li#" + i).find('.song-artist').html('<p style="font-weight:bold;color:black">Type Not Supported !</p>');
+                $("li#" + i).find('.song-artist').html('<p style="font-weight:bold;color:black">Type is Not Supported !</p>');
             }
                 
                 

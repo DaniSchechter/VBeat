@@ -10,58 +10,55 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SongName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SongPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SongImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongPath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SongImagePath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AddedDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.SongId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.SongId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.SongId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Song Image</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var song in (IEnumerable<SongModel>)Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="col-sm-5">
+                                <div class="card">
+                                    <h1>@song.SongName</h1>
+                                    <div class="card-image-container">
+                                        <img src="@song.SongImagePath" alt="Image Not Found" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-sm-8 ">
+                                <div class="playlist-song-container">
+                                    <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(songModel => song.Genre): </p><p class="second-info">@song.Genre</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(songModel => song.SongPath): </p><p class="second-info">@song.SongPath</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.AddedDate): </p><p class="second-info">@song.AddedDate</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.ReleaseDate): </p><p class="second-info">@song.ReleaseDate</p></div>
+                                </div>
+                                <a asp-action="Edit" asp-route-id="@song.SongId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@song.SongId">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

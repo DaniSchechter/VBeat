@@ -9,57 +9,55 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ShowName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HouseNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShowTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StreetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HouseNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowTime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ShowId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ShowId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ShowId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Show Image</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var show in (IEnumerable<VBeat.Models.ShowModel>)Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="col-sm-5">
+                                <div class="card">
+                                    <h1>@show.ShowName</h1>
+                                    <div class="card-image-container">
+                                        <img src="@show.ShowImagePath" alt="Image Not Found" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-sm-8 ">
+                                <div class="playlist-song-container">
+                                    <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(showModel => show.Country): </p><p class="second-info">@show.Country</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(showModel => show.City): </p><p class="second-info">@show.City</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.StreetName): </p><p class="second-info">@show.StreetName</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.HouseNumber): </p><p class="second-info">@show.HouseNumber</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.ShowTime): </p><p class="second-info">@show.ShowTime</p></div>
+                                </div>
+                                <a asp-action="Edit" asp-route-id="@show.ShowId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@show.ShowId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@show.ShowId">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
