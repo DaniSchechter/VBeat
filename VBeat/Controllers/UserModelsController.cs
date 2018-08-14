@@ -193,5 +193,10 @@ namespace VBeat.Controllers
             return RedirectToAction("Index", "Home");// TODO check this
         }
 
+        public async Task<IActionResult> SignOutAction()
+        {
+            HttpContext.Session.Remove(SessionConsts.UserId);
+            return RedirectToAction("HomePage", "Home");
+        }
     }
 }
