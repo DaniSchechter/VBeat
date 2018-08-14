@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using VBeat.Models.BridgeModel;
 using VBeat.Models.Consts;
 using VBeat.Models.Json;
 
@@ -29,10 +30,16 @@ namespace VBeat.Controllers
         }
 
         // GET: SongModels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Display()
         {
             ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             ViewData["NUM_NEW_RELEASES"] = Math.Min(_context.Songs.Count(),NUM_NEW_RELEASES);
+            return View(await _context.Songs.ToListAsync());
+        }
+
+        // GET: SongModels
+        public async Task<IActionResult> Index()
+        {
             return View(await _context.Songs.ToListAsync());
         }
 
@@ -50,7 +57,7 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["USER_PLAYLISTS"]= await _context.Playlists.ToListAsync();
             return View(songModel);
         }
 
@@ -72,8 +79,15 @@ namespace VBeat.Controllers
                 songModel.AddedDate = DateTime.UtcNow;
                 songModel.SongImagePath = "/images/" + songModel.SongImagePath;
                 _context.Add(songModel);
+                //adds the created song to the current artist according to the session
+                int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+                Models.BridgeModel.ArtistSongModel temp = new Models.BridgeModel.ArtistSongModel();
+                temp.SongId = songModel.SongId;
+                temp.UserId = id;
+                _context.Add(temp);
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Display));
             }
             return View(songModel);
         }
@@ -124,7 +138,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Display));
             }
             return View(songModel);
         }
@@ -155,7 +169,7 @@ namespace VBeat.Controllers
             var songModel = await _context.Songs.SingleOrDefaultAsync(m => m.SongId == id);
             _context.Songs.Remove(songModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Display));
         }
 
         public IActionResult Statistics()
@@ -236,6 +250,11 @@ namespace VBeat.Controllers
                               select new DataLabelModel() { Label = sGenre.Key, Value = genreCount };
 
             return Json(genreResult.ToList());
+        }
+
+        public void AddSongToPlayList(int playlistId,int songId)
+        {
+            
         }
     }
 }
