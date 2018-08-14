@@ -264,9 +264,12 @@ div.body-content {
     z-index: 3;
     display: none;
 }
+
+.col-sm-4 {
+width: 80%;
+}
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
-
 }
 carousel-caption p {
     font-size: 20px;
@@ -317,6 +320,7 @@ div.playlist-song-container {
     border: white 2px solid;
     margin-bottom: 20px;
     border-radius: 30px;
+    overflow: hidden;
 }
 
 div.playlist-song-container div{
