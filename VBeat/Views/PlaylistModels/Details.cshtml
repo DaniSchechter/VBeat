@@ -30,10 +30,12 @@
                                     </a>
                                     <div class="song-name"><p>@song.Song.SongName</p></div>
                                     <div class="song-artist">
+                                        <p>
                                              @foreach (var artist in song.Song.ArtistList)
                                              {
-                                                 <p>@artist.Artist.ArtistName,</p>
+                                                <span><img class="separator" src="~/images/dot.png" /></span> @artist.Artist.ArtistName
                                              }
+                                        </p>
                                     </div>
                                     <div class="song-path-container">
                                         <p>@song.Song.SongPath</p>

@@ -359,3 +359,10 @@ img.song-information {
     float: left;
     padding: 10px;
 }
+
+.separator{
+    background-image:url('~/images/dot.png');
+    display:inline-block;
+    height:5px;
+    margin-bottom:5px;
+}
