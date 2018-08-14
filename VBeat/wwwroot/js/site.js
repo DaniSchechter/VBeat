@@ -13,7 +13,7 @@ $('.table-cell').mouseleave(function () {
     $(this).children("a").children("img").hide();
 });
 
-$(".add-song-to-playlist").click(function() {
+$(".add-song-to-audio").click(function() {
     alert("to do - add song to playlist");
     loadAudioPlayer();
 });
