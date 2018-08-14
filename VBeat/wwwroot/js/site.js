@@ -111,7 +111,10 @@ $('audio').on('ended', function () {
     $('#song-in-audio-name').children('p').html(songName);
 });
 
-//---------------------------Display  playlist when adding song to playlist 
+//---------------------------Display  playlist when adding song to playlist------------------- 
+$('#add-song-to-playlist').click(function () {
+    $('.add-song-to-specific-playlist').show();
+});
 
 //_________________________________________________________ Just to not forget something
 $('.add-playlist-to-library').click(function () {
