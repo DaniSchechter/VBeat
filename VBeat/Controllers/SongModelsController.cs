@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
+using VBeat.Models.BridgeModel;
 using VBeat.Models.Consts;
 using VBeat.Models.Json;
 
@@ -72,6 +73,13 @@ namespace VBeat.Controllers
                 songModel.AddedDate = DateTime.UtcNow;
                 songModel.SongImagePath = "/images/" + songModel.SongImagePath;
                 _context.Add(songModel);
+                //adds the created song to the current artist according to the session
+                int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+                Models.BridgeModel.ArtistSongModel temp = new Models.BridgeModel.ArtistSongModel();
+                temp.SongId = songModel.SongId;
+                temp.UserId = id;
+                _context.Add(temp);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -75,6 +75,11 @@ namespace VBeat.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(playlistModel);
+                //adds the crated playlist too the current user lit of playlists
+                int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+                UserModel user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+                user.SavedPlaylists.Add(playlistModel);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
