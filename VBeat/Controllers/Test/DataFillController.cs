@@ -282,14 +282,14 @@ namespace VBeat.Controllers
 
         public bool Index()
         {
-            //ICollection<SongModel> songs = RandomSongs(20);
-            //ICollection<ArtistModel> artists = RandomArtists(3);
-            //ICollection<UserModel> users = RandomUsers(3);
-            //ICollection<PlaylistModel> playlists = RandomPlaylists(2);
-            //ICollection<Models.BridgeModel.ArtistSongModel> artistsong = RandomArtistToSong(songs, artists);
-            //ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = RandomSongsToPlaylist(playlists, songs);
+            ICollection<SongModel> songs = RandomSongs(20);
+            ICollection<ArtistModel> artists = RandomArtists(3);
+            ICollection<UserModel> users = RandomUsers(3);
+            ICollection<PlaylistModel> playlists = RandomPlaylists(2);
+            ICollection<Models.BridgeModel.ArtistSongModel> artistsong = RandomArtistToSong(songs, artists);
+            ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = RandomSongsToPlaylist(playlists, songs);
             ICollection<ShowModel> shows = randomShows(4);
-            //ICollection<Models.BridgeModel.ArtistShowModel> artistsToShows = randomArtistsToShows(shows, artists);
+            ICollection<Models.BridgeModel.ArtistShowModel> artistsToShows = randomArtistsToShows(shows, artists);
             return true;
         }
     }

@@ -4,6 +4,20 @@
     ViewData["Title"] = "Details";
 }
 
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 400px;
+        width: 400px;
+    }
+    /* Optional: Makes the sample page fill the window. */
+
+</style>
+
+
+
 <div class="middle-container">
     <div class="row">
         <div class="col-sm-4">
@@ -11,7 +25,7 @@
                 <h1>@Model.ShowName</h1>
                 <div class="card-image-container">
                     <!--Chnage the img src to show image-->
-                    <img src="@Model.ShowImagePath" alt="Image Not Found"/>
+                    <img src="@Model.ShowImagePath" alt="Image Not Found" />
                 </div>
             </div>
         </div>
@@ -33,6 +47,26 @@
                     <div class="playlist-song-container">
                         <div class="releaseDate"><p class="first-info">Show Time: </p><p class="second-info">@Model.ShowTime</p></div>
                     </div>
+
+
+
+                    <div id="map"></div>
+                    <script>
+                        var map;
+                        function initMap() {
+                            var latlng = new google.maps.LatLng(39.305, -76.617);
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: latlng,
+                                zoom: 8
+                            });
+                        }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCOhuEzH731AU1Qu_DJ3tRJ1sZGy2fjI&callback=initMap"
+                            async defer></script>
+
+
+
+
                 </li>
             </ul>
         </div>
