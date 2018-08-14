@@ -24,20 +24,19 @@
     <h2>Search for songs</h2>
     <div class="row">
         <form class="form-inline" method="get" asp-controller="SongModels" asp-action="Search">
+            
             <label class="sr-only" for="inlineFormInput">Artist Name</label>
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="artistName" name="artistName" placeholder="Artist Name">
 
             <label class="sr-only" for="inlineFormInputGroup">Song Name</label>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                <input type="text" class="form-control" id="songName" name="songName" placeholder="Song Name">
-            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="songName" name="songName" placeholder="Song Name">
 
             <label class="sr-only" for="inlineFormInput">Genre</label>
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
-            <input type="hidden" name="offset" value="0" />
+
+            <input type="hidden" name="offset" value="0"/>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="@Html.Raw(nextUrl)" class="btn btn-warning" id="nextPage">Next Page</a>
-
             <a href="@Html.Raw(prevUrl)" class="btn btn-warning" id="prevPage">Previous Page</a>
         </form>
     </div>
@@ -51,30 +50,51 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Song Name</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Song Path</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Release Date</th>
+                        <th scope="col">Song Image</th>
+                        <th scope="col">Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (int i = 0; i < Songs.Count(); i++)
                     {
-
-
                         SongModel curSong = Songs[i];
 
                         <tr>
-                            <th scope="row">@curSong.SongId</th>
-                            <th>@curSong.SongName</th>
-                            <th>@curSong.Genre</th>
-                            <th>@curSong.SongPath</th>
-                            <th><img src="@curSong.SongImagePath" /></th>
-                            <th>@curSong.ReleaseDate.ToShortDateString()</th>
+                            <div class="middle-container">
+                                <div class="row">
+                                    <th>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <h1>@curSong.SongName</h1>
+                                                <div class="card-image-container">
+                                                    <img src="@curSong.SongImagePath" alt="Image Not Found" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="col-sm-8 ">
+                                            <ul id="playlist-song-list">
+                                                <li>
+                                                    <div class="playlist-song-container">
+                                                        <div class="song-genre"><p class="first-info">Song Genre: </p><p class="second-info">@curSong.Genre</p></div>
+                                                    </div>
+                                                    <div class="playlist-song-container">
+                                                        <div class="Url2Mp3"><p class="first-info">Song Path: </p><p class="second-info">@curSong.SongPath</p></div>
+                                                    </div>
+                                                    <div class="playlist-song-container">
+                                                        <div class="addedDate"><p class="first-info">Added Date: </p><p class="second-info">@curSong.AddedDate</p></div>
+                                                    </div>
+                                                    <div class="playlist-song-container">
+                                                        <div class="releaseDate"><p class="first-info">Release Date: </p><p class="second-info">@curSong.ReleaseDate</p></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th>
+                                </div>
+                            </div>
                         </tr>
-
                     }
                 </tbody>
             </table>
