@@ -1,9 +1,41 @@
 ﻿
 @{
     ViewData["Title"] = "SuggestView";
+    List<SongModel> songList = (List<SongModel>)ViewData["SongList"];
+    PlaylistModel playlistModel = (PlaylistModel)ViewData["Target"];
 }
 
 <div class="container">
+    <h2>Songs that you might like</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Song Image</th>
+                <th scope="col">Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>mdo</td>
+            </tr>
 
+            @foreach(SongModel song in songList)
+            {
+            <tr>
+                <th scope="row">@song.SongId</th>
+                <td>@song.SongName</td>
+                <td>@song.Genre</td>
+                <td><img src="@song.SongImagePath"/></td>
+                <td>@song.ReleaseDate.ToShortDateString()</td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
 

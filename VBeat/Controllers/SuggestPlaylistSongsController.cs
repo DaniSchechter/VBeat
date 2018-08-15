@@ -21,14 +21,18 @@ namespace VBeat.Controllers.PlaylistModels
 
         public IActionResult Suggest(int playlistId)
         {
-            PlaylistModel playlistModel = _context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault();
-            if (playlistModel == null)
+            PlaylistModel targetPlaylistModel = _context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault();
+            if (targetPlaylistModel == null)
             {
                 return NotFound();
             }
 
             _algo.Train(_context.Playlists.Where(p => p.PlaylistId != playlistId).ToList());
+            List<int> songList = _algo.Suggset(targetPlaylistModel);
+            List<SongModel> songModels = _context.Songs.Where(s => songList.Contains(s.SongId)).ToList();
 
+            ViewData["SongList"] = songModels;
+            ViewData["Target"] = targetPlaylistModel;
             return View("~/Views/PlaylistModels/SuggestView.cshtml");
         }
     }
