@@ -188,7 +188,7 @@ namespace VBeat.Controllers
             for (int i = 0; i < shows.Count; i++)
             {
                 int randomNumArtists = random.Next(1, artists.Count);
-                for (int j = 0; i < randomNumArtists; i++)
+                for (int j = 0; j < randomNumArtists; j++)
                 {
                     int randomArtistIndex = random.Next(artists.Count);
                     if (!checkIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId, shows.ElementAt(i).ShowId))

@@ -37,10 +37,40 @@ namespace VBeat.Controllers
             return View(await _context.Songs.ToListAsync());
         }
 
+
+
+
+        private bool IsSongInList(List<Models.BridgeModel.ArtistSongModel> songList,int songId)
+        {
+            var foundSong = songList.SingleOrDefault(s=>s.SongId==songId);
+            if (foundSong == null) return false;
+            return true;
+        }
+
+
+
+
         // GET: SongModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Songs.ToListAsync());
+
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+
+            var artistModel = await _context.Artists
+                .SingleOrDefaultAsync(m => m.UserId == id);
+            if (artistModel == null)
+            {
+                return NotFound();
+            }
+            var artist = await _context.Artists.SingleOrDefaultAsync(u => u.UserId == artistModel.UserId);
+            var songList = artist.SongList.ToList();
+            return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
+            //return View(await _context.Songs.ToListAsync());
         }
 
         // GET: SongModels/Details/5

@@ -172,7 +172,7 @@ namespace VBeat.Controllers
         }
 
 
-        public async Task<IActionResult> SignIn()
+        public IActionResult SignIn()
         {
             return View();
         }
@@ -193,7 +193,7 @@ namespace VBeat.Controllers
             return RedirectToAction("Display", "SongModels");// TODO check this
         }
 
-        public async Task<IActionResult> SignOutAction()
+        public IActionResult SignOutAction()
         {
             HttpContext.Session.Remove(SessionConsts.UserId);
             return RedirectToAction("HomePage", "Home");
