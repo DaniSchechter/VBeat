@@ -40,7 +40,7 @@ namespace VBeat.Controllers
         // GET: SongModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Songs.ToListAsync());
+            return View(await _context.Songs.Take(PAGE_SIZE).ToListAsync());
         }
 
         // GET: SongModels/Details/5
