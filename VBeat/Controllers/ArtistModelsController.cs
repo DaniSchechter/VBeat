@@ -24,7 +24,7 @@ namespace VBeat.Controllers
         // GET: ArtistModels
         public async Task<IActionResult> Index()
         { 
-            return View(await _context.Artists.ToListAsync());
+            return View(await _context.Artists.Take(PAGE_SIZE).ToListAsync());
         }
 
         // GET: ArtistModels/Details/5
