@@ -32,7 +32,7 @@ namespace VBeat.Controllers
         // GET: SongModels
         public async Task<IActionResult> Display()
         {
-            ViewData["NEW_RELEASES"] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
+            ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             ViewData["NUM_NEW_RELEASES"] = Math.Min(_context.Songs.Count(),NUM_NEW_RELEASES);
             return View(await _context.Songs.ToListAsync());
         }
