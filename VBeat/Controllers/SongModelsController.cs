@@ -70,7 +70,6 @@ namespace VBeat.Controllers
             var artist = await _context.Artists.SingleOrDefaultAsync(u => u.UserId == artistModel.UserId);
             var songList = artist.SongList.ToList();
             return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
-            //return View(await _context.Songs.ToListAsync());
         }
 
         // GET: SongModels/Details/5
