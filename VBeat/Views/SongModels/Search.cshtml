@@ -60,7 +60,7 @@
                         SongModel curSong = Songs[i];
 
                         <tr>
-                            <th>
+                            <td>
                                 <div class="col-sm-5">
                                     <div class="card">
                                         <h1>@curSong.SongName</h1>
@@ -69,27 +69,26 @@
                                         </div>
                                     </div>
                                 </div>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <div class="col-sm-8 ">
-                                    <ul id="playlist-song-list">
-                                        <li>
-                                            <div class="playlist-song-container">
-                                                <div class="song-genre"><p class="first-info">Song Genre: </p><p class="second-info">@curSong.Genre</p></div>
-                                            </div>
-                                            <div class="playlist-song-container">
-                                                <div class="Url2Mp3"><p class="first-info">Song Path: </p><p class="second-info">@curSong.SongPath</p></div>
-                                            </div>
-                                            <div class="playlist-song-container">
-                                                <div class="addedDate"><p class="first-info">Added Date: </p><p class="second-info">@curSong.AddedDate</p></div>
-                                            </div>
-                                            <div class="playlist-song-container">
-                                                <div class="releaseDate"><p class="first-info">Release Date: </p><p class="second-info">@curSong.ReleaseDate</p></div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <div class="playlist-song-container">
+                                        <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(curSongModel => curSong.Genre): </p><p class="second-info">@curSong.Genre</p></div>
+                                    </div>
+                                    <div class="playlist-song-container">
+                                        <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(curSongModel => curSong.SongPath): </p><p class="second-info">@curSong.SongPath</p></div>
+                                    </div>
+                                    <div class="playlist-song-container">
+                                        <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(curSongModel => curSong.AddedDate):  </p><p class="second-info">@curSong.AddedDate</p></div>
+                                    </div>
+                                    <div class="playlist-song-container">
+                                        <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(curSongModel => curSong.ReleaseDate): </p><p class="second-info">@curSong.ReleaseDate</p></div>
+                                    </div>
+                                    <a asp-action="Edit" asp-route-id="@curSong.SongId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@curSong.SongId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@curSong.SongId">Delete</a>
                                 </div>
-                            </th>
+                            </td>
                         </tr>
                     }
                 </tbody>
