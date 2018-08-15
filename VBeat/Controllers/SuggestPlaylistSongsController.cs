@@ -19,15 +19,22 @@ namespace VBeat.Controllers.PlaylistModels
             _algo = AprioriSuggestionAlgorithm.GetInstance();
         }
 
-        public IActionResult Suggest(int playlistId)
+        // SuggestPlaylistSongs/Suggest/{playlist-id}
+        [HttpGet]
+        public IActionResult Suggest(int? id)
         {
-            PlaylistModel targetPlaylistModel = _context.Playlists.Where(p => p.PlaylistId == playlistId).FirstOrDefault();
+            if(!id.HasValue)
+            {
+                return View("~/SongModels/Display.cshtml");
+            }
+
+            PlaylistModel targetPlaylistModel = _context.Playlists.Where(p => p.PlaylistId == id.Value).FirstOrDefault();
             if (targetPlaylistModel == null)
             {
                 return NotFound();
             }
 
-            _algo.Train(_context.Playlists.Where(p => p.PlaylistId != playlistId).ToList());
+            _algo.Train(_context.Playlists.Where(p => p.PlaylistId != id.Value).ToList());
             List<int> songList = _algo.Suggset(targetPlaylistModel);
             List<SongModel> songModels = _context.Songs.Where(s => songList.Contains(s.SongId)).ToList();
 

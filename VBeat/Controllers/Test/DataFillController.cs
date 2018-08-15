@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VBeat.Models;
+using VBeat.Models.BridgeModel;
 
 namespace VBeat.Controllers
 {
@@ -160,7 +161,7 @@ namespace VBeat.Controllers
         }
 
 
-        public ICollection<ShowModel> randomShows(int num)
+        public ICollection<ShowModel> RandomShows(int num)
         {
             ICollection<ShowModel> ret = new List<ShowModel>();
             int randomToName = random.Next(2000);
@@ -182,7 +183,7 @@ namespace VBeat.Controllers
             return ret;
         }
 
-        public ICollection<Models.BridgeModel.ArtistShowModel> randomArtistsToShows(ICollection<ShowModel> shows, ICollection<ArtistModel> artists)
+        public ICollection<Models.BridgeModel.ArtistShowModel> RandomArtistsToShows(ICollection<ShowModel> shows, ICollection<ArtistModel> artists)
         {
             ICollection<Models.BridgeModel.ArtistShowModel> ret = new List<Models.BridgeModel.ArtistShowModel>();
             for (int i = 0; i < shows.Count; i++)
@@ -191,7 +192,7 @@ namespace VBeat.Controllers
                 for (int j = 0; j < randomNumArtists; j++)
                 {
                     int randomArtistIndex = random.Next(artists.Count);
-                    if (!checkIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId, shows.ElementAt(i).ShowId))
+                    if (!CheckIfArtistAlreadyInShow(artists.ElementAt(randomArtistIndex).UserId, shows.ElementAt(i).ShowId))
                     {
                         Models.BridgeModel.ArtistShowModel temp = new Models.BridgeModel.ArtistShowModel();
                         temp.UserId = artists.ElementAt(randomArtistIndex).UserId;
@@ -207,7 +208,7 @@ namespace VBeat.Controllers
 
 
 
-        private bool checkIfArtistAlreadyInShow(int artistId, int showId)
+        private bool CheckIfArtistAlreadyInShow(int artistId, int showId)
         {
             ShowModel show = dbContext.Shows.SingleOrDefault(s => s.ShowId == showId);
             var check = show.ArtistList.SingleOrDefault(a => a.UserId == artistId);
@@ -215,7 +216,7 @@ namespace VBeat.Controllers
             return true;
         }
 
-        private bool checkIfArtistAlreadyHaveSong(int artistId, int songId)
+        private bool CheckIfArtistAlreadyHaveSong(int artistId, int songId)
         {
             ArtistModel artist = dbContext.Artists.SingleOrDefault(a => a.UserId == artistId);
             var check = artist.SongList.SingleOrDefault(s => s.SongId == songId);
@@ -235,7 +236,7 @@ namespace VBeat.Controllers
                     temp.SongId = songs.ElementAt(i).SongId;
                     int rand = random.Next(0, artists.Count);
                     temp.UserId = artists.ElementAt(rand).UserId;
-                    if (!checkIfArtistAlreadyHaveSong(temp.UserId, temp.SongId))
+                    if (!CheckIfArtistAlreadyHaveSong(temp.UserId, temp.SongId))
                     {
                         ret.Add(temp);
                         dbContext.Add(temp);
@@ -246,7 +247,7 @@ namespace VBeat.Controllers
             return ret;
         }
 
-        private bool checkIfSongAlreadyInPlaylist(int songId, int playlistId)
+        private bool CheckIfSongAlreadyInPlaylist(int songId, int playlistId)
         {
             PlaylistModel playlist = dbContext.Playlists.SingleOrDefault(p => p.PlaylistId == playlistId);
             var check = playlist.Songs.SingleOrDefault(s => s.SongId == songId);
@@ -267,7 +268,7 @@ namespace VBeat.Controllers
                     Models.BridgeModel.PlaylistSongModel temp = new Models.BridgeModel.PlaylistSongModel();
                     temp.PlaylistId = curPlaylist.PlaylistId;
                     temp.SongId = songs.ElementAt(i).SongId;
-                    if (!checkIfSongAlreadyInPlaylist(temp.SongId, temp.PlaylistId))
+                    if (!CheckIfSongAlreadyInPlaylist(temp.SongId, temp.PlaylistId))
                     {
                         ret.Add(temp);
                         dbContext.Add(temp);
@@ -278,8 +279,6 @@ namespace VBeat.Controllers
             return ret;
         }
 
-
-
         public bool Index()
         {
             ICollection<SongModel> songs = RandomSongs(20);
@@ -288,8 +287,8 @@ namespace VBeat.Controllers
             ICollection<PlaylistModel> playlists = RandomPlaylists(2);
             ICollection<Models.BridgeModel.ArtistSongModel> artistsong = RandomArtistToSong(songs, artists);
             ICollection<Models.BridgeModel.PlaylistSongModel> playlistsong = RandomSongsToPlaylist(playlists, songs);
-            ICollection<ShowModel> shows = randomShows(4);
-            ICollection<Models.BridgeModel.ArtistShowModel> artistsToShows = randomArtistsToShows(shows, artists);
+            ICollection<ShowModel> shows = RandomShows(4);
+            ICollection<Models.BridgeModel.ArtistShowModel> artistsToShows = RandomArtistsToShows(shows, artists);
             return true;
         }
     }
