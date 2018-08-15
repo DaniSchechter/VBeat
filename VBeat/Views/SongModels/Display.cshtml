@@ -75,22 +75,15 @@
 <section id="recently-played">
     <div class="middle-container">
         <h1>Recently Played</h1>
-
-        @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
-        {
-            <div class="square">
-                <div class="content">
-                    <div class="table">
-                        <div class="table-cell">
-                            <a href="#"><img class="add-song-to-audio" src="~/images/play-button-white.png" alt="image not foound"/></a>
-                            <img src="@Html.DisplayFor(modelItem => item.SongImagePath)" alt="image not foound"/>
-
-                        </div>
+        <div class="row">
+            @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
+            {
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="frontpage_square" style="background-image:url('@Html.DisplayFor(modelItem => item.SongImagePath)')">
                     </div>
                 </div>
-            </div>
-        }
-
+            }
+        </div>
 
     </div>
 </section>
