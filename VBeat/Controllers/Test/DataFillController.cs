@@ -85,11 +85,31 @@ namespace VBeat.Controllers
                 temp.SongName = "song" + addToName.ToString();
                 temp.SongPath = RandomString(12);
                 temp.ReleaseDate = new DateTime(2018, 3, 11);
-                temp.Genre = RandomString(5);
-                temp.AddedDate = DateTime.Today;
-                ret.Add(temp);
-                dbContext.Add(temp);
+                  if (i % 9 == 0)
+                       temp.Genre = enum_Genre.Jazz.ToString();
+                   else if (i%3 == 0)
+                       temp.Genre = enum_Genre.Blues.ToString();
+                   else if(i%5 == 0)
+                       temp.Genre = enum_Genre.Classic.ToString();
+                   else if(i%7 == 0)
+                       temp.Genre = enum_Genre.Electronic.ToString();
+                   else if (i % 11 == 0)
+                       temp.Genre = enum_Genre.Other.ToString();
+                   else if (i % 13 == 0)
+                       temp.Genre = enum_Genre.Country.ToString();
+                   else if (i % 17 == 0)
+                       temp.Genre = enum_Genre.Pop.ToString();
+                   else if (i % 19 == 0)
+                       temp.Genre = enum_Genre.Hip_hop.ToString();
+                   else
+                       temp.Genre = enum_Genre.Folk.ToString();
+                   temp.AddedDate = DateTime.Today;
+                   ret.Add(temp);
+                   dbContext.Add(temp);
+                   
+
             }
+            
             dbContext.SaveChanges();
             return ret;
         }
