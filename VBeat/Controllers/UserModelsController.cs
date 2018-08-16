@@ -109,8 +109,14 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
+        public async Task<IActionResult> Edit([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             if (id != userModel.UserId)
             {
                 return NotFound();
