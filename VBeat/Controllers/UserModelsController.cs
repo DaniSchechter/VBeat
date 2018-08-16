@@ -140,7 +140,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Display", "SongModels");
             }
             return View(userModel);
         }
