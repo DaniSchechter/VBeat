@@ -185,6 +185,7 @@ div.body-content {
     float: right;
     margin-top: 60px;
     overflow-y: scroll;
+    padding-bottom:4%;
 }
 
 @media (min-width: 768px) {
@@ -231,9 +232,6 @@ div.body-content {
     width: 20%;
     z-index: 3;
     display: none;
-}
-.col-sm-5 {
-    width: 80%;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
