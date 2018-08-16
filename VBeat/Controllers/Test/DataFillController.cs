@@ -94,7 +94,7 @@ namespace VBeat.Controllers
                    else if(i%7 == 0)
                        temp.Genre = enum_Genre.Electronic.ToString();
                    else if (i % 11 == 0)
-                       temp.Genre = enum_Genre.Other.ToString();
+                       temp.Genre = enum_Genre.Rock.ToString();
                    else if (i % 13 == 0)
                        temp.Genre = enum_Genre.Country.ToString();
                    else if (i % 17 == 0)
