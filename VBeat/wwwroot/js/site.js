@@ -24,22 +24,22 @@ function loadAudioPlayer() {
     var i;
     var path;
     var extensoin;
+    var songName;
     var length = $('#playlist-song-list').children("li").last().attr('id');
     if (length) {
         //load data to the audio player
-        for (i = 0; i <= length; i++) {
+        for (i = 0; i <=length; i++) {
             path = $("li#" + i).find('.song-path-container').children('p').html();
             extension = path.split('.').pop();
+            songName = $('li#' + i).find('.song-name').children('p').html();
             if (checkSongValidation(path))
-                $('#myAudio').append("<source id=" + i + " class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+                $('#myAudio').append("<source class='" + songName + "' src=" + path + " type='audio/" + extension + "'>");
             else {
                 $("li#" + i).children('.playlist-song-container').css("background-color", "red");
                 $("li#" + i).children('.playlist-song-container').off('mouseover');
                 $("li#" + i).children('.playlist-song-container').off('mouseleave');
                 $("li#" + i).find('.song-artist').html('<p style="font-weight:bold;color:black">Type is Not Supported !</p>');
-            }
-                
-                
+            }    
         }
         $("#myAudio").trigger('load');
         $("#myAudio").trigger('play');
@@ -57,7 +57,7 @@ function checkSongValidation(path) {
     return answer;
 }
 
-function addSongToAudio(path) {
+function addSongToAudio(path,name) {
     extension = path.split('.').pop();
     var valid = checkSongValidation(path);
     if (valid == "") {
@@ -69,10 +69,12 @@ function addSongToAudio(path) {
 
         //add the new song to the top of the audio songs list
         $('#myAudio').html("");
-        $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append("<source class='"+ name + "' src=" + path + " type='audio/" + extension + "'>");
         $('#myAudio').append(waitingSongs);
         $("#myAudio").trigger('load');
         $("#myAudio").trigger('play');
+
+        $('#song-in-audio-name').children('p').html(name);
     }
 }
 
@@ -88,21 +90,25 @@ $('.add-song-to-audio-player').click(function () {
         //get the song name and update the p near the audio player, that displays song's name
         var songId = $(this).closest('li').attr('id');
         var songName = $('li#' + songId).find('.song-name').children('p').html();
-        $('#song-in-audio-name').children('p').html(songName);
-        addSongToAudio(path);
+        addSongToAudio(path, songName);
     }
 });
 
 //------------------Change song on audio player when previous is finished -----------------------
 $('audio').on('ended', function () {
     var waitingSongs = $('#myAudio').children(':not(:first)');
+    var newFirstSong = waitingSongs.first();
     $('#myAudio').html("");
     $('#myAudio').append(waitingSongs);
     $("#myAudio").trigger('load');
     $("#myAudio").trigger('play');
     var songid = waitingSongs.first().attr('id');
-    var songName = $('li#' + songid).find('.song-name').children('p').html();
-    $('#song-in-audio-name').children('p').html(songName);
+    var songName = newFirstSong.attr('class');
+    //if the audio list finished
+    if (songName != null)
+        $('#song-in-audio-name').children('p').html(songName);
+    else
+        $('#song-in-audio-name').children('p').html("");
 });
 
 //---------------------------Display  playlist when adding song to playlist------------------- 
@@ -119,6 +125,7 @@ $('.frontpage_square').mouseleave(function () {
 $('.frontpage_square a').click(function () {
     path = $(this).parent().closest('.frontpage_square').siblings().find('p').html();
     addSongToAudio(path);
+    /*ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERRORERROR ERRORERROR ERROR ERROR ERROR ERROR ERROR  ERROR ERROR ERRORERROR v v*/
 });
 //----------------------------Add songs to audio player from song display page NEW RELEASES------------------
 $('.item').mouseover(function () {
@@ -129,12 +136,22 @@ $('.item').mouseleave(function () {
 });
 $('.item a').click(function () {
     path = $(this).siblings().children('p').html();
-    addSongToAudio(path);
+    var valid = checkSongValidation(path);
+    if (valid == "") {
+        alert("audio player do not support this type of files");
+    }
+    else {
+        //get the song name and update the p near the audio player, that displays song's name
+        var songName = $(this).siblings('div.carousel-caption').children('h3').html();
+        addSongToAudio(path, songName);
+    }
+
 });
 //----------------------------Add songs to audio player from song Index/AllSongs/Search------------------
 $('.play-song-from-index a').click(function () {
-    path = $(this).siblings().children('p').html();
-    addSongToAudio(path);
+    var path = $(this).siblings('div.song-path-container').children('p').html();
+    var songName = $(this).closest('td').prev('td').find('h1').html();
+    addSongToAudio(path, songName);
 });
 //_________________________________________________________ Just to not forget something
 $('.add-playlist-to-library').click(function () {
