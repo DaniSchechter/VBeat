@@ -4,26 +4,10 @@ $(document).ready(function () {
     loadAudioPlayer();
 });
 
-//--------------Show plus icon on the Home Page images------------------------- 
-$('.table-cell').mouseover(function () {
-    $(this).find("img").show();
-});
-
-$('.table-cell').mouseleave(function () {
-    $(this).children("a").children("img").hide();
-});
-
-$(".add-song-to-audio").click(function() {
-    alert("to do - add song to playlist");
-    loadAudioPlayer();
-});
-
-
 //--------------Change colors when hovering over details of song/Playlist etc..
 $('div.playlist-song-container').mouseover(function () {
     $(this).css("background-color", "black");
     $(this).children('img').attr("src", "/images/play-button.png")
-
 });
 
 $('div.playlist-song-container').mouseleave(function () {
@@ -74,9 +58,10 @@ function checkSongValidation(path) {
 }
 
 
-//------------------Add song manually to audio player on click-----------------------
+//------------------Add song manually to audio player on click from playlist-----------------------
 $('.add-song-to-audio-player').click(function () {
     var path = $(this).siblings('.song-path-container').children('p').html();
+    extension = path.split('.').pop();
     var valid = checkSongValidation(path);
     if (valid == "") {
         alert("audio player do not support this type of files");
@@ -85,17 +70,17 @@ $('.add-song-to-audio-player').click(function () {
         //get the waiting songs in the audio player
         var waitingSongs = $('#myAudio').html();
 
-        //get the song name and update the p
+        //get the song name and update the p near the audio player, that displays song's name
         var songId = $(this).closest('li').attr('id');
         var songName = $('li#' + songId).find('.song-name').children('p').html();
         $('#song-in-audio-name').children('p').html(songName);
 
-        //delete the finished song from the waiting list
+        //add the new song to the top of the audio songs list
         $('#myAudio').html("");
-        $('#myAudio').append("<source id=" + songId +"class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append("<source id=" + songId + " class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
         $('#myAudio').append(waitingSongs);
         $("#myAudio").trigger('load');
-        play_audio('play');
+        $("#myAudio").trigger('play');
     }
 });
 
@@ -115,7 +100,49 @@ $('audio').on('ended', function () {
 $('#add-song-to-playlist').click(function () {
     $('.add-song-to-specific-playlist').show();
 });
+//----------------------------Add songs to audio player from song display page RECENTLY PLAYED------------------
+$('.frontpage_square').mouseover(function () {
+    $(this).find('img').show();
+});
+$('.frontpage_square').mouseleave(function () {
+    $(this).find('img').hide();
+});
+$('.frontpage_square a').click(function () {
+    path = $(this).parent().closest('.frontpage_square').siblings().find('p').html();
+    extension = path.split('.').pop();
+    if (checkSongValidation(path)){
+        var waitingSongs = $('#myAudio').html();
+        $('#myAudio').html("");
+        $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append(waitingSongs);
+        $("#myAudio").trigger('load');
+        $("#myAudio").trigger('play');
+    }
+    else
+        alert("audio player do not support this type of files");
+});
+//----------------------------Add songs to audio player from song display page NEW RELEASES------------------
+$('.item').mouseover(function () {
+    $(this).find('a img').show();
+});
+$('.item').mouseleave(function () {
+    $(this).find('a img').hide();
+});
+$('.item a').click(function () {
+    path = $(this).siblings().children('p').html();
 
+    extension = path.split('.').pop();
+    if (checkSongValidation(path)) {
+        var waitingSongs = $('#myAudio').html();
+        $('#myAudio').html("");
+        $('#myAudio').append("<source class='waitingSong' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append(waitingSongs);
+        $("#myAudio").trigger('load');
+        $("#myAudio").trigger('play');
+    }
+    else
+        alert("audio player do not support this type of files");
+});
 //_________________________________________________________ Just to not forget something
 $('.add-playlist-to-library').click(function () {
     alert("To DO :add playlist to list of playlists")
