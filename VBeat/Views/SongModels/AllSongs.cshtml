@@ -2,14 +2,12 @@
 @model IEnumerable<VBeat.Models.SongModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AllSongs";
 }
 
-<h2>Index</h2>
+<h2>All Songs</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <div class="container">
     <div class="row">
 
@@ -48,7 +46,6 @@
                                 <div class="playlist-song-container">
                                     <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.ReleaseDate): </p><p class="second-info">@song.ReleaseDate</p></div>
                                 </div>
-
                                 <div class="playlist-song-container">
                                     <div class="artists">
                                         <p class="first-info">Artists:</p>
@@ -64,10 +61,7 @@
                                         </p>
                                     </div>
                                 </div>
-
-                                <a asp-action="Edit" asp-route-id="@song.SongId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@song.SongId">Delete</a>
+                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a>
                                 <div class="play-song-from-index">
                                     <div>
                                         <a href="#">
@@ -87,6 +81,4 @@
         </table>
     </div>
 </div>
-
-
 

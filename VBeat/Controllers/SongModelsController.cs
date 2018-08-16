@@ -285,5 +285,12 @@ namespace VBeat.Controllers
         {
             
         }
+
+
+        public async Task<IActionResult> AllSongs()
+        {
+            return View(_context.Songs.ToList());
+        }
+
     }
 }

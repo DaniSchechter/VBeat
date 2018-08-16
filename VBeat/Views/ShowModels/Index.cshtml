@@ -26,7 +26,7 @@
                 {
                     <tr>
                         <td>
-                            <div class="col-sm-5">
+                            <div class="col-sm-12">
                                 <div class="card">
                                     <h1>@show.ShowName</h1>
                                     <div class="card-image-container">
@@ -36,7 +36,7 @@
                             </div>
                         </td>
                         <td>
-                            <div class="col-sm-8 ">
+                            <div class="col-sm-12 ">
                                 <div class="playlist-song-container">
                                     <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(showModel => show.Country): </p><p class="second-info">@show.Country</p></div>
                                 </div>
@@ -52,11 +52,8 @@
                                 <div class="playlist-song-container">
                                     <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.ShowTime): </p><p class="second-info">@show.ShowTime</p></div>
                                 </div>
-                                <!--To Do Only for admin!!!!!!!!!!!!!!!-->
-                                <!--<a asp-action="Edit" asp-route-id="@show.ShowId">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@show.ShowId">Delete</a>--> 
-                                <a asp-action="Details" asp-route-id="@show.ShowId">Details</a> 
-                                
+                                <a asp-action="Details" asp-route-id="@show.ShowId">Details</a> |
+
                             </div>
                         </td>
                     </tr>
