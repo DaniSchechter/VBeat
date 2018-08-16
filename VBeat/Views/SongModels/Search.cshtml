@@ -32,7 +32,13 @@
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="songName" name="songName" placeholder="Song Name">
 
             <label class="sr-only" for="inlineFormInput">Genre</label>
-            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
+
+            <select type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
+                @foreach (var item in Enum.GetValues(typeof(enum_Genre)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
 
             <input type="hidden" name="offset" value="0"/>
             <button type="submit" class="btn btn-primary">Submit</button>
