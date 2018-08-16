@@ -1,0 +1,58 @@
+﻿
+@model IEnumerable<VBeat.Models.SongModel>
+
+@{
+    ViewData["Title"] = "AllSongs";
+}
+
+<h2>All Songs</h2>
+
+
+<div class="container">
+    <div class="row">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Song Image</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var song in (IEnumerable<SongModel>)Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="col-sm-5">
+                                <div class="card">
+                                    <h1>@song.SongName</h1>
+                                    <div class="card-image-container">
+                                        <img src="@song.SongImagePath" alt="Image Not Found" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-sm-8 ">
+                                <div class="playlist-song-container">
+                                    <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(songModel => song.Genre): </p><p class="second-info">@song.Genre</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(songModel => song.SongPath): </p><p class="second-info">@song.SongPath</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.AddedDate): </p><p class="second-info">@song.AddedDate</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.ReleaseDate): </p><p class="second-info">@song.ReleaseDate</p></div>
+                                </div>
+                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a> |
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
