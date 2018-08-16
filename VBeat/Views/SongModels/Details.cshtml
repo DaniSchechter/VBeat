@@ -29,6 +29,24 @@
                     <div class="playlist-song-container">
                         <div class="releaseDate"><p class="first-info">Release Date: </p><p class="second-info">@Model.ReleaseDate</p></div>
                     </div>
+
+                    <div class="playlist-song-container">
+                        <div class="artists">
+                            <p class="first-info">Artists:</p>
+                            <p class="second-info">
+                                @foreach (var a in Model.ArtistList)
+                                {
+                                    <span>@a.Artist.ArtistName</span>
+                                    @if (a != Model.ArtistList.ElementAt(Model.ArtistList.Count - 1))
+                                    {
+                                        <span>, </span>
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+
                 </li>
             </ul>
             <div class="col-sm-6 ">
