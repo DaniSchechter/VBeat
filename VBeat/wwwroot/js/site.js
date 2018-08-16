@@ -131,7 +131,11 @@ $('.item a').click(function () {
     path = $(this).siblings().children('p').html();
     addSongToAudio(path);
 });
-//----------------------------Add songs to audio player from song display page NEW RELEASES------------------
+//----------------------------Add songs to audio player from song Index------------------
+$('.play-song-from-index a').click(function () {
+    path = $(this).siblings().children('p').html();
+    addSongToAudio(path);
+});
 //_________________________________________________________ Just to not forget something
 $('.add-playlist-to-library').click(function () {
     alert("To DO :add playlist to list of playlists")
