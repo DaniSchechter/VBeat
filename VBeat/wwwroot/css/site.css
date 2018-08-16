@@ -208,7 +208,7 @@ div.body-content {
     border-radius: 25px;
     border: white 1px solid;
 }
-/*Section recently played!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*Section recently played*/
 .frontpage_square {
     width: 100%;
     padding-bottom: 100%;
@@ -239,6 +239,14 @@ div.body-content {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
 }
+/*View For Playlist------------------------------------------------*/
+.separator {
+    background-image: url('~/images/dot.png');
+    display: inline-block;
+    height: 5px;
+    margin-bottom: 5px;
+}
+
 carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
@@ -297,6 +305,7 @@ div.playlist-song-container div{
     margin:2px;
 }
 
+/*Inside Song Details, add song to playlist*/
 button#add-song-to-playlist,
 button.add-song-to-specific-playlist {
     position: absolute;
@@ -345,10 +354,6 @@ img.song-information {
     margin-top: 20px;
 }
 
-.song-path-container{
-    display:none;
-}
-
 .first-info{
     float: left;
     padding-left: 10px;
@@ -362,9 +367,13 @@ img.song-information {
     font-size:18px;
 }
 
-.separator{
-    background-image:url('~/images/dot.png');
-    display:inline-block;
-    height:5px;
-    margin-bottom:5px;
+
+/*To be able to add songs to audio (from playlist)----------------------------*/
+.song-path-container {
+    display: none;
+}
+
+/*To be able to add songs to audio (from song display)----------------------------*/
+.song-to-audio{
+
 }
