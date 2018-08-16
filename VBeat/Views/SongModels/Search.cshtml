@@ -34,6 +34,7 @@
             <label class="sr-only" for="inlineFormInput">Genre</label>
 
             <select type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="genre" name="genre" placeholder="Genre">
+                <option value="">All</option>
                 @foreach (var item in Enum.GetValues(typeof(enum_Genre)))
                 {
                     <option value="@item">@item</option>
