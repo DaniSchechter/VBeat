@@ -23,7 +23,7 @@
                 {
                     <tr>
                         <td>
-                            <div class="col-sm-5">
+                            <div class="col-sm-12">
                                 <div class="card">
                                     <h1>@song.SongName</h1>
                                     <div class="card-image-container">
@@ -33,7 +33,7 @@
                             </div>
                         </td>
                         <td>
-                            <div class="col-sm-8 ">
+                            <div class="col-sm-12 ">
                                 <div class="playlist-song-container">
                                     <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(songModel => song.Genre): </p><p class="second-info">@song.Genre</p></div>
                                 </div>
@@ -46,7 +46,6 @@
                                 <div class="playlist-song-container">
                                     <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(songModel => song.ReleaseDate): </p><p class="second-info">@song.ReleaseDate</p></div>
                                 </div>
-
                                 <div class="playlist-song-container">
                                     <div class="artists">
                                         <p class="first-info">Artists:</p>
@@ -62,8 +61,18 @@
                                         </p>
                                     </div>
                                 </div>
-
-                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a> 
+                                <a asp-action="Details" asp-route-id="@song.SongId">Details</a>
+                                <div class="play-song-from-index">
+                                    <div>
+                                        <a href="#">
+                                            <img src="~/images/play-button-white.png"
+                                                 style="position:relative; margin:2px 2% 0 0;width:7%;background-color:black;border-radius:50%;border:black 4px solid;" />
+                                        </a>
+                                        <div class="song-path-container">
+                                            <p>@song.SongPath</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>
