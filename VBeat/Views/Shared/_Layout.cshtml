@@ -28,8 +28,8 @@
                 <div class="ul-container">
                     <ul class="list-group collapse" id="side-menu-collapse">
                         <li id="logo"><div><a asp-controller="SongModels" asp-action="Display"> VBeat</a></div></li>
-                        <li><div><a asp-controller="SongModels" asp-action="Index" class="li-selected">Featured</a></div></li>
-                        <li><div><a asp-controller="SongModels" asp-action="Index">Genres</a></div></li>
+                        <li><div><a asp-controller="ShowModels" asp-action="Index" class="li-selected">Shows</a></div></li>
+                        <li><div><a asp-controller="SongModels" asp-action="AllSongs">Explore Songs</a></div></li>
                         <li><div><a asp-controller="SongModels" asp-action="Index">Discover</a></div></li>
                     </ul>
                 </div>
@@ -42,6 +42,7 @@
             <ul>
                 <li><div><a asp-controller="UserModels" asp-action="Details" class="link-button">Account overview</a></div></li>
                 <li><div><a asp-controller="UserModels" asp-action="Edit" class="link-button">Edit profile</a></div></li>
+                <li><div><a asp-controller="PlayListModels" asp-action="Index" class="link-button">Your Library</a></div></li>
                 <li><div><a asp-controller="UserModels" asp-action="SignOutAction" class="link-button">Sign Out</a></div></li>
             </ul>
         </div>

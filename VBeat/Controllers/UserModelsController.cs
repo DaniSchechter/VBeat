@@ -23,6 +23,7 @@ namespace VBeat.Controllers
         // GET: UserModels
         public async Task<IActionResult> Index()
         {
+            ViewData["ArtistsList"] = await _context.Artists.ToListAsync();
             return View(await _context.Users.ToListAsync());
         }
 

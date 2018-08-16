@@ -1,7 +1,9 @@
-﻿@model IEnumerable<VBeat.Models.UserModel>
+﻿@using Microsoft.EntityFrameworkCore
+@model IEnumerable<VBeat.Models.UserModel>
 
 @{
     ViewData["Title"] = "Index";
+    IEnumerable<VBeat.Models.ArtistModel> artistList = (IEnumerable<VBeat.Models.ArtistModel>)ViewData["ArtistsList"];
 }
 
 <h2>Index</h2>
@@ -24,6 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
+            <th>
+                Is Artist
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,11 +48,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
+            @{
+                if (@artistList.Contains(item))
+                { <td>
+                      <input type="checkbox" checked="checked" onclick="return false"/>
+                  </td>
+                  <td>
+                        <a asp-controller="ArtistModels" asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                        <a asp-controller="ArtistModels" asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                        <a asp-controller="ArtistModels" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                  </td>
+                }
+                else { <td>
+                           <input type="checkbox" onclick="return false"/>
+                       </td>
+                       <td>
+                        <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                       </td>
+                }
+            }
+            
+
+            
         </tr>
         }
     </tbody>

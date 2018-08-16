@@ -6,9 +6,11 @@
 
 <h2>Index</h2>
 
-<p>
+<!--To Do Only for admin!!!!!!!!!!!!!!!-->
+<!--<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>-->
+
 <div class="container">
     <div class="row">
 
@@ -51,6 +53,7 @@
                                     <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.ShowTime): </p><p class="second-info">@show.ShowTime</p></div>
                                 </div>
                                 <a asp-action="Details" asp-route-id="@show.ShowId">Details</a> |
+
                             </div>
                         </td>
                     </tr>
