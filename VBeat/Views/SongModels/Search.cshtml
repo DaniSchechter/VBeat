@@ -91,6 +91,23 @@
                                     <div class="playlist-song-container">
                                         <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(curSongModel => curSong.ReleaseDate): </p><p class="second-info">@curSong.ReleaseDate</p></div>
                                     </div>
+
+                                    <div class="playlist-song-container">
+                                        <div class="artists">
+                                            <p class="first-info">Artists:</p>
+                                            <p class="second-info">
+                                                @foreach (var a in curSong.ArtistList)
+                                                {
+                                                    <span>@a.Artist.ArtistName</span>
+                                                    @if (a != curSong.ArtistList.ElementAt(curSong.ArtistList.Count - 1))
+                                                    {
+                                                        <span>, </span>
+                                                    }
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <a asp-action="Edit" asp-route-id="@curSong.SongId">Edit</a> |
                                     <a asp-action="Details" asp-route-id="@curSong.SongId">Details</a> |
                                     <a asp-action="Delete" asp-route-id="@curSong.SongId">Delete</a>
