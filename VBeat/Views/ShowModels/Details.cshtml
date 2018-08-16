@@ -71,7 +71,7 @@
                     <script>
                         var map;
 
-                        var currentAddress = "@Model.HouseNumber + ',' + @Model.StreetName + ',' + @Model.City + ',' +@Model.Country"
+                        var currentAddress = "@Model.HouseNumber,@Model.StreetName,@Model.City,@Model.Country"
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 16
