@@ -20,7 +20,7 @@ namespace VBeat.Models
 
         [Required]
         [Display(Name = "Song Genre")]
-        public String Genre { get; set; }
+        public string Genre { get; set; }
 
         [Required]
         [Display(Name  ="URL To MP3")]
