@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "SearchView";
+    int offset = (int)ViewData["Offset"];
+    string showtName = (string)ViewData["ShowtName"];
+    string country = (string)ViewData["Country"];
+    string show_Time = ((DateTime)ViewData["Show_Time"]).ToString();
+    string baseUrl = "?ShowtName=" + System.Net.WebUtility.UrlEncode(showtName)
+                     + "&Country=" + System.Net.WebUtility.UrlEncode(country)
+                     + "&Show_Time=" + (show_Time);
+    string nextUrl = baseUrl + "&offset=" + (offset + 1);
+    string prevUrl = null;
+    if (offset == 0)
+    {
+        prevUrl = "#";
+    }
+    else
+    {
+        prevUrl = baseUrl + "&offset=" + (offset - 1);
+    }
+}
+
+<div class="container">
+    <h2>Search for shows</h2>
+    <div class="row">
+        <form class="form-inline" method="get" asp-controller="ShowModels" asp-action="Search">
+            
+            <label class="sr-only" for="inlineFormInput">Show Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="showtName" name="showtName" placeholder="Show Name">
+
+            <label class="sr-only" for="inlineFormInputGroup">Country</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="country" name="country" placeholder="Country">
+
+            <label class="sr-only" for="inlineFormInput">Show Time</label>
+            <input type="date" class="form-control mb-2 mr-sm-2 mb-sm-0" id="show_Time" name="show_Time" placeholder="Show Time">
+
+            <input type="hidden" name="offset" value="0"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="@Html.Raw(nextUrl)" class="btn btn-warning" id="nextPage">Next Page</a>
+            <a href="@Html.Raw(prevUrl)" class="btn btn-warning" id="prevPage">Previous Page</a>
+        </form>
+    </div>
+
+    <div class="row">
+        @if (ViewData["Shows"] != null)
+        {
+
+            List<ShowModel> shows = ((IQueryable<ShowModel>)ViewData["Shows"]).ToList();
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Show Image</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for (int i = 0; i < shows.Count(); i++)
+                {
+                    ShowModel curShow = shows[i];
+
+                    <tr>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <h1>@curShow.ShowName</h1>
+                                    <div class="card-image-container">
+                                        <img src="@curShow.ShowImagePath" alt="Image Not Found" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-sm-12 ">
+                                <div class="playlist-song-container">
+                                    <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(showModel => curShow.Country): </p><p class="second-info">@curShow.Country</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(showModel => curShow.City): </p><p class="second-info">@curShow.City</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(showModel => curShow.StreetName): </p><p class="second-info">@curShow.StreetName</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => curShow.HouseNumber): </p><p class="second-info">@curShow.HouseNumber</p></div>
+                                </div>
+                                <div class="playlist-song-container">
+                                    <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => curShow.ShowTime): </p><p class="second-info">@curShow.ShowTime.ToString("MM/dd/yyyy HH:mm:ss")</p></div>
+                                </div>
+                                <a asp-action="Details" asp-route-id="@curShow.ShowId">Details</a> |
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+
