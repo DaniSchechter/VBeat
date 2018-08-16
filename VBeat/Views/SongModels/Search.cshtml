@@ -94,6 +94,17 @@
                                     <a asp-action="Edit" asp-route-id="@curSong.SongId">Edit</a> |
                                     <a asp-action="Details" asp-route-id="@curSong.SongId">Details</a> |
                                     <a asp-action="Delete" asp-route-id="@curSong.SongId">Delete</a>
+                                    <div class="play-song-from-index">
+                                        <div>
+                                            <a href="#">
+                                                <img src="~/images/play-button-white.png"
+                                                     style="position:relative; margin:2px 2% 0 0;width:7%;background-color:black;border-radius:50%;border:black 4px solid;" />
+                                            </a>
+                                            <div class="song-path-container">
+                                                <p>@curSong.SongPath</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

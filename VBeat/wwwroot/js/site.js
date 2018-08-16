@@ -131,7 +131,7 @@ $('.item a').click(function () {
     path = $(this).siblings().children('p').html();
     addSongToAudio(path);
 });
-//----------------------------Add songs to audio player from song Index------------------
+//----------------------------Add songs to audio player from song Index/AllSongs/Search------------------
 $('.play-song-from-index a').click(function () {
     path = $(this).siblings().children('p').html();
     addSongToAudio(path);
