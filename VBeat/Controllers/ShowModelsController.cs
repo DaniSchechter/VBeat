@@ -12,6 +12,7 @@ namespace VBeat.Models
 {
     public class ShowModelsController : Controller
     {
+        private const int PAGE_SIZE = 10;
         private readonly VBeatDbContext _context;
 
         public ShowModelsController(VBeatDbContext context)
@@ -148,6 +149,48 @@ namespace VBeat.Models
         private bool ShowModelExists(int id)
         {
             return _context.Shows.Any(e => e.ShowId == id);
+        }
+
+        [HttpGet]
+        public IActionResult Search(string showtName, string country, DateTime show_Time, int? offset)
+        {
+
+            IQueryable<ShowModel> shows = from s in _context.Shows select s;
+
+            if (!string.IsNullOrWhiteSpace(country))
+            {
+                shows = shows.Where(s => s.Country.ToLower().Contains(country.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(showtName))
+            {
+                shows = shows.Where(s => s.ShowName.ToLower().Contains(showtName.ToLower()));
+            }
+            DateTime d = DateTime.Parse("01/01/0001 00:00:00");
+            if (!d.Equals(show_Time))
+            {
+                shows = shows.Where(s => s.ShowTime.Equals(show_Time));
+            }
+
+            int realOffset = !offset.HasValue ? 0 : offset.Value;
+
+            shows = shows
+                .Skip(realOffset * PAGE_SIZE)
+                .Take(PAGE_SIZE);
+
+            ViewData["Show_Time"] = show_Time;
+            ViewData["ShowtName"] = showtName;
+            ViewData["Country"] = country;
+            if (offset.HasValue)
+            {
+                ViewData["Offset"] = offset.Value;
+            }
+            else
+            {
+                ViewData["Offset"] = 0;
+            }
+            ViewData["Shows"] = shows;
+            return View("~/Views/ShowModels/Search.cshtml");
         }
     }
 }
