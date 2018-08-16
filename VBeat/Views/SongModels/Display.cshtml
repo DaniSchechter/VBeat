@@ -80,11 +80,21 @@
     </div>
 </section>
 
-<section id="search-songs">
-    <div class="container">
-        <span><a class="btn btn-primary" asp-action="Search">Search For Songs</a></span>
-    </div>
-</section>
+
+    <section id="search-songs">
+        <div class="container">
+            <span><a class="btn btn-primary" asp-action="Search">Search For Songs</a></span>
+        </div>
+    </section>
+
+@if ((string) @ViewData["UserName"] == "admin")
+{
+    <section id="statistics">
+        <div class="container">
+            <span><a class="btn btn-primary" asp-action="Statistics">Statistics</a></span>
+        </div>
+    </section>
+}
 
 <section id="recently-played">
     <div class="middle-container">
