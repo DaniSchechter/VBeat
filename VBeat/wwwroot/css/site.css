@@ -237,8 +237,7 @@ div.body-content {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-}
+
 /*View For Playlist------------------------------------------------*/
 .separator {
     background-image: url('~/images/dot.png');
@@ -246,6 +245,7 @@ div.body-content {
     height: 5px;
     margin-bottom: 5px;
 }
+
 
 carousel-caption p {
     font-size: 20px;
@@ -276,9 +276,10 @@ img.add-playlist-to-library {
 .card p{
     padding-bottom: 20px ;
 }
+
 .card h1 {
     padding: 20px 0;
-    overflow:hidden;
+    overflow: hidden;
 }
 .card a {
     padding-top: 400px;
@@ -358,13 +359,12 @@ img.song-information {
     float: left;
     padding-left: 10px;
     padding-top: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 .second-info {
     float: left;
     padding: 10px;
-    font-size:18px;
 }
 
 

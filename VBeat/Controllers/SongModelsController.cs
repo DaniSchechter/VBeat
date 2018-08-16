@@ -227,7 +227,7 @@ namespace VBeat.Controllers
 
             if (!string.IsNullOrWhiteSpace(genre))
             {
-                songs = songs.Where(s => s.Genre.ToLower().Contains(genre.ToLower()));
+                songs = songs.Where(s => s.Genre.ToString().ToLower().Contains(genre.ToLower()));
             }
 
             int realOffset = !offset.HasValue ? 0 : offset.Value;
@@ -276,7 +276,7 @@ namespace VBeat.Controllers
             IQueryable<DataLabelModel> genreResult = from s in _context.Songs
                               group s by s.Genre into sGenre
                               let genreCount = sGenre.Count()
-                              select new DataLabelModel() { Label = sGenre.Key, Value = genreCount };
+                              select new DataLabelModel() { Label = sGenre.Key.ToString(), Value = genreCount };
 
             return Json(genreResult.ToList());
         }

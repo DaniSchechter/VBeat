@@ -7,7 +7,8 @@ using VBeat.Models.BridgeModel;
 using VBeat.Models.Validations;
 
 namespace VBeat.Models
-{
+{      
+    public enum enum_Genre { Blues , Country, Electronic, Folk, Hip_hop, Jazz, Latin, Pop, Rock, Classic};
     public class SongModel
     {
         [Key]
@@ -18,6 +19,7 @@ namespace VBeat.Models
         public string SongName { get; set; }
 
         [Required]
+        [Display(Name = "Song Genre")]
         public string Genre { get; set; }
 
         [Required]
