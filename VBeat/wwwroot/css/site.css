@@ -216,12 +216,6 @@ div.body-content {
     font-family: myFirstFont;
     src: url(sansation_light.woff);
 }
-.btn {
-    transition: 2s;
-} 
-.btn:hover{
-    width: 30%
-}
 /*Section recently played*/
 .frontpage_square {
     width: 100%;
@@ -405,6 +399,29 @@ img.song-information {
     color: white;
     font-size: 20px;
 }
+
+/*Add New Artists to show*/
+.add-artist-to-show select {
+    height: 50px;
+    background-color: transparent;
+    font-size: 20px;
+    border: white 2px solid;
+    border-radius: 30px;
+    padding-left: 5%;
+}
+
+.add-artist-to-show option {
+    color: black;
+    font-size: 20px;
+    height: 50px;
+}
+
+.add-artist-to-show option:disabled {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+
 
 .delete-item:hover{
     cursor:pointer;
