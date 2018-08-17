@@ -209,6 +209,12 @@ div.body-content {
     padding: 2%;
     border-radius: 25px;
     border: white 1px solid;
+    text-shadow: 2px 2px blue;
+    font-family: myFirstFont;
+}
+@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
 }
 /*Section recently played*/
 .frontpage_square {
@@ -256,12 +262,7 @@ carousel-caption p {
     padding-bottom: 100%;
     margin-bottom: 20px;
 }
-img.add-playlist-to-library {
-    bottom: 0;
-    position: absolute;
-    margin-top: 57%;
-    margin-left: 40%;
-}
+
 .card img {
     position: absolute;
     max-width: 100%;
@@ -379,7 +380,49 @@ img.song-information {
     display: none;
 }
 
-/*To be able to add songs to audio (from song display)----------------------------*/
-.song-to-audio{
+/*Add New Artists to song*/
+.add-artist-to-song select {
+    height: 50px;
+    background-color: transparent;
+    font-size: 20px;
+    border: white 2px solid;
+    border-radius: 30px;
+    padding-left: 5%;
+}
+.add-artist-to-song option {
+    color: black;
+    font-size: 20px;
+    height: 50px;
+}
+.add-artist-to-song option:disabled  {
+    background-color:black;
+    color: white;
+    font-size: 20px;
+}
 
+/*Add New Artists to show*/
+.add-artist-to-show select {
+    height: 50px;
+    background-color: transparent;
+    font-size: 20px;
+    border: white 2px solid;
+    border-radius: 30px;
+    padding-left: 5%;
+}
+
+.add-artist-to-show option {
+    color: black;
+    font-size: 20px;
+    height: 50px;
+}
+
+.add-artist-to-show option:disabled {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+
+
+.delete-item:hover{
+    cursor:pointer;
 }

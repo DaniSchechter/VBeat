@@ -89,12 +89,14 @@ namespace VBeat.Controllers
         }
 
         // GET: ArtistModels/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
-                return NotFound();
+                return Unauthorized();
             }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
             var artistModel = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
             if (artistModel == null)
@@ -109,8 +111,14 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
+        public async Task<IActionResult> Edit([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             if (id != artistModel.UserId)
             {
                 return NotFound();
@@ -134,7 +142,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "ArtistModels");
             }
             return View(artistModel);
         }

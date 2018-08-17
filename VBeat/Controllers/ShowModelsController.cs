@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models.Consts;
+using VBeat.Models.BridgeModel;
 
 namespace VBeat.Models
 {
@@ -71,16 +72,30 @@ namespace VBeat.Models
         // GET: ShowModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //list of artists
+            IQueryable<ArtistModel> artists = from a in _context.Artists select a;
             if (id == null)
             {
                 return NotFound();
             }
 
-            var showModel = await _context.Shows.SingleOrDefaultAsync(m => m.ShowId == id);
+            var showModel = await _context.Shows.SingleOrDefaultAsync(s => s.ShowId == id);
             if (showModel == null)
             {
                 return NotFound();
             }
+            //all the artists in this show
+            var allArtistsInThishow = artists.Where(a => a.Shows.Where(s => s.ShowId.Equals(id)).Count() > 0);
+            //get all the artists not in this show
+            LinkedList<ArtistModel> allArtistsNotInThisShow = new LinkedList<ArtistModel>();
+            foreach (var art in artists)
+            {
+                if (!(allArtistsInThishow.Contains(art)))
+                {
+                    allArtistsNotInThisShow.AddLast(art);
+                }
+            }
+            ViewData["Artists"] = allArtistsNotInThisShow;
             return View(showModel);
         }
 
@@ -197,6 +212,52 @@ namespace VBeat.Models
         public async Task<IActionResult> AllShows()
         {
             return View(_context.Shows.ToList());
+        }
+        public async Task<IActionResult> addArtistToShow(int showId, int artistId)
+        {
+            var showModel = await _context.Shows.SingleOrDefaultAsync(s => s.ShowId == showId);
+            if (showModel == null)
+            {
+                return NotFound();
+            }
+
+            var artistModel = await _context.Artists.SingleOrDefaultAsync(a => a.UserId == artistId);
+            if (artistModel == null)
+            {
+                return NotFound();
+            }
+
+            ArtistShowModel artistShowModel = new ArtistShowModel();
+            artistShowModel.Show = showModel;
+            artistShowModel.ShowId = showId;
+            artistShowModel.UserId = artistId;
+            artistShowModel.Artist = artistModel;
+            _context.Add(artistShowModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Display", "SongModels");
+        }
+        public async Task<IActionResult> removeArtistFromShow(int showId, int artistId)
+        {
+            var showModel = await _context.Shows.SingleOrDefaultAsync(s => s.ShowId == showId);
+            if (showModel == null)
+            {
+                return NotFound();
+            }
+
+            var artistModel = await _context.Artists.SingleOrDefaultAsync(a => a.UserId == artistId);
+            if (artistModel == null)
+            {
+                return NotFound();
+            }
+
+            ArtistShowModel artistShowModel = new ArtistShowModel();
+            artistShowModel.Show = showModel;
+            artistShowModel.ShowId = showId;
+            artistShowModel.UserId = artistId;
+            artistShowModel.Artist = artistModel;
+            _context.Remove(artistShowModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Display", "SongModels");
         }
     }
 }
