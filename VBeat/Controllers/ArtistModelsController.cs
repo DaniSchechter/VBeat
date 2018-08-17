@@ -58,7 +58,7 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
+        public async Task<IActionResult> Create([Bind("ArtistName,FirstName,LastName,UserId,Username,Email,Password")] ArtistModel artistModel, IFormFile artistImageFile)
         {
             var checkIfExists = await _context.Users.SingleOrDefaultAsync(u => u.Username == artistModel.Username);
             if (checkIfExists != null)
@@ -71,6 +71,7 @@ namespace VBeat.Controllers
             {
                 artistModel.TimeOfLastLogin = DateTime.UtcNow;
                 artistModel.DateOfRegistration = DateTime.UtcNow;
+                artistModel.ArtistImage = FileHelper.SaveFile(artistImageFile, "images", artistImageFile.FileName);
                 _context.Add(artistModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "SongModels");
