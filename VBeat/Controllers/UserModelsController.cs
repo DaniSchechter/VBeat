@@ -155,7 +155,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Display", "SongModels");
+                return RedirectToAction("Details", "UserModels");
             }
             return View(userModel);
         }

@@ -142,7 +142,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Display", "SongModels");
+                return RedirectToAction("Details", "ArtistModels");
             }
             return View(artistModel);
         }
