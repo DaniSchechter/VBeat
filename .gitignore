@@ -335,3 +335,5 @@ ASALocalRun/
 # Ignore binary files
 VBeat/bin/
 VBeat/obj/
+
+/VBeat/wwwroot/images

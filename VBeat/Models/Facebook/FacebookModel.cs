@@ -21,10 +21,10 @@ namespace VBeat.Models.Facebook
             try
             {
                 var response = await httpClient.PostAsync("https://graph.facebook.com/3.1/vbeatcollegeproject/feed?access_token=" + WebUtility.UrlEncode(PAGE_ACCESS_TOKEN)
-                    + "&message=" + WebUtility.UrlEncode(message), new StringContent(null));
+                    + "&message=" + WebUtility.UrlEncode(message), new StringContent(""));
                 return response.StatusCode == HttpStatusCode.OK;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
