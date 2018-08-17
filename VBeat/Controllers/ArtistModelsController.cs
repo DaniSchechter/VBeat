@@ -71,7 +71,7 @@ namespace VBeat.Controllers
                 error = "Email is already taken.";
             }
                 ViewData["Error"] = error;
-                return View();
+                if(error!="") return View();
 
 
             if (ModelState.IsValid)
