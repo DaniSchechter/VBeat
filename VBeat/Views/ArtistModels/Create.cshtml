@@ -10,7 +10,7 @@
 <div class="row form-wrapper">
     <h1>Sign Up Artist</h1>
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group form-item">
                 <input asp-for="ArtistName" placeholder="Artist Name" />
