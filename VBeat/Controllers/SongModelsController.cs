@@ -81,7 +81,7 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-            var artist = await _context.Artists.SingleOrDefaultAsync(u => u.UserId == artistModel.UserId);
+
             var songList = artist.SongList.ToList();
             return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
         }
