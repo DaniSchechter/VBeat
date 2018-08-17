@@ -191,7 +191,7 @@ namespace VBeat.Controllers
             playlistSongModel.SongId = songId;
             _context.Add(playlistSongModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction("SongModels","Display");
+            return RedirectToAction("Display","SongModels");
         }
 
     }
