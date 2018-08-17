@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
 using VBeat.Models.BridgeModel;
 using VBeat.Models.Consts;
+using VBeat.Models.Facebook;
 using VBeat.Models.Json;
 
 namespace VBeat.Controllers
@@ -81,7 +82,7 @@ namespace VBeat.Controllers
 
             var songList = artistModel.SongList.ToList();
 
-            return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
+            return View(_context.Songs.Where(s => IsSongInList(songList, s.SongId)).ToList());
 
         }
 
@@ -100,7 +101,7 @@ namespace VBeat.Controllers
                 return NotFound();
             }
             int userId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
-            ViewData["USER_PLAYLISTS"] = await _context.Playlists.Where(p=>p.UserModel.UserId==userId).ToListAsync();
+            ViewData["USER_PLAYLISTS"] = await _context.Playlists.Where(p => p.UserModel.UserId == userId).ToListAsync();
             return View(songModel);
         }
 
@@ -131,6 +132,8 @@ namespace VBeat.Controllers
                 _context.Add(temp);
 
                 await _context.SaveChangesAsync();
+                FacebookModel facebookModel = new FacebookModel();
+                await facebookModel.Post(string.Format("A new song has been added to the site -> {0}", songModel.SongName));
                 return RedirectToAction(nameof(Display));
             }
             return View(songModel);
