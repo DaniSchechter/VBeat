@@ -109,8 +109,14 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
+        public async Task<IActionResult> Edit([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             if (id != artistModel.UserId)
             {
                 return NotFound();
@@ -134,7 +140,7 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "ArtistModels");
             }
             return View(artistModel);
         }
