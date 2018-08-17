@@ -147,7 +147,7 @@ $('.play-song-from-index a').click(function () {
     var songName = $(this).closest('td').prev('td').find('h1').html();
     addSongToAudio(path, songName);
 });
-//_________________________________________________________ Just to not forget something
-$('.add-playlist-to-library').click(function () {
-    alert("To DO :add playlist to list of playlists")
-});
+
+
+
+

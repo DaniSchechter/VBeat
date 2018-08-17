@@ -107,6 +107,14 @@ namespace VBeat.Controllers
         // GET: SongModels/Create
         public IActionResult Create()
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+
+            ViewData["Artists"] = _context.Artists.Where(m => m.UserId != id);
             return View();
         }
 
