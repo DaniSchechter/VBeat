@@ -9,7 +9,7 @@ namespace VBeat.Models.Facebook
 {
     public class FacebookModel
     {
-        private static string PAGE_ACCESS_TOKEN = "EAAECTyQpBgQBABTcBleKZBEsz7FVRrLOUCR7kFQPwBVKEVi7VRJ4ZAkZB4QFemwwCEA9EIZBU6Ll3I3MN1BhRQDBdSXMFxDpjx0LCc2ZBT4thamN9JEt61aVG3xPt2M95ADK5ZCJR2GWkdRuC1pXR4GnpysmQlsTtMYqQhFT3DyG1X6wZA3EOoCf482cUgGyYZBFDTHVDkYElWQbf8WJ6q9KnJZAkhkwbeUynrFCW8osrbQZDZD";
+        private static string PAGE_ACCESS_TOKEN = "EAAECTyQpBgQBABAxEkzVbqO3DzwIZAaCZB4qx6WQMe4sRL47eEZAtJVkAwyqp8HTluqfuwLevvzU2kSHZBTXf1VOuqy7btqo6TzxYykb9zHKPuHIGYUAWUCMDmkds30L6aYTsVE5ZBamBzVwvQlNxid7RDoOWpMbZCGi1DZAuGvxAfk1mZAxpC4k11Ey7pZB1CsQZD";
         HttpClient httpClient;
         public FacebookModel()
         {
@@ -20,8 +20,12 @@ namespace VBeat.Models.Facebook
         {
             try
             {
-                var response = await httpClient.PostAsync("https://graph.facebook.com/3.1/vbeatcollegeproject/feed?access_token=" + WebUtility.UrlEncode(PAGE_ACCESS_TOKEN)
-                    + "&message=" + WebUtility.UrlEncode(message), new StringContent(""));
+                var response = await httpClient.PostAsync("https://graph.facebook.com/274273156721225/feed" +
+                   "?message=" + WebUtility.UrlEncode(message), new FormUrlEncodedContent(new Dictionary<string, string>()
+                   {
+                       {"access_token", PAGE_ACCESS_TOKEN }
+                   }));
+                string contents = await response.Content.ReadAsStringAsync();
                 return response.StatusCode == HttpStatusCode.OK;
             }
             catch (Exception e)
