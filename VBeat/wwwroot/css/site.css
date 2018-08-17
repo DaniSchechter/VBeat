@@ -307,7 +307,7 @@ div.playlist-song-container div{
 
 /*Inside Song Details, add song to playlist*/
 button#add-song-to-playlist,
-button.add-song-to-specific-playlist {
+div.add-song-to-specific-playlist {
     position: absolute;
     background-color: green;
     height: 50px;
@@ -318,20 +318,27 @@ button.add-song-to-specific-playlist {
     border: white 2px solid;
 }
 button#add-song-to-playlist:hover,
-button.add-song-to-specific-playlist:hover{
+div.add-song-to-specific-playlist:hover{
     background-color: black;
+    cursor:pointer;
 }
 button#add-song-to-playlist img,
-button.add-song-to-specific-playlist{
+div.add-song-to-specific-playlist{
     position:relative;
     height:100%;
     margin-left:10%;
 }
 
-button.add-song-to-specific-playlist{
-    margin-bottom:10px;
-    display:none;
+div.add-song-to-specific-playlist {
+    margin-bottom: 10px;
+    display: none;
 }
+
+div.add-song-to-specific-playlist a{
+    text-decoration:none;
+    color:white;
+}
+
 
 ul#playlist-song-list{
     list-style:none;

@@ -52,7 +52,11 @@
             <div class="col-sm-6 ">
                @foreach(var playlist in (IEnumerable<PlaylistModel>)ViewData["USER_PLAYLISTS"])
                {
-                    <button class="add-song-to-specific-playlist">Add to @Html.DisplayFor(playlistModel => playlist.PlaylistName) playlist</button>    
+                    <div class="add-song-to-specific-playlist">
+                        <a asp-controller="PlaylistModels" asp-action="addSongToPlaylist" asp-route-playlistId="@playlist.PlaylistId" asp-route-songId="@Model.SongId">
+                            Add to @Html.DisplayFor(playlistModel => playlist.PlaylistName) playlist
+                        </a>
+                    </div>
                }
             </div>
     </div>
