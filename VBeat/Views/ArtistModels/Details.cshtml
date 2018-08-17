@@ -49,6 +49,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> 
+</div>
+
+<div class="container">
+    <span><a class="btn btn-primary" asp-controller="SongModels" asp-action="Index">Show My Songs</a></span>
 </div>

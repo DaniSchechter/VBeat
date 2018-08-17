@@ -15,8 +15,9 @@ namespace VBeat.Models.ActionFilter
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            
-            if (context.ActionDescriptor.DisplayName == "VBeat.Controllers.UserModelsController.SignIn (VBeat)" || context.ActionDescriptor.DisplayName == "VBeat.Controllers.UserModelsController.Create (VBeat)" || context.ActionDescriptor.DisplayName == "VBeat.Controllers.ArtistModelsController.Create (VBeat)")
+
+            string path = context.HttpContext.Request.Path;
+            if (path == "/" || path == "/ArtistModels/Create" || path == "/UserModels/Create" || path == "/UserModels/SignIn")
             {
                 return;
             }

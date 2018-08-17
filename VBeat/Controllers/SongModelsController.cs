@@ -80,7 +80,9 @@ namespace VBeat.Controllers
             }
 
             var songList = artistModel.SongList.ToList();
-            return View(_context.Songs.Where(s => IsSongInList(songList, s.SongId)).ToList());
+
+            return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
+
         }
 
         // GET: SongModels/Details/5

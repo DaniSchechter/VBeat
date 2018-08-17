@@ -1,0 +1,65 @@
+﻿@model IEnumerable<VBeat.Models.ShowModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="container">
+    <div class="row">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Show Image</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var show in (IEnumerable<VBeat.Models.ShowModel>)Model)
+            {
+                <tr>
+                    <td>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <h1>@show.ShowName</h1>
+                                <div class="card-image-container">
+                                    <img src="@show.ShowImagePath" alt="Image Not Found" />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-12 ">
+                            <div class="playlist-song-container">
+                                <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(showModel => show.Country): </p><p class="second-info">@show.Country</p></div>
+                            </div>
+                            <div class="playlist-song-container">
+                                <div class="Url2Mp3"><p class="first-info">@Html.DisplayNameFor(showModel => show.City): </p><p class="second-info">@show.City</p></div>
+                            </div>
+                            <div class="playlist-song-container">
+                                <div class="addedDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.StreetName): </p><p class="second-info">@show.StreetName</p></div>
+                            </div>
+                            <div class="playlist-song-container">
+                                <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.HouseNumber): </p><p class="second-info">@show.HouseNumber</p></div>
+                            </div>
+                            <div class="playlist-song-container">
+                                <div class="releaseDate"><p class="first-info">@Html.DisplayNameFor(showModel => show.ShowTime): </p><p class="second-info">@show.ShowTime</p></div>
+                            </div>
+                            <a asp-action="Edit" asp-route-id="@show.ShowId">Edit |</a> 
+                            <a asp-action="Details" asp-route-id="@show.ShowId">Details |</a> 
+                            <a asp-action="Delete" asp-route-id="@show.ShowId">Delete</a> 
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
