@@ -115,12 +115,12 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,SongPath,ReleaseDate")] SongModel songModel, IFormFile SongImagePath)
+        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,SongPath,ReleaseDate")] SongModel songModel, IFormFile songImagePath)
         {
             if (ModelState.IsValid)
             {
                 songModel.AddedDate = DateTime.UtcNow;
-                songModel.SongImagePath = "/images/" + songModel.SongImagePath;
+                songModel.SongImagePath = FileHelper.SaveFile(songImagePath, "images", songImagePath.FileName);
                 _context.Add(songModel);
                 //adds the created song to the current artist according to the session
                 int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
