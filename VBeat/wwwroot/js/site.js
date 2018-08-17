@@ -128,12 +128,6 @@ $('.frontpage_square a').click(function () {
     /*ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERRORERROR ERRORERROR ERROR ERROR ERROR ERROR ERROR  ERROR ERROR ERRORERROR v v*/
 });
 //----------------------------Add songs to audio player from song display page NEW RELEASES------------------
-$('.item').mouseover(function () {
-    $(this).find('a img').show();
-});
-$('.item').mouseleave(function () {
-    $(this).find('a img').hide();
-});
 $('.item a').click(function () {
     path = $(this).siblings().children('p').html();
     var valid = checkSongValidation(path);

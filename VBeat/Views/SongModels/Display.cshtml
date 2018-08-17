@@ -38,9 +38,13 @@
                         <div class="carousel-caption">
                             <h3>@list.ElementAt(0).SongName</h3>
                         </div> 
+                        <a asp-action="Details" asp-route-id="@list.ElementAt(0).SongId">
+                            <img src="~/images/information.png" alt="No Image Found"
+                                 style="position:absolute;top:2%;left:45%; width:5%;background-color:black;border-radius:50%;border:black 2px solid;" />
+                        </a>
                         <a href="#">
                             <img src="~/images/play-button-white.png" alt="No Image Found"
-                                 style="display:none;position:absolute;right:45%;top:45%;width:10%;background-color:black;border-radius:50%;border:black 4px solid;" />
+                                 style="position:absolute;top:2%;left:50%;width:5%;background-color:black;border-radius:50%;border:black 2px solid;" />
                         </a>
                         <div class="song-path-container">
                             <p>@list.ElementAt(0).SongPath</p>
@@ -54,9 +58,13 @@
                                 <div class="carousel-caption">
                                     <h3>@list.ElementAt(i).SongName</h3>
                                 </div>
+                                <a asp-action="Details" asp-route-id="@list.ElementAt(i).SongId">
+                                    <img src="~/images/information.png" alt="No Image Found"
+                                         style="position:absolute;top:2%;left:45%; width:5%;background-color:black;border-radius:50%;border:black 2px solid;" />
+                                </a>
                                 <a href="#">
                                     <img src="~/images/play-button-white.png" alt="No Image Found"
-                                         style="display:none;position:absolute;right:45%;top:45%;width:10%;background-color:black;border-radius:50%;border:black 4px solid;" />
+                                         style="position:absolute;top:2%;left:50%;width:5%;background-color:black;border-radius:50%;border:black 2px solid;" />
                                 </a>
                                 <div class="song-path-container">
                                     <p>@list.ElementAt(i).SongPath</p>
