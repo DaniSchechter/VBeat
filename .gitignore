@@ -336,4 +336,4 @@ ASALocalRun/
 VBeat/bin/
 VBeat/obj/
 
-/VBeat/wwwroot/images
+/VBeat/wwwroot/images/*
