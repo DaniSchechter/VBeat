@@ -194,5 +194,9 @@ namespace VBeat.Models
             ViewData["Shows"] = shows;
             return View("~/Views/ShowModels/Search.cshtml");
         }
+        public async Task<IActionResult> AllShows()
+        {
+            return View(_context.Shows.ToList());
+        }
     }
 }
