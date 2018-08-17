@@ -24,11 +24,10 @@ namespace VBeat.Models.Facebook
                     + "&message=" + WebUtility.UrlEncode(message), new StringContent(null));
                 return response.StatusCode == HttpStatusCode.OK;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
-
         }
     }
 }
