@@ -28,12 +28,14 @@ namespace VBeat.Controllers
         }
 
         // GET: ArtistModels/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
-                return NotFound();
+                return Unauthorized();
             }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
             var artistModel = await _context.Artists
                 .SingleOrDefaultAsync(m => m.UserId == id);
