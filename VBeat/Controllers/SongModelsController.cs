@@ -114,7 +114,6 @@ namespace VBeat.Controllers
 
             int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
-            ViewData["Artists"] = _context.Artists.Where(m => m.UserId != id);
             return View();
         }
 
@@ -147,6 +146,8 @@ namespace VBeat.Controllers
         // GET: SongModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //list of artists
+            IQueryable<ArtistModel> artists = from a in _context.Artists select a;
             if (id == null)
             {
                 return NotFound();
@@ -157,6 +158,18 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
+            //all the artists in this song
+            var allArtistsInThisSong = artists.Where(a => a.SongList.Where(s => s.SongId.Equals(id)).Count() > 0);
+            //get all the artists not in this song
+            LinkedList<ArtistModel> allArtistsNotInThisSong = new LinkedList<ArtistModel>();
+            foreach (var art in artists)
+            {
+                if (!(allArtistsInThisSong.Contains(art)))
+                {
+                    allArtistsNotInThisSong.AddLast(art);
+                }
+            }
+            ViewData["Artists"] = allArtistsNotInThisSong;
             return View(songModel);
         }
 
@@ -304,15 +317,56 @@ namespace VBeat.Controllers
             return Json(genreResult.ToList());
         }
 
-        public void AddSongToPlayList(int playlistId, int songId)
-        {
-
-        }
-
-
         public async Task<IActionResult> AllSongs()
         {
             return View(_context.Songs.ToList());
+        }
+
+        public async Task<IActionResult> addArtistToSong(int songId, int artistId) 
+        {
+            var songModel = await _context.Songs.SingleOrDefaultAsync(s => s.SongId == songId);
+            if (songModel == null)
+            {
+                return NotFound();
+            }
+
+            var artistModel = await _context.Artists.SingleOrDefaultAsync(a => a.UserId == artistId);
+            if (artistModel == null)
+            {
+                return NotFound();
+            }
+
+            Models.BridgeModel.ArtistSongModel artistSongModel = new ArtistSongModel();
+            artistSongModel.Song = songModel;
+            artistSongModel.SongId = songId;
+            artistSongModel.UserId = artistId;
+            artistSongModel.Artist = artistModel;
+            _context.Add(artistSongModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Display", "SongModels");
+        }
+        public async Task<IActionResult> removeArtistFromSong(int songId, int artistId)
+        {
+            var songModel = await _context.Songs.SingleOrDefaultAsync(s => s.SongId == songId);
+            if (songModel == null)
+            {
+                return NotFound();
+            }
+
+            var artistModel = await _context.Artists.SingleOrDefaultAsync(a => a.UserId == artistId);
+            if (artistModel == null)
+            {
+                return NotFound();
+            }
+
+            Models.BridgeModel.ArtistSongModel artistSongModel = new ArtistSongModel();
+            artistSongModel.Song = songModel;
+            artistSongModel.SongId = songId;
+            artistSongModel.UserId = artistId;
+            artistSongModel.Artist = artistModel;
+            _context.Remove(artistSongModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Display", "SongModels");
         }
 
     }

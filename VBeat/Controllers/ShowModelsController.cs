@@ -71,16 +71,30 @@ namespace VBeat.Models
         // GET: ShowModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //list of artists
+            IQueryable<ArtistModel> artists = from a in _context.Artists select a;
             if (id == null)
             {
                 return NotFound();
             }
 
-            var showModel = await _context.Shows.SingleOrDefaultAsync(m => m.ShowId == id);
+            var showModel = await _context.Shows.SingleOrDefaultAsync(s => s.ShowId == id);
             if (showModel == null)
             {
                 return NotFound();
             }
+            //all the artists in this song
+            var allArtistsInThishow = artists.Where(a => a.Shows.Where(s => s.ShowId.Equals(id)).Count() > 0);
+            //get all the artists not in this song
+            LinkedList<ArtistModel> allArtistsNotInThisShow = new LinkedList<ArtistModel>();
+            foreach (var art in artists)
+            {
+                if (!(allArtistsInThishow.Contains(art)))
+                {
+                    allArtistsNotInThisShow.AddLast(art);
+                }
+            }
+            ViewData["Shows"] = allArtistsNotInThisShow;
             return View(showModel);
         }
 

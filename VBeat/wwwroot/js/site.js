@@ -148,6 +148,43 @@ $('.play-song-from-index a').click(function () {
     addSongToAudio(path, songName);
 });
 
+//----------------------------Add artists to songs------------------
+$('.add-artist-to-song select').change(function () {
 
+    if ($(this).children('option:selected').attr('value') != "") {
+        //disable the option to select more then once
+        $(this).children('option:selected').attr("disabled", true);
+        var artistName = $(this).children('option:selected').html();
+        var artistID = $(this).children('option:selected').attr('value');
+        var songId = $('.song-id').html();
+        $('.added-artists-to-song').append("<div class='playlist-song-container " + artistID +"'><p style='padding-left:5%;float:left;font-size:3vh;width=80%;'>" + artistName + "</p> <img class='delete-item' style='padding:1% 5% 0 0;height:80%;position:relative;float:right' src='/images/delete.png' /> </div>");
+        $.get({
+            url: '/SongModels/addArtistToSong',
+            data: { songId: '' + songId, artistId: '' + artistID },
+        });
+    }
+    $(this).children().attr("selected", false);
+    $(this).children('[value=""]').attr('selected', true);
 
+});
+
+$(".added-artists-to-song").on("click", ".playlist-song-container img.delete-item", function () {
+    var songId = $('.song-id').html();
+    var artistID = $(this).parent('div.playlist-song-container').attr('class');
+    artistID = artistID.split(" ")[1];
+
+    //release the disabled option from the connected select option
+    var option = $('.add-artist-to-song select').children("option[value='" + artistID + "']");
+    option.attr('disabled', false);
+
+    //remove the artisr from the added artists list
+    var artistToBeDeleted = $('.added-artists-to-song div').hasClass(artistID);
+    $('.added-artists-to-song div.'+artistID).remove();
+
+    $.get({
+        url: '/SongModels/removeArtistFromSong',
+        data: { songId: '' + songId, artistId: '' + artistID },
+    });
+
+});
 

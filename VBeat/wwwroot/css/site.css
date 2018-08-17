@@ -387,6 +387,25 @@ img.song-information {
 }
 
 /*Add New Artists to song*/
-.add-artist-to-song option{
+.add-artist-to-song select {
+    height: 50px;
+    background-color: transparent;
+    font-size: 20px;
+    border: white 2px solid;
+    border-radius: 30px;
+    padding-left: 5%;
+}
+.add-artist-to-song option {
+    color: black;
+    font-size: 20px;
+    height: 50px;
+}
+.add-artist-to-song option:disabled  {
     background-color:black;
+    color: white;
+    font-size: 20px;
+}
+
+.delete-item:hover{
+    cursor:pointer;
 }

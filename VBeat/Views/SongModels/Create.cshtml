@@ -54,21 +54,7 @@
             </div>
         </form>
     </div>
-    <div class="col-sm-4">
-        <div class="add-artist-to-song col-sm-12">
-            <label class="control-label">Add New Artist:</label><br />
-            <select style="width:100%">
-                @foreach (var artist in (IEnumerable<ArtistModel>)ViewData["Artists"])
-                {
-                    <option value="@artist.UserId">@artist.ArtistName</option>
-                }
-            </select>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="added-artists-to-song">
-        </div>
-    </div>
+ 
 </div>
 <div>
     <a asp-action="Index">Back to List</a>

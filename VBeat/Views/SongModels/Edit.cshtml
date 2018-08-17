@@ -10,7 +10,7 @@
 <h4>SongModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="SongId" />
@@ -49,12 +49,30 @@
             </div>
         </form>
     </div>
+    <div class="col-sm-4">
+        <div class="add-artist-to-song col-sm-12">
+            <label class="control-label">Add New Artist:</label><br />
+            <select style="width:100%">
+                <option value="">Add An Artist</option>
+                @foreach (var artist in (IEnumerable<ArtistModel>)ViewData["Artists"])
+                {
+                    <option value="@artist.UserId">@artist.ArtistName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="added-artists-to-song col-sm-12">
+            <label class="control-label">Added Artistd:</label><br />
+        </div>
+    </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+<p style="display:none" class="song-id">@Model.SongId</p>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
