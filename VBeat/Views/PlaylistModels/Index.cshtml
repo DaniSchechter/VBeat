@@ -40,7 +40,8 @@
                                 </div> 
                                 <a asp-action="Edit" asp-route-id="@playList.PlaylistId">Edit</a> |
                                 <a asp-action="Details" asp-route-id="@playList.PlaylistId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@playList.PlaylistId">Delete</a>
+                                <a asp-action="Delete" asp-route-id="@playList.PlaylistId">Delete</a> |
+                                <a asp-controller="SuggestPlaylistSongs" asp-action="Suggest" asp-route-id="@playList.PlaylistId">Discover</a>
                             </div>
                         </td>
                     </tr>
