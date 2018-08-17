@@ -34,6 +34,20 @@ namespace VBeat.Controllers
         {
             ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
             ViewData["NUM_NEW_RELEASES"] = Math.Min(_context.Songs.Count(),NUM_NEW_RELEASES);
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+
+            var userModel = await _context.Users
+                .SingleOrDefaultAsync(m => m.UserId == id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+            ViewData["UserName"] = userModel.Username;
             return View(await _context.Songs.ToListAsync());
         }
 
