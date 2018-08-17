@@ -69,11 +69,6 @@
                     </div>
 
 
-
-
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCOhuEzH731AU1Qu_DJ3tRJ1sZGy2fjI&callback=initMap"
-                            async defer></script>
-                    <div id="map"></div>
                     <script>
                         var map;
 
@@ -82,28 +77,29 @@
                             map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 16
                             });
-                        }
 
-
-                        var geocoder = new google.maps.Geocoder();
+                            var geocoder = new google.maps.Geocoder();
                             geocoder.geocode({ address: currentAddress }, function (results, status) {
 
-                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (status == google.maps.GeocoderStatus.OK) {
 
-                                var myResult = results[0].geometry.location; // reference LatLng value
-                                map.setCenter(myResult);
-                                var marker = new google.maps.Marker({
-                                    position: myResult,
-                                    map: map,
-                                    title: "@Model.ShowName"
-                                });
-                            }
-                        });
+                                    var myResult = results[0].geometry.location; // reference LatLng value
+                                    map.setCenter(myResult);
+                                    var marker = new google.maps.Marker({
+                                        position: myResult,
+                                        map: map,
+                                        title: "@Model.ShowName"
+                                    });
+                                }
+                            });
                         }
 
 
                     </script>
 
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCOhuEzH731AU1Qu_DJ3tRJ1sZGy2fjI&callback=initMap"
+                            async defer></script>
+                    <div id="map"></div>
                 </li>
             </ul>
         </div>
