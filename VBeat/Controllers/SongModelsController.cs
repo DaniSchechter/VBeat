@@ -82,7 +82,7 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            var songList = artist.SongList.ToList();
+            var songList = artistModel.SongList.ToList();
             return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
         }
 
