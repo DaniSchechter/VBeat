@@ -61,9 +61,6 @@ namespace VBeat.Controllers
             return true;
         }
 
-
-
-
         // GET: SongModels
         public async Task<IActionResult> Index()
         {
@@ -82,7 +79,7 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            var songList = artist.SongList.ToList();
+            var songList = artistModel.SongList.ToList();
             return View(_context.Songs.Where(s => IsSongInList(songList, s.SongId)).ToList());
         }
 
@@ -100,7 +97,8 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-            ViewData["USER_PLAYLISTS"] = await _context.Playlists.ToListAsync();
+            int userId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            ViewData["USER_PLAYLISTS"] = await _context.Playlists.Where(p=>p.UserModel.UserId==userId).ToListAsync();
             return View(songModel);
         }
 

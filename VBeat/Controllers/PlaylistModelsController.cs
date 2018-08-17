@@ -171,5 +171,26 @@ namespace VBeat.Controllers
         {
             return _context.Playlists.Any(e => e.PlaylistId == id);
         }
+
+        public async Task<IActionResult> addSongToPlaylist(int playlistId, int songId)
+        {
+            var playListModel = await _context.Playlists.SingleOrDefaultAsync(p => p.PlaylistId == playlistId);
+            if (playListModel == null)
+            {
+                return NotFound();
+            }
+            var songModel = await _context.Songs.SingleOrDefaultAsync(s => s.SongId == songId);
+            if (songModel == null)
+            {
+                return NotFound();
+            }
+            Models.BridgeModel.PlaylistSongModel playlistSongModel = new Models.BridgeModel.PlaylistSongModel();
+            playlistSongModel.Playlist = playListModel;
+            playlistSongModel.PlaylistId = playlistId;
+            playlistSongModel.Song = songModel;
+            playlistSongModel.SongId = songId;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("SongModels","Display");
+        }
     }
 }
