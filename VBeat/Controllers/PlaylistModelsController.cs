@@ -70,8 +70,9 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlaylistId,Public,PlaylistImage,PlaylistName")] PlaylistModel playlistModel)
+        public async Task<IActionResult> Create([Bind("PlaylistId,Public,PlaylistName")] PlaylistModel playlistModel, IFormFile playlistImage)
         {
+            playlistModel.PlaylistImage = FileHelper.SaveFile(playlistImage, "images", playlistImage.FileName);
             if (ModelState.IsValid)
             {
                 _context.Add(playlistModel);
