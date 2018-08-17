@@ -37,13 +37,21 @@ namespace VBeat.Controllers
 
             int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
+
+            var artistModel = await _context.Artists
+                .SingleOrDefaultAsync(m => m.UserId == id);
+            if (artistModel != null)
+            {
+                return RedirectToAction("Details", "ArtistModels");
+            }
+
             var userModel = await _context.Users
                 .SingleOrDefaultAsync(m => m.UserId == id);
             if (userModel == null)
             {
                 return NotFound();
             }
-
+            ViewData["UserName"] = userModel.Username;
             return View(userModel);
         }
 
