@@ -33,7 +33,7 @@ namespace VBeat.Controllers
         public async Task<IActionResult> Display()
         {
             ViewData[NEW_RELEASES_LIST_KEY] = await _context.Songs.OrderByDescending(t => t.AddedDate).Take(NUM_NEW_RELEASES).ToListAsync();
-            ViewData["NUM_NEW_RELEASES"] = Math.Min(_context.Songs.Count(),NUM_NEW_RELEASES);
+            ViewData["NUM_NEW_RELEASES"] = Math.Min(_context.Songs.Count(), NUM_NEW_RELEASES);
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
@@ -54,9 +54,9 @@ namespace VBeat.Controllers
 
 
 
-        private bool IsSongInList(List<Models.BridgeModel.ArtistSongModel> songList,int songId)
+        private bool IsSongInList(List<Models.BridgeModel.ArtistSongModel> songList, int songId)
         {
-            var foundSong = songList.SingleOrDefault(s=>s.SongId==songId);
+            var foundSong = songList.SingleOrDefault(s => s.SongId == songId);
             if (foundSong == null) return false;
             return true;
         }
@@ -83,7 +83,7 @@ namespace VBeat.Controllers
             }
             var artist = await _context.Artists.SingleOrDefaultAsync(u => u.UserId == artistModel.UserId);
             var songList = artist.SongList.ToList();
-            return View(_context.Songs.Where( s =>IsSongInList(songList,s.SongId)).ToList());
+            return View(_context.Songs.Where(s => IsSongInList(songList, s.SongId)).ToList());
         }
 
         // GET: SongModels/Details/5
@@ -100,7 +100,7 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-            ViewData["USER_PLAYLISTS"]= await _context.Playlists.ToListAsync();
+            ViewData["USER_PLAYLISTS"] = await _context.Playlists.ToListAsync();
             return View(songModel);
         }
 
@@ -115,10 +115,11 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,SongPath,ReleaseDate")] SongModel songModel, IFormFile songImagePath)
+        public async Task<IActionResult> Create([Bind("SongId,SongName,Genre,ReleaseDate")] SongModel songModel, IFormFile songImagePath, IFormFile songPath)
         {
             if (ModelState.IsValid)
             {
+                songModel.SongPath = FileHelper.SaveFile(songPath, "songs", songPath.FileName);
                 songModel.AddedDate = DateTime.UtcNow;
                 songModel.SongImagePath = FileHelper.SaveFile(songImagePath, "images", songImagePath.FileName);
                 _context.Add(songModel);
@@ -278,7 +279,7 @@ namespace VBeat.Controllers
             for (int i = 0; i < months.Length; i++)
             {
                 int numSongs = _context.Songs.Where(s => s.ReleaseDate.Month.Equals(i + 1)).Count();
-                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i]  + " (" + numSongs.ToString()  + ")"});
+                dataLabelModel.Add(new DataLabelModel() { Value = numSongs, Label = months[i] + " (" + numSongs.ToString() + ")" });
             }
 
             return Json(dataLabelModel);
@@ -288,16 +289,16 @@ namespace VBeat.Controllers
         {
             List<DataLabelModel> dataLabelMdoel = new List<DataLabelModel>();
             IQueryable<DataLabelModel> genreResult = from s in _context.Songs
-                              group s by s.Genre into sGenre
-                              let genreCount = sGenre.Count()
-                              select new DataLabelModel() { Label = sGenre.Key.ToString(), Value = genreCount };
+                                                     group s by s.Genre into sGenre
+                                                     let genreCount = sGenre.Count()
+                                                     select new DataLabelModel() { Label = sGenre.Key.ToString(), Value = genreCount };
 
             return Json(genreResult.ToList());
         }
 
-        public void AddSongToPlayList(int playlistId,int songId)
+        public void AddSongToPlayList(int playlistId, int songId)
         {
-            
+
         }
 
 
