@@ -57,10 +57,10 @@ namespace VBeat.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel, IFormFile showImagePath)
         {
-            showModel.ShowImagePath = "fsdf";
+
+            showModel.ShowImagePath = FileHelper.SaveFile(showImagePath, "images", showImagePath.FileName);
             if (ModelState.IsValid)
             {
-                showModel.ShowImagePath = FileHelper.SaveFile(showImagePath, "images", showImagePath.FileName);
                 _context.Add(showModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
