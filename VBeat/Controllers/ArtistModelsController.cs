@@ -60,12 +60,21 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ArtistName,FirstName,LastName,UserId,Username,Email,Password")] ArtistModel artistModel, IFormFile artistImageFile)
         {
-            var checkIfExists = await _context.Users.SingleOrDefaultAsync(u => u.Username == artistModel.Username);
-            if (checkIfExists != null)
+            var checkIfExistsUserName = await _context.Users.SingleOrDefaultAsync(u => u.Username == artistModel.Username);
+            var checkIfExistsEmail = await _context.Users.SingleOrDefaultAsync(u => u.Email == artistModel.Email);
+            string error = "";
+            if (checkIfExistsUserName != null)
             {
-                ViewData["Error"] = "UserName already exists, please try again";
-                return View();
+                error = "Username is already taken.";
             }
+            
+            else if (checkIfExistsEmail != null)
+            {
+                error = "Email is already taken.";
+            }
+                ViewData["Error"] = error;
+                if(error!="") return View();
+
 
             if (ModelState.IsValid)
             {
