@@ -25,7 +25,8 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group form-item">
-                <input asp-for="ArtistImage" placeholder="Artist Image" />
+                <label asp-for="ArtistImage" class="control-label"></label>
+                <input type="file" name="artistImageFile" id="artistImageFile" placeholder="Artist Image"/>
                 <span asp-validation-for="ArtistImage" class="text-danger"></span>
             </div>
             <div class="form-group form-item">
