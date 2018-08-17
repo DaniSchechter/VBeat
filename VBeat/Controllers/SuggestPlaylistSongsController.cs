@@ -26,6 +26,7 @@ namespace VBeat.Controllers.PlaylistModels
             if(!id.HasValue)
             {
                 return RedirectToAction("Display", "SongModels");
+
             }
 
             PlaylistModel targetPlaylistModel = _context.Playlists.Where(p => p.PlaylistId == id.Value).FirstOrDefault();
