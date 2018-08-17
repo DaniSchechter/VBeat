@@ -12,9 +12,11 @@ namespace VBeat.Models
         public static string SaveFile(IFormFile formFile, string dir, string filename)
         {
             dir = dir.Trim('.', '~', '/');
+            string guid = System.Guid.NewGuid().ToString();
+            string htmlFilename = "/" + dir + "/" + guid + "-" + filename;
             using (Stream stream = formFile.OpenReadStream())
             {
-                filename = "~/" + dir + "/" + System.Guid.NewGuid() + "-" + filename;
+                filename = "wwwroot/" + dir + "/" + guid + "-" + filename;
                 using (StreamWriter writer = new StreamWriter(filename))
                 {
                     byte[] buffer = new byte[2048];
@@ -26,7 +28,7 @@ namespace VBeat.Models
                 }
             }
 
-            return filename;
+            return htmlFilename;
         }
     }
 }
