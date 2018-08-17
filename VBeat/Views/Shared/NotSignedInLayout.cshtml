@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/NotLoggedStyle.css">
+    <script src="~/js/NotSignedInScript.js" asp-append-version="true"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -26,6 +27,9 @@
             </ul>
         </div>
     </nav>
+
+    <canvas id="canvas" width="150" height="150"></canvas>
+
     <div>
         @RenderBody()
     </div>
