@@ -209,6 +209,18 @@ div.body-content {
     padding: 2%;
     border-radius: 25px;
     border: white 1px solid;
+    text-shadow: 2px 2px blue;
+    font-family: myFirstFont;
+}
+@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+.btn {
+    transition: 2s;
+} 
+.btn:hover{
+    width: 30%
 }
 /*Section recently played*/
 .frontpage_square {
