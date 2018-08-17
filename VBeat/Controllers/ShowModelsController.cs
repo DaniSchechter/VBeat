@@ -55,10 +55,12 @@ namespace VBeat.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime,ShowImagePath")] ShowModel showModel)
+        public async Task<IActionResult> Create([Bind("ShowId,ShowName,Country,City,StreetName,HouseNumber,ShowTime")] ShowModel showModel, IFormFile showImagePath)
         {
+            showModel.ShowImagePath = "fsdf";
             if (ModelState.IsValid)
             {
+                showModel.ShowImagePath = FileHelper.SaveFile(showImagePath, "images", showImagePath.FileName);
                 _context.Add(showModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
