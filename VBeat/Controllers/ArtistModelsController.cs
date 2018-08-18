@@ -23,7 +23,7 @@ namespace VBeat.Controllers
 
         // GET: ArtistModels
         public async Task<IActionResult> Index()
-        { 
+        {
             return View(await _context.Artists.ToListAsync());
         }
 
@@ -67,13 +67,13 @@ namespace VBeat.Controllers
             {
                 error = "Username is already taken.";
             }
-            
+
             else if (checkIfExistsEmail != null)
             {
                 error = "Email is already taken.";
             }
-                ViewData["Error"] = error;
-                if(error!="") return View();
+            ViewData["Error"] = error;
+            if (error != "") return View();
 
 
             if (ModelState.IsValid)
@@ -171,6 +171,18 @@ namespace VBeat.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var artistModel = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
+            //the playlists of the deleted user
+            var playlistsOfThisUser = await _context.Playlists.Where(p => p.UserModel.UserId == id).ToListAsync();
+            //the song of the deleted user
+            var songsOfThisUser = await _context.Songs.Where(a => a.ArtistList.Where(s => s.UserId == id).Count() > 0).ToListAsync();
+            foreach (var playList in playlistsOfThisUser)
+            {
+                _context.Playlists.Remove(playList);
+            }
+            foreach (var song in songsOfThisUser)
+            {
+                _context.Songs.Remove(song);
+            }
             _context.Artists.Remove(artistModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -182,7 +194,7 @@ namespace VBeat.Controllers
             int realOffset = offset.HasValue ? offset.Value : 0;
             IQueryable<ArtistModel> artistModels = _context.Artists;
 
-            if(!string.IsNullOrEmpty(artistName))
+            if (!string.IsNullOrEmpty(artistName))
             {
                 artistModels = artistModels.Where(a => a.ArtistName.ToLower().Contains(artistName));
             }
