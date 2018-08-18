@@ -137,9 +137,18 @@ namespace VBeat.Controllers
                 if (artistImage != null)
                     artistModel.ArtistImage = FileHelper.SaveFile(artistImage, "images", artistImage.FileName);
 
+                // To prevent two instances with the same id tracked
+                originalArtist.ArtistName = artistModel.ArtistName;
+                originalArtist.FirstName = artistModel.FirstName;
+                originalArtist.LastName = artistModel.LastName;
+                originalArtist.ArtistImage = artistModel.ArtistImage;
+                originalArtist.Username = artistModel.Username;
+                originalArtist.Email = artistModel.Email;
+                // originalArtist.FirstName = artistModel.FirstName;
+
                 try
                 {
-                    _context.Update(artistModel);
+                    _context.Update(originalArtist);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
