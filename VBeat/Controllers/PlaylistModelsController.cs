@@ -183,13 +183,19 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-            Models.BridgeModel.PlaylistSongModel playlistSongModel = new Models.BridgeModel.PlaylistSongModel();
-            playlistSongModel.Playlist = playListModel;
-            playlistSongModel.PlaylistId = playlistId;
-            playlistSongModel.Song = songModel;
-            playlistSongModel.SongId = songId;
-            _context.Add(playlistSongModel);
-            await _context.SaveChangesAsync();
+
+            //check if the song is alreay in this playlist
+            var song = playListModel.Songs.SingleOrDefault(s => s.SongId == songId);      
+            if(song==null)
+            {
+                Models.BridgeModel.PlaylistSongModel playlistSongModel = new Models.BridgeModel.PlaylistSongModel();
+                playlistSongModel.Playlist = playListModel;
+                playlistSongModel.PlaylistId = playlistId;
+                playlistSongModel.Song = songModel;
+                playlistSongModel.SongId = songId;
+                _context.Add(playlistSongModel);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction("Display","SongModels");
         }
 

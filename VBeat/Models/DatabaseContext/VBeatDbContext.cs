@@ -26,5 +26,10 @@ namespace VBeat.Models
 
             modelBuilder.Entity<UserModel>().HasMany(u => u.SavedPlaylists).WithOne(p => p.UserModel);
         }
+
+        internal bool Find(PlaylistSongModel playlistSongModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,7 +4,12 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if ((int)ViewData["NUM_NEW_RELEASES"] == 0)
+{
+    <p>No songs to be displayed </p>
+    return;
+}
+  
 <section id="new-releases">
     <div class="container">
         <div><h1 class="text-shadow">New Releases</h1></div>
@@ -28,12 +33,7 @@
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active">
-                        @if ((int)ViewData["NUM_NEW_RELEASES"] == 0)
-                        {
-                            <p>No songs to be displayed </p>
-                            return;
-                        }      
+                    <div class="item active">    
                         <img src="@list.ElementAt(0).SongImagePath" alt="No Image Found" style="width: 100%; height: 500px">
                         <div class="carousel-caption">
                             <h3>@list.ElementAt(0).SongName</h3>
