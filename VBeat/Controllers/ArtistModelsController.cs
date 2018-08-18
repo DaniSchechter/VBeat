@@ -153,7 +153,24 @@ namespace VBeat.Controllers
                 artistModel.ArtistImage = originalArtist.ArtistImage;
             }
 
-
+            if (originalArtist.Username != artistModel.Username)
+            {
+                string error = CheckIfUserNameExists(artistModel.Username);
+                if (error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
+            if (originalArtist.Email != artistModel.Email)
+            {
+                string error = CheckIfEmailExists(artistModel.Email);
+                if (error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
             if (ModelState.IsValid)
             {
                 if (artistImage != null)
@@ -260,6 +277,33 @@ namespace VBeat.Controllers
         private bool ArtistModelExists(int id)
         {
             return _context.Artists.Any(e => e.UserId == id);
+        }
+
+        public string CheckIfUserNameExists(string userName)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Username == userName).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Username == userName)
+                {
+                    error = "Username is already taken.";
+                }
+            }
+            return error;
+        }
+        public string CheckIfEmailExists(string email)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Email == email).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Email == email)
+                {
+                    error = "Email is already taken.";
+                }
+            }
+            return error;
         }
     }
 }

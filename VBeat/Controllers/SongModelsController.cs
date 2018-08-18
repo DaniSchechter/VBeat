@@ -188,7 +188,7 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
-            SongModel origSongModel = _context.Songs.AsNoTracking().Where(s => songModel.SongId == id).FirstOrDefault();
+            SongModel origSongModel = _context.Songs.FirstOrDefault(s => songModel.SongId == id);
 
             songModel.SongImagePath = origSongModel.SongImagePath;
             songModel.SongPath = origSongModel.SongPath;

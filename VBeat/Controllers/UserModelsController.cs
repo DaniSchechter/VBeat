@@ -80,22 +80,12 @@ namespace VBeat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
-            UserModel checkIfExists = _context.Users.Where(u => u.Username == userModel.Username || u.Email == userModel.Email).FirstOrDefault();
-            if (checkIfExists != null)
+            string error = CheckIfExists(userModel.Username, userModel.Email);
+            if (error != "")
             {
-                string error = "";
-                if (checkIfExists.Username == userModel.Username)
-                {
-                    error = "Username is already taken.";
-                }
-                else if (checkIfExists.Email == userModel.Email)
-                {
-                    error = "Email is already taken.";
-                }
                 ViewData["Error"] = error;
                 return View();
             }
-
             if (ModelState.IsValid)
             {
                 userModel.TimeOfLastLogin = DateTime.UtcNow;
@@ -159,12 +149,35 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-
+            UserModel user = _context.Users.SingleOrDefault(u => u.UserId == id);
+            if (userModel.Username != user.Username)
+            {
+                string error = CheckIfUserNameExists(userModel.Username);
+                if ( error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
+            if (userModel.Email != user.Email)
+            {
+                string error = CheckIfEmailExists(userModel.Email);
+                if (error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
             if (ModelState.IsValid)
             {
+                // To prevent two instances with the same id tracked
+                user.FirstName = userModel.FirstName;
+                user.LastName = userModel.LastName;
+                user.Username = userModel.Username;
+                user.Email = userModel.Email;
                 try
                 {
-                    _context.Update(userModel);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -180,8 +193,8 @@ namespace VBeat.Controllers
                 }
 
                 var userId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
-                var user = await _context.Users.SingleOrDefaultAsync(u => u.UserId == userId);
-                if (user.Username=="admin")
+                var user1 = await _context.Users.SingleOrDefaultAsync(u => u.UserId == userId);
+                if (user1.Username=="admin")
                     return RedirectToAction("Index", "UserModels");
                 else
                     return RedirectToAction("Details", "UserModels");
@@ -255,6 +268,50 @@ namespace VBeat.Controllers
         {
             HttpContext.Session.Remove(SessionConsts.UserId);
             return RedirectToAction("HomePage", "Home");
+        }
+
+        public string CheckIfExists (string userName, string email)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Username == userName || u.Email == email).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Username == userName)
+                {
+                    error = "Username is already taken.";
+                }
+                else if (checkIfExists.Email == email)
+                {
+                    error = "Email is already taken.";
+                }
+            }
+            return error;
+        }
+        public string CheckIfUserNameExists(string userName)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Username == userName).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Username == userName)
+                {
+                    error = "Username is already taken.";
+                }
+            }
+            return error;
+        }
+        public string CheckIfEmailExists(string email)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Email == email).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Email == email)
+                {
+                    error = "Email is already taken.";
+                }
+            }
+            return error;
         }
     }
 }
