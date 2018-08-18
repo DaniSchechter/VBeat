@@ -23,7 +23,7 @@ namespace VBeat.Controllers
 
         // GET: ArtistModels
         public async Task<IActionResult> Index()
-        { 
+        {
             return View(await _context.Artists.ToListAsync());
         }
 
@@ -67,13 +67,13 @@ namespace VBeat.Controllers
             {
                 error = "Username is already taken.";
             }
-            
+
             else if (checkIfExistsEmail != null)
             {
                 error = "Email is already taken.";
             }
-                ViewData["Error"] = error;
-                if(error!="") return View();
+            ViewData["Error"] = error;
+            if (error != "") return View();
 
 
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("ArtistName,FirstName,LastName,ArtistImage,UserId,Username,Email,Password")] ArtistModel artistModel)
+        public async Task<IActionResult> Edit([Bind("ArtistName,FirstName,LastName,UserId,Username,Email,Password")] ArtistModel artistModel, IFormFile artistImage)
         {
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
@@ -124,8 +124,19 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
+            // keeping original image if artist doesn't change it
+            ArtistModel originalArtist = _context.Artists.Where(a => a.UserId == id).FirstOrDefault();
+            if(artistImage == null)
+            {
+                artistModel.ArtistImage = originalArtist.ArtistImage;
+            }
+
+
             if (ModelState.IsValid)
             {
+                if (artistImage != null)
+                    artistModel.ArtistImage = FileHelper.SaveFile(artistImage, "images", artistImage.FileName);
+
                 try
                 {
                     _context.Update(artistModel);
@@ -182,7 +193,7 @@ namespace VBeat.Controllers
             int realOffset = offset.HasValue ? offset.Value : 0;
             IQueryable<ArtistModel> artistModels = _context.Artists;
 
-            if(!string.IsNullOrEmpty(artistName))
+            if (!string.IsNullOrEmpty(artistName))
             {
                 artistModels = artistModels.Where(a => a.ArtistName.ToLower().Contains(artistName));
             }
