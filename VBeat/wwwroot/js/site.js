@@ -33,7 +33,7 @@ function loadAudioPlayer() {
             extension = path.split('.').pop();
             songName = $('li#' + i).find('.song-name').children('p').html();
             if (checkSongValidation(path))
-                $('#myAudio').append("<source class='" + songName + "' src=" + path + " type='audio/" + extension + "'>");
+                $('#myAudio').append("<source class='" + songName + "' src=" + encodeURI(path) + " type='audio/" + extension + "'>");
             else {
                 $("li#" + i).children('.playlist-song-container').css("background-color", "red");
                 $("li#" + i).children('.playlist-song-container').off('mouseover');
@@ -69,7 +69,7 @@ function addSongToAudio(path,name) {
 
         //add the new song to the top of the audio songs list
         $('#myAudio').html("");
-        $('#myAudio').append("<source class='"+ name + "' src=" + path + " type='audio/" + extension + "'>");
+        $('#myAudio').append("<source class='" + name + "' src=" + encodeURI(path) + " type='audio/" + extension + "'>");
         $('#myAudio').append(waitingSongs);
         $("#myAudio").trigger('load');
         $("#myAudio").trigger('play');
