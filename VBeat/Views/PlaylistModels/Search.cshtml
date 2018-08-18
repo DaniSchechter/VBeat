@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "SearchView";
+    int offset = (int)ViewData["Offset"];
+    string playListName = (string)ViewData["PlayListName"];
+    string baseUrl = "?PlayListName=" + System.Net.WebUtility.UrlEncode(playListName); 
+    string nextUrl = baseUrl + "&offset=" + (offset + 1);
+    string prevUrl = null;
+    if (offset == 0)
+    {
+        prevUrl = "#";
+    }
+    else
+    {
+        prevUrl = baseUrl + "&offset=" + (offset - 1);
+    }
+}
+
+<div class="container">
+    <h2>Search for PlayLists</h2>
+    <div class="row">
+        <form class="form-inline" method="get" asp-controller="PlaylistModels" asp-action="Search">
+
+            <label class="sr-only" for="inlineFormInput">Play List Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="showtName" name="playListName" placeholder="PlayList Name">
+
+            <input type="hidden" name="offset" value="0" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="@Html.Raw(nextUrl)" class="btn btn-warning" id="nextPage">Next Page</a>
+            <a href="@Html.Raw(prevUrl)" class="btn btn-warning" id="prevPage">Previous Page</a>
+        </form>
+    </div>
+
+    <div class="row">
+        @if (ViewData["PlayLists"] != null)
+        {
+
+            List<PlaylistModel> playLists = ((IQueryable<PlaylistModel>)ViewData["PlayLists"]).ToList();
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Play List Image</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < playLists.Count(); i++)
+                {
+                    PlaylistModel curPlayList = playLists[i];
+
+                        <tr>
+                            <td>
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <h1>@curPlayList.PlaylistName</h1>
+                                        <div class="card-image-container">
+                                            <img src="@curPlayList.PlaylistImage" alt="Image Not Found" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-12 ">
+                                    <div class="playlist-song-container">
+                                        <div class="song-genre"><p class="first-info">@Html.DisplayNameFor(playListModel => curPlayList.Public): </p><p class="second-info">@curPlayList.Public</p></div>
+                                    </div> 
+                                    <a asp-action="Edit" asp-route-id="@curPlayList.PlaylistId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@curPlayList.PlaylistId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@curPlayList.PlaylistId">Delete</a> |
+                                    <a asp-controller="SuggestPlaylistSongs" asp-action="Suggest" asp-route-id="@curPlayList.PlaylistId">Discover</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+
