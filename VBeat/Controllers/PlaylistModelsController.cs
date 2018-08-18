@@ -13,6 +13,7 @@ namespace VBeat.Controllers
 {
     public class PlaylistModelsController : Controller
     {
+        private const int PAGE_SIZE = 10;
         private readonly VBeatDbContext _context;
 
         public PlaylistModelsController(VBeatDbContext context)
@@ -196,5 +197,33 @@ namespace VBeat.Controllers
             return RedirectToAction("Display","SongModels");
         }
 
+        [HttpGet]
+        public IActionResult Search(string playListName, int? offset)
+        {
+
+            IQueryable<PlaylistModel> playLists = from p in _context.Playlists select p;
+
+            if (!string.IsNullOrWhiteSpace(playListName))
+            {
+                playLists = playLists.Where(s => s.PlaylistName.ToLower().Contains(playListName.ToLower()));
+            }
+            int realOffset = !offset.HasValue ? 0 : offset.Value;
+
+            playLists = playLists
+                .Skip(realOffset * PAGE_SIZE)
+                .Take(PAGE_SIZE);
+
+            ViewData["PlayListName"] = playListName;
+            if (offset.HasValue)
+            {
+                ViewData["Offset"] = offset.Value;
+            }
+            else
+            {
+                ViewData["Offset"] = 0;
+            }
+            ViewData["PlayLists"] = playLists;
+            return View("~/Views/PlayListModels/Search.cshtml");
+        }
     }
 }
