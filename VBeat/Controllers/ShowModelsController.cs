@@ -111,6 +111,9 @@ namespace VBeat.Models
                 return NotFound();
             }
 
+            ShowModel orig = _context.Shows.AsNoTracking().Where(s => s.ShowId == id).FirstOrDefault();
+            showModel.ShowImagePath = orig.ShowImagePath;
+
             if (ModelState.IsValid)
             {
                 try

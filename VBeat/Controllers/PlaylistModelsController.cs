@@ -114,6 +114,9 @@ namespace VBeat.Controllers
                 return NotFound();
             }
 
+            PlaylistModel orig = _context.Playlists.AsNoTracking().Where(p => p.PlaylistId == id).FirstOrDefault();
+            playlistModel.PlaylistImage = orig.PlaylistImage;
+
             if (ModelState.IsValid)
             {
                 try
