@@ -181,7 +181,7 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SongId,SongName,Genre,SongPath,SongImagePath,ReleaseDate")] SongModel songModel)
+        public async Task<IActionResult> Edit(int id, [Bind("SongId,SongName,SongImagePath,SongPath,Genre,ReleaseDate")] SongModel songModel)
         {
             if (id != songModel.SongId)
             {
