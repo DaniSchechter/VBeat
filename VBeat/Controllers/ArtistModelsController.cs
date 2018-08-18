@@ -256,21 +256,28 @@ namespace VBeat.Controllers
         [HttpGet]
         public IActionResult Search(string artistName, int? offset)
         {
-            int realOffset = offset.HasValue ? offset.Value : 0;
-            IQueryable<ArtistModel> artistModels = _context.Artists;
 
-            if (!string.IsNullOrEmpty(artistName))
+            IQueryable<ArtistModel> artists = from a in _context.Artists select a;
+
+            if (!string.IsNullOrWhiteSpace(artistName))
             {
-                artistModels = artistModels.Where(a => a.ArtistName.ToLower().Contains(artistName));
+                artists = artists.Where(s => s.ArtistName.ToLower().Contains(artistName.ToLower()));
             }
+            int realOffset = !offset.HasValue ? 0 : offset.Value;
 
-            artistModels = artistModels
+            artists = artists
                 .Skip(realOffset * PAGE_SIZE)
                 .Take(PAGE_SIZE);
-
-            ViewData["ArtistList"] = artistModels;
             ViewData["ArtistName"] = artistName;
-            ViewData["Offset"] = realOffset;
+            if (offset.HasValue)
+            {
+                ViewData["Offset"] = offset.Value;
+            }
+            else
+            {
+                ViewData["Offset"] = 0;
+            }
+            ViewData["Artists"] = artists;
             return View("~/Views/ArtistModels/Search.cshtml");
         }
 

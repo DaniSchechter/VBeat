@@ -66,8 +66,11 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.UserId">Details</a> 
+                        @if (!item.Username.Equals("admin"))
+                        {
+                            <a asp-controller="ArtistModels" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                        }
                     </td>
                 }
             }
