@@ -30,6 +30,14 @@ namespace VBeat.Controllers
         // GET: ArtistModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int connectedUserId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            var connectedUser = await _context.Users.SingleOrDefaultAsync(u => u.UserId == connectedUserId);
+
             if (id != null)
             {
                 var artist = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
@@ -37,25 +45,18 @@ namespace VBeat.Controllers
                 {
                     return NotFound();
                 }
-
+                if (connectedUser != null)
+                {
+                    ViewData["USER_NAME"] = connectedUser.Username;
+                }     
                 return View(artist);
             }
 
-            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
-            {
-                return Unauthorized();
-            }
-
-            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
-
-            var artistModel = await _context.Artists
-                .SingleOrDefaultAsync(m => m.UserId == Id);
-            if (artistModel == null)
+            if (connectedUser == null)
             {
                 return NotFound();
             }
-            ViewData["USER_NAME"] = artistModel.Username;
-            return View(artistModel);
+            return View(connectedUser);
         }
 
         // GET: ArtistModels/Create

@@ -55,6 +55,7 @@
 @if ((string)ViewData["USER_NAME"] != "admin")
 {
     <div class="container">
+        <p>@ViewData["USER_NAME"]</p>
         <span><a class="btn btn-primary" asp-controller="SongModels" asp-action="Index">Show My Songs</a></span>
     </div>
 }
