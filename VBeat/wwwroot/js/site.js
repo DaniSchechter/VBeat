@@ -128,7 +128,7 @@ $('.frontpage_square a').click(function () {
     /*ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERRORERROR ERRORERROR ERROR ERROR ERROR ERROR ERROR  ERROR ERROR ERRORERROR v v*/
 });
 //----------------------------Add songs to audio player from song display page NEW RELEASES------------------
-$('.item a').click(function () {
+$('.item a.play-song').click(function () {
     path = $(this).siblings().children('p').html();
     var valid = checkSongValidation(path);
     if (valid == "") {
