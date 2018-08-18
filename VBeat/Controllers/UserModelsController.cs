@@ -110,6 +110,11 @@ namespace VBeat.Controllers
         // GET: UserModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
             if (id != null)
             {
                 var user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
@@ -120,10 +125,7 @@ namespace VBeat.Controllers
 
                 return View(user);
             }
-            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
-            {
-                return Unauthorized();
-            }
+            
 
             int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             var artistModel = await _context.Artists
