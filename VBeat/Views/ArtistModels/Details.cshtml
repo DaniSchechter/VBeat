@@ -52,6 +52,9 @@
     <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> 
 </div>
 
-<div class="container">
-    <span><a class="btn btn-primary" asp-controller="SongModels" asp-action="Index">Show My Songs</a></span>
-</div>
+@if ((string)ViewData["USER_NAME"] != "admin")
+{
+    <div class="container">
+        <span><a class="btn btn-primary" asp-controller="SongModels" asp-action="Index">Show My Songs</a></span>
+    </div>
+}

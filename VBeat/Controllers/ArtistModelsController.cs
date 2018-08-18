@@ -43,7 +43,7 @@ namespace VBeat.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["USER_NAME"] = artistModel.Username;
             return View(artistModel);
         }
 
