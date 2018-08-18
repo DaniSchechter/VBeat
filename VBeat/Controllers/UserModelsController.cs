@@ -28,26 +28,37 @@ namespace VBeat.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
-        // GET: UserModels/Details/5
-        public async Task<IActionResult> Details()
+
+        // GET: UserModels/Details/
+        public async Task<IActionResult> Details(int? id)
         {
+            if(id != null)
+            {
+                var user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View(user);
+            }
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
 
             var artistModel = await _context.Artists
-                .SingleOrDefaultAsync(m => m.UserId == id);
+                .SingleOrDefaultAsync(m => m.UserId == Id);
             if (artistModel != null)
             {
                 return RedirectToAction("Details", "ArtistModels");
             }
 
             var userModel = await _context.Users
-                .SingleOrDefaultAsync(m => m.UserId == id);
+                .SingleOrDefaultAsync(m => m.UserId == Id);
             if (userModel == null)
             {
                 return NotFound();
@@ -97,22 +108,34 @@ namespace VBeat.Controllers
         }
 
         // GET: UserModels/Edit/5
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            if (id != null)
+            {
+                var user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View(user);
+            }
+            
+
+            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             var artistModel = await _context.Artists
-                .SingleOrDefaultAsync(m => m.UserId == id);
+                .SingleOrDefaultAsync(m => m.UserId == Id);
             if (artistModel != null)
             {
                 return RedirectToAction("Edit", "ArtistModels");
             }
 
-            var userModel = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+            var userModel = await _context.Users.SingleOrDefaultAsync(m => m.UserId == Id);
             if (userModel == null)
             {
                 return NotFound();
@@ -125,14 +148,13 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
+        public async Task<IActionResult> Edit(int id,[Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             if (id != userModel.UserId)
             {
                 return NotFound();
@@ -156,7 +178,13 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "UserModels");
+
+                var userId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.UserId == userId);
+                if (user.Username=="admin")
+                    return RedirectToAction("Index", "UserModels");
+                else
+                    return RedirectToAction("Details", "UserModels");
             }
             return View(userModel);
         }

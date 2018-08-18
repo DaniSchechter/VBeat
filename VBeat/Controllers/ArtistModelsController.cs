@@ -28,17 +28,28 @@ namespace VBeat.Controllers
         }
 
         // GET: ArtistModels/Details/5
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int? id)
         {
+            if (id != null)
+            {
+                var artist = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
+                if (artist == null)
+                {
+                    return NotFound();
+                }
+
+                return View(artist);
+            }
+
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
             var artistModel = await _context.Artists
-                .SingleOrDefaultAsync(m => m.UserId == id);
+                .SingleOrDefaultAsync(m => m.UserId == Id);
             if (artistModel == null)
             {
                 return NotFound();
@@ -89,16 +100,27 @@ namespace VBeat.Controllers
         }
 
         // GET: ArtistModels/Edit/5
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
+            if (id != null)
+            {
+                var artist = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
+                if (artist == null)
+                {
+                    return NotFound();
+                }
+
+                return View(artist);
+            }
+
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
 
-            var artistModel = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
+            var artistModel = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == Id);
             if (artistModel == null)
             {
                 return NotFound();
@@ -111,14 +133,13 @@ namespace VBeat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("ArtistName,FirstName,LastName,UserId,Username,Email,Password")] ArtistModel artistModel, IFormFile artistImage)
+        public async Task<IActionResult> Edit(int id,[Bind("ArtistName,FirstName,LastName,UserId,Username,Email,Password")] ArtistModel artistModel, IFormFile artistImage)
         {
             if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
             {
                 return Unauthorized();
             }
 
-            int id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
             if (id != artistModel.UserId)
             {
                 return NotFound();
@@ -162,7 +183,13 @@ namespace VBeat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "ArtistModels");
+
+                var userId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.UserId == userId);
+                if (user.Username == "admin")
+                    return RedirectToAction("Index", "UserModels");
+                else
+                    return RedirectToAction("Details", "ArtistModels");
             }
             return View(artistModel);
         }

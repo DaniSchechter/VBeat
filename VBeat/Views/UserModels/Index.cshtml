@@ -50,7 +50,8 @@
             </td>
             @{
                 if (@artistList.Contains(item))
-                { <td>
+                { 
+                  <td>
                       <input type="checkbox" checked="checked" onclick="return false"/>
                   </td>
                   <td>
@@ -59,14 +60,15 @@
                         <a asp-controller="ArtistModels" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
                   </td>
                 }
-                else { <td>
-                           <input type="checkbox" onclick="return false"/>
-                       </td>
-                       <td>
+                else { 
+                    <td>
+                        <input type="checkbox" onclick="return false"/>
+                    </td>
+                    <td>
                         <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
-                       </td>
+                    </td>
                 }
             }
             
