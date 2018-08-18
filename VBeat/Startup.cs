@@ -55,6 +55,15 @@ namespace VBeat
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+                if(ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+                {
+                    ctx.Request.Path = "/Home/NotFound";
+                    await next();
+                }
+            });
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
