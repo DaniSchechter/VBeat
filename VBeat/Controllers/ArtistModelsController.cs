@@ -232,7 +232,7 @@ namespace VBeat.Controllers
             }
             _context.Artists.Remove(artistModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "UserModels");
         }
 
         [HttpGet]
