@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VBeat.Models;
 using Microsoft.AspNetCore.Http;
+using VBeat.Models.BridgeModel;
 using VBeat.Models.Consts;
 
 namespace VBeat.Controllers
@@ -69,7 +70,7 @@ namespace VBeat.Controllers
         public async Task<IActionResult> Create([Bind("UserId,Username,FirstName,LastName,Email,Password")] UserModel userModel)
         {
             UserModel checkIfExists = _context.Users.Where(u => u.Username == userModel.Username || u.Email == userModel.Email).FirstOrDefault();
-            if (checkIfExists!=null)
+            if (checkIfExists != null)
             {
                 string error = "";
                 if (checkIfExists.Username == userModel.Username)
@@ -184,6 +185,12 @@ namespace VBeat.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var userModel = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+            //take all the playlists of the deleted user
+            var playlistsOfThisUser = await _context.Playlists.Where(p => p.UserModel.UserId == id).ToListAsync();
+            foreach (var playList in playlistsOfThisUser)
+            {
+                _context.Playlists.Remove(playList);
+            }
             _context.Users.Remove(userModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -204,8 +211,8 @@ namespace VBeat.Controllers
         [HttpPost, ActionName("SignIn")]
         public async Task<IActionResult> SignInAction([Bind("Username,Password")] UserModel inputUser)
         {
-            var userModel = await _context.Users.SingleOrDefaultAsync(u=>(u.Username==inputUser.Username && u.Password == inputUser.Password));
-            if (userModel==null)
+            var userModel = await _context.Users.SingleOrDefaultAsync(u => (u.Username == inputUser.Username && u.Password == inputUser.Password));
+            if (userModel == null)
             {
                 ViewData["Error"] = "username or password are incorrect";
                 return View();

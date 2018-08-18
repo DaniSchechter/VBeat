@@ -191,6 +191,18 @@ namespace VBeat.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var artistModel = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
+            //the playlists of the deleted user
+            var playlistsOfThisUser = await _context.Playlists.Where(p => p.UserModel.UserId == id).ToListAsync();
+            //the song of the deleted user
+            var songsOfThisUser = await _context.Songs.Where(a => a.ArtistList.Where(s => s.UserId == id).Count() > 0).ToListAsync();
+            foreach (var playList in playlistsOfThisUser)
+            {
+                _context.Playlists.Remove(playList);
+            }
+            foreach (var song in songsOfThisUser)
+            {
+                _context.Songs.Remove(song);
+            }
             _context.Artists.Remove(artistModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
