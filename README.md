@@ -10,3 +10,5 @@ Two folders need to be created:<br>
 </ul>
 
 Place the resource images in the images folder (play button & details button)
+
+<a href="https://www.sendspace.com/file/m7fluw">Images</a>
