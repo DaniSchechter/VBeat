@@ -30,6 +30,14 @@ namespace VBeat.Controllers
         // GET: ArtistModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
+            {
+                return Unauthorized();
+            }
+
+            int connectedUserId = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
+            var connectedUser = await _context.Users.SingleOrDefaultAsync(u => u.UserId == connectedUserId);
+
             if (id != null)
             {
                 var artist = await _context.Artists.SingleOrDefaultAsync(m => m.UserId == id);
@@ -37,25 +45,18 @@ namespace VBeat.Controllers
                 {
                     return NotFound();
                 }
-
+                if (connectedUser != null)
+                {
+                    ViewData["USER_NAME"] = connectedUser.Username;
+                }     
                 return View(artist);
             }
 
-            if (!HttpContext.Session.GetInt32(SessionConsts.UserId).HasValue)
-            {
-                return Unauthorized();
-            }
-
-            int Id = HttpContext.Session.GetInt32(SessionConsts.UserId).Value;
-
-            var artistModel = await _context.Artists
-                .SingleOrDefaultAsync(m => m.UserId == Id);
-            if (artistModel == null)
+            if (connectedUser == null)
             {
                 return NotFound();
             }
-
-            return View(artistModel);
+            return View(connectedUser);
         }
 
         // GET: ArtistModels/Create
@@ -152,7 +153,24 @@ namespace VBeat.Controllers
                 artistModel.ArtistImage = originalArtist.ArtistImage;
             }
 
-
+            if (originalArtist.Username != artistModel.Username)
+            {
+                string error = CheckIfUserNameExists(artistModel.Username);
+                if (error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
+            if (originalArtist.Email != artistModel.Email)
+            {
+                string error = CheckIfEmailExists(artistModel.Email);
+                if (error != "")
+                {
+                    ViewData["Error"] = error;
+                    return View();
+                }
+            }
             if (ModelState.IsValid)
             {
                 if (artistImage != null)
@@ -238,27 +256,61 @@ namespace VBeat.Controllers
         [HttpGet]
         public IActionResult Search(string artistName, int? offset)
         {
-            int realOffset = offset.HasValue ? offset.Value : 0;
-            IQueryable<ArtistModel> artistModels = _context.Artists;
 
-            if (!string.IsNullOrEmpty(artistName))
+            IQueryable<ArtistModel> artists = from a in _context.Artists select a;
+
+            if (!string.IsNullOrWhiteSpace(artistName))
             {
-                artistModels = artistModels.Where(a => a.ArtistName.ToLower().Contains(artistName));
+                artists = artists.Where(s => s.ArtistName.ToLower().Contains(artistName.ToLower()));
             }
+            int realOffset = !offset.HasValue ? 0 : offset.Value;
 
-            artistModels = artistModels
+            artists = artists
                 .Skip(realOffset * PAGE_SIZE)
                 .Take(PAGE_SIZE);
-
-            ViewData["ArtistList"] = artistModels;
             ViewData["ArtistName"] = artistName;
-            ViewData["Offset"] = realOffset;
+            if (offset.HasValue)
+            {
+                ViewData["Offset"] = offset.Value;
+            }
+            else
+            {
+                ViewData["Offset"] = 0;
+            }
+            ViewData["Artists"] = artists;
             return View("~/Views/ArtistModels/Search.cshtml");
         }
 
         private bool ArtistModelExists(int id)
         {
             return _context.Artists.Any(e => e.UserId == id);
+        }
+
+        public string CheckIfUserNameExists(string userName)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Username == userName).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Username == userName)
+                {
+                    error = "Username is already taken.";
+                }
+            }
+            return error;
+        }
+        public string CheckIfEmailExists(string email)
+        {
+            UserModel checkIfExists = _context.Users.Where(u => u.Email == email).FirstOrDefault();
+            string error = "";
+            if (checkIfExists != null)
+            {
+                if (checkIfExists.Email == email)
+                {
+                    error = "Email is already taken.";
+                }
+            }
+            return error;
         }
     }
 }

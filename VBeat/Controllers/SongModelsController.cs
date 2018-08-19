@@ -49,6 +49,9 @@ namespace VBeat.Controllers
                 return NotFound();
             }
             ViewData["UserName"] = userModel.Username;
+
+            var playlists =  _context.Playlists.Where(p => p.UserModel.UserId == id).Take(5).ToList();
+            ViewData["PlayLists"] = playlists;
             return View(await _context.Songs.ToListAsync());
         }
 
