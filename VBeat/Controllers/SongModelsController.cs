@@ -50,7 +50,7 @@ namespace VBeat.Controllers
             }
             ViewData["UserName"] = userModel.Username;
 
-            var playlists = await _context.Playlists.Where(p => p.UserModel.UserId == id).ToListAsync();
+            var playlists =  _context.Playlists.Where(p => p.UserModel.UserId == id).Take(5).ToList();
             ViewData["PlayLists"] = playlists;
             return View(await _context.Songs.ToListAsync());
         }
