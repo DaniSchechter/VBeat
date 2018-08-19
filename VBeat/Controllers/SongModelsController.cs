@@ -263,6 +263,7 @@ namespace VBeat.Controllers
 
             if (!string.IsNullOrWhiteSpace(artistName))
             {
+                // implicit Join
                 songs = songs.Where(s =>
                 s.ArtistList.Where(
                     a => a.Artist.ArtistName.ToLower().Contains(artistName.ToLower())).Count() > 0
