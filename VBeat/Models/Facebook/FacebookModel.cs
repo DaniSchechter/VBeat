@@ -9,7 +9,7 @@ namespace VBeat.Models.Facebook
 {
     public class FacebookModel
     {
-        private static string PAGE_ACCESS_TOKEN = "EAAECTyQpBgQBABAxEkzVbqO3DzwIZAaCZB4qx6WQMe4sRL47eEZAtJVkAwyqp8HTluqfuwLevvzU2kSHZBTXf1VOuqy7btqo6TzxYykb9zHKPuHIGYUAWUCMDmkds30L6aYTsVE5ZBamBzVwvQlNxid7RDoOWpMbZCGi1DZAuGvxAfk1mZAxpC4k11Ey7pZB1CsQZD";
+        private static string PAGE_ACCESS_TOKEN = "EAAECTyQpBgQBAGdJOxd0AYkxeBtCPHcgelWM61sVH6xktsBOUD8DCNKGcfsS1AfFhtzZAPcJ7ZC4qKmmDIgf9IjbtFJWao4z7pgg7BKhcgSFmAEDGWZA8eTNjw8FCF6LyVOroXst23dwZARooLrpoR8RmW0IGxTPesIwJoOJGp2fqGBnYmBkoTvBvKEmg6kZD";
         HttpClient httpClient;
         public FacebookModel()
         {
