@@ -69,7 +69,7 @@
                         <a asp-action="Details" asp-route-id="@item.UserId">Details</a> 
                         @if (!item.Username.Equals("admin"))
                         {
-                            <a asp-controller="ArtistModels" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                            <a asp-controller="UserModels" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
                         }
                     </td>
                 }
