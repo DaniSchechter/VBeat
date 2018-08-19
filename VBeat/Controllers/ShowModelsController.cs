@@ -84,7 +84,8 @@ namespace VBeat.Models
             {
                 return NotFound();
             }
-            //all the artists in this show
+            // all the artists in this show
+            // implicit Join
             var allArtistsInThishow = artists.Where(a => a.Shows.Where(s => s.ShowId.Equals(id)).Count() > 0);
             //get all the artists not in this show
             LinkedList<ArtistModel> allArtistsNotInThisShow = new LinkedList<ArtistModel>();
