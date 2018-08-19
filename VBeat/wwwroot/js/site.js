@@ -122,11 +122,6 @@ $('.frontpage_square').mouseover(function () {
 $('.frontpage_square').mouseleave(function () {
     $(this).find('img').hide();
 });
-$('.frontpage_square a').click(function () {
-    path = $(this).parent().closest('.frontpage_square').siblings().find('p').html();
-    addSongToAudio(path);
-    /*ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERRORERROR ERRORERROR ERROR ERROR ERROR ERROR ERROR  ERROR ERROR ERRORERROR v v*/
-});
 //----------------------------Add songs to audio player from song display page NEW RELEASES------------------
 $('.item a.play-song').click(function () {
     path = $(this).siblings().children('p').html();

@@ -99,17 +99,14 @@
 
 <section id="recently-played">
     <div class="middle-container">
-        <h1>Recently Played</h1>
+        <h1>Your Playlists</h1>
         <div class="row">
-            @foreach (var item in (IEnumerable<SongModel>)ViewData["NEW_RELEASES"])
+            @foreach (var item in (IEnumerable<PlaylistModel>)ViewData["PlayLists"])
             {
                 <div class="col-md-3 col-sm-4 col-xs-6">
-                    <div class="frontpage_square" style="background-image:url('@Html.DisplayFor(modelItem => item.SongImagePath)')">
-                        <a href="#"><img  src="~/images/play-button-white.png" alt="Image Not Found"
+                    <div class="frontpage_square" style="background-image:url('@Html.DisplayFor(modelItem => item.PlaylistImage)')">
+                        <a asp-controller="PlaylistModels" asp-action="Details" asp-route-id="@item.PlaylistId"><img  src="~/images/information.png" alt="Image Not Found"
                                          style="display:none;position:absolute;left:40%;top:40%; width:20%; background-color:black; border-radius:50%; border:black 4px solid;"/></a>
-                    </div>
-                    <div class="song-path-container">
-                        <p>@item.SongPath</p>
                     </div>
                 </div> 
             }
